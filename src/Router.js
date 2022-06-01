@@ -16,6 +16,7 @@ function Routing() {
         <Route path="/tv" element={<Tv />} />
         <Route path="/myPage" element={<MyPage />} />
         <Route path="/movie/:id" element={<Detail />} />
+        <Route path="/tv/:id" element={<Detail />} />
       </Routes>
     </Router>
   );

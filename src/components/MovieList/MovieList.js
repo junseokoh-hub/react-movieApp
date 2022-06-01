@@ -19,6 +19,11 @@ const List = styled.li`
   margin: 1em 0.5em;
 `;
 
+const ClassficiationTitle = styled.h2`
+  padding: 0.5em;
+  text-transform: uppercase;
+`;
+
 const Poster = styled.img`
   width: 5em;
   margin-bottom: 0.4em;
@@ -32,7 +37,7 @@ const ListHeader = styled.span`
   color: ${(props) => props.theme.whiteColor};
 `;
 
-function MovieList({ tvShow, movie, apiList }) {
+function MovieList({ movie, apiList }) {
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -55,30 +60,28 @@ function MovieList({ tvShow, movie, apiList }) {
 
   return (
     <>
-      <h2 style={{ padding: "0.5em", textTransform: "uppercase" }}>
-        {apiList}
-      </h2>
+      <ClassficiationTitle>{apiList}</ClassficiationTitle>
       <UnorderedList>
         {data.results &&
           data.results.map((item) => {
             return (
-              <Link to="/movie/:id">
-                <List key={item.id}>
+              <List key={item.id}>
+                <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
                   <Poster
                     src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                     alt={item.original_title}
                   />
-                  {tvShow ? (
-                    <ListHeader>{item.original_name}</ListHeader>
-                  ) : (
+                  {movie ? (
                     <ListHeader>
                       {item.title.length > 10
                         ? `${item.title.slice(0, 10)}...`
                         : item.title}
                     </ListHeader>
+                  ) : (
+                    <ListHeader>{item.original_name}</ListHeader>
                   )}
-                </List>
-              </Link>
+                </Link>
+              </List>
             );
           })}
       </UnorderedList>
