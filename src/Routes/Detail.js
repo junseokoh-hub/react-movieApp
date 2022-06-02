@@ -9,6 +9,16 @@ const SeparatePoster = styled.img`
   width: 15em;
 `;
 
+const SeparateVideos = styled.iframe`
+  width: 15em;
+  height: 12em;
+`;
+
+const MoreInfo = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 function Detail({ movie }) {
   const [data, setData] = useState({});
   const [showData, setShowData] = useState({});
@@ -43,37 +53,38 @@ function Detail({ movie }) {
 
   return (
     <>
-      <div>
-        {data && (
-          <SeparatePoster
-            src={`https://${IMAGE_BASE_URL}/w200${data.poster_path}`}
-            alt={data.title}
-          />
-        )}
-        <div style={{ width: "15em", marginLeft: "1em" }}>
-          {data.genres &&
-            data.genres.map((item) => {
-              return (
-                <span
-                  style={{
-                    display: "inline-block",
-                    margin: "0 0.5em",
-                  }}
-                >
-                  {item.name}
-                </span>
-              );
-            })}
-        </div>
-        {data && <p>{data.homepage}</p>}
-        {showData.results && (
-          <iframe
-            style={{ width: "30em", height: "25em" }}
-            title={showData.results[0].id}
-            src={`https://www.youtube.com/embed/${showData.results[0].key}?autoplay=1`}
-          ></iframe>
-        )}
+      {data && (
+        <SeparatePoster
+          src={`https://${IMAGE_BASE_URL}/w200${data.poster_path}`}
+          alt={data.title}
+        />
+      )}
+      <div style={{ width: "15em", marginLeft: "1em" }}>
+        {data.genres &&
+          data.genres.map((item) => {
+            return (
+              <span
+                style={{
+                  display: "inline-block",
+                  margin: "0 0.5em",
+                }}
+              >
+                {item.name}
+              </span>
+            );
+          })}
       </div>
+      <MoreInfo>
+        {showData.results &&
+          showData.results.slice(0, 2).map((item) => {
+            return (
+              <SeparateVideos
+                title={item.id}
+                src={`https://www.youtube.com/embed/${item.key}?autoplay=1`}
+              ></SeparateVideos>
+            );
+          })}
+      </MoreInfo>
     </>
   );
 }
