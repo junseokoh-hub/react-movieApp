@@ -1,4 +1,4 @@
-import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
+import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";

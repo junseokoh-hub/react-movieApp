@@ -1,20 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 import { fetchMedia, fetchMediaVideos } from "../api";
-import TabIntro from "../components/MovieList/ShowInfo";
-import Trailers from "../components/MovieList/Trailer";
+import TabIntro from "../components/ShowInfo";
+import Trailers from "../components/Trailer";
+import Poster from "../components/Poster";
 
 const ShowMainInfo = styled.div`
   display: flex;
   background-color: rgb(0, 0, 0, 0.5);
-`;
-
-const SeparatePoster = styled.img`
-  display: block;
-  margin: 0.5em;
-  width: 15em;
 `;
 
 function Detail({ movie }) {
@@ -42,12 +36,7 @@ function Detail({ movie }) {
   return (
     <>
       <ShowMainInfo>
-        {data.poster_path && (
-          <SeparatePoster
-            src={`https://${IMAGE_BASE_URL}/w300${data.poster_path}`}
-            alt={data.title}
-          />
-        )}
+        <Poster data={data} />
         <TabIntro data={data} movie={movie} />
       </ShowMainInfo>
       <Trailers showData={showData} />
