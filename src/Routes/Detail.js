@@ -3,17 +3,20 @@ import { useParams } from "react-router-dom";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 
-const ShowMainInfoUl = styled.ul`
+const ShowMainInfo = styled.div`
+  display: flex;
   background-color: rgb(0, 0, 0, 0.5);
 `;
 
-const ShowMainInfoLi = styled.li`
-  display: flex;
+const ShowInfoUl = styled.ul`
+  width: 50%;
+  background-color: transparent;
+  margin-top: 0.5em;
 `;
 
 const SeparatePoster = styled.img`
   display: block;
-  margin: 0.5em 0 0.5em 0.5em;
+  margin: 0.5em;
   width: 15em;
 `;
 
@@ -37,6 +40,7 @@ const VoteRateCircle = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   color: black;
   opacity: 0.8;
+  margin-top: 0.5em;
   &::before {
     position: absolute;
     content: "${(props) => props.value}";
@@ -48,6 +52,10 @@ const VoteRateCircle = styled.div`
     border-radius: 50%;
     background-color: ${(props) => props.theme.whiteColor};
   }
+`;
+
+const Overview = styled.p`
+  margin-top: 0.5em;
 `;
 
 function Detail({ movie }) {
@@ -84,39 +92,60 @@ function Detail({ movie }) {
 
   return (
     <>
-      {data && (
-        <ShowMainInfoUl>
-          <ShowMainInfoLi>
-            <SeparatePoster
-              src={`https://${IMAGE_BASE_URL}/w200${data.poster_path}`}
-              alt={data.title}
-            />
-            <ul style={{ width: "70%", margin: "0 auto" }}>
-              <li>
-                {movie ? (
-                  <h3>
-                    {data.original_title}
-                    <span>({data.release_date.slice(0, 4)})</span>
-                  </h3>
-                ) : (
-                  <h3>{data.original_name}</h3>
-                )}
-                {data.genres.map((item) => {
-                  return <span>{item.name}</span>;
-                })}
-                {<VoteRateCircle value={data.vote_average}></VoteRateCircle>}
-                {<p>{data.overview.slice(0, 140)}...</p>}
-              </li>
-            </ul>
-          </ShowMainInfoLi>
-        </ShowMainInfoUl>
-      )}
+      <ShowMainInfo>
+        {data && (
+          <SeparatePoster
+            src={`https://${IMAGE_BASE_URL}/w300${data.poster_path}`}
+            alt={data.title}
+          />
+        )}
+        <ShowInfoUl>
+          <li>
+            {movie ? (
+              <h2>
+                {data.original_title}
+                <span>
+                  ({data.realease_date && data.release_date.slice(0, 4)})
+                </span>
+              </h2>
+            ) : (
+              <h2>{data.original_name}</h2>
+            )}
+            {data.genres &&
+              data.genres.map((item, index) => {
+                return (
+                  <span key={index} style={{ margin: "0 1em" }}>
+                    {item.name}
+                  </span>
+                );
+              })}
+            <VoteRateCircle value={data.vote_average}></VoteRateCircle>
+            <h3 style={{ marginTop: "0.5em" }}>Overview</h3>
+            <Overview>
+              {data.overview && data.overview.slice(0, 140)}...
+            </Overview>
+            <div style={{ marginTop: "0.5em" }}>
+              {movie ? <h5>Production</h5> : <h5>Creator</h5>}
+              {movie
+                ? data.production_companies &&
+                  data.production_companies.map((item) => {
+                    return <span key={item.id}> {item.name}</span>;
+                  })
+                : data.created_by &&
+                  data.created_by.map((item) => {
+                    return <span key={item.id}>{item.name}</span>;
+                  })}
+            </div>
+          </li>
+        </ShowInfoUl>
+      </ShowMainInfo>
       <MoreInfo>
         {showData.results &&
           showData.results.slice(0, 2).map((item) => {
             return (
               <SeparateVideos
-                title={item.id}
+                key={item.id}
+                title={item.name}
                 src={`https://www.youtube.com/embed/${item.key}?autoplay=1`}
               ></SeparateVideos>
             );
