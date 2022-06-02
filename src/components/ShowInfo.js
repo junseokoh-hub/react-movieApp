@@ -42,7 +42,7 @@ function TabIntro({ data, movie }) {
         {movie ? (
           <h2>
             {data.original_title}
-            <span>({data.realease_date && data.release_date.slice(0, 4)})</span>
+            <span>({data.release_date && data.release_date.slice(0, 4)})</span>
           </h2>
         ) : (
           <h2>{data.original_name}</h2>
