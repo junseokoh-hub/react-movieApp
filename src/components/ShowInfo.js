@@ -8,6 +8,13 @@ const ShowInfoUl = styled.ul`
     ${(props) => props.theme.smallGap};
 `;
 
+const TabSpan = styled.span`
+  background-color: ${(props) => props.isToggled && `#3d3d3d`};
+  padding: 0.2em 0.4em;
+  border-radius: 0.2em;
+  margin-left: ${(props) => props.marginLeft && `0.5em`};
+`;
+
 const VoteRateCircle = styled.div`
   display: flex;
   justify-content: center;
@@ -36,12 +43,16 @@ const Overview = styled.p`
   margin-top: ${(props) => props.theme.smallGap};
 `;
 
+const OverviewContent = styled.div`
+  margin-top: ${(props) => props.theme.smallGap};
+`;
+
 function TabIntro({ data, movie }) {
   return (
     <ShowInfoUl>
       <li>
-        <span>Info</span>
-        <span style={{ marginLeft: "0.5em" }}>Cast</span>
+        <TabSpan isToggled>Info</TabSpan>
+        <TabSpan marginLeft>Cast</TabSpan>
       </li>
       <li>
         {movie ? (
@@ -62,8 +73,8 @@ function TabIntro({ data, movie }) {
           })}
         <VoteRateCircle value={data.vote_average}></VoteRateCircle>
         <h3 style={{ marginTop: "0.5em" }}>Overview</h3>
-        <Overview>{data.overview && data.overview.slice(0, 140)}...</Overview>
-        <div style={{ marginTop: "0.5em" }}>
+        <Overview>{data.overview && data.overview.slice(0, 250)}...</Overview>
+        <OverviewContent>
           {movie ? <h5>Production</h5> : <h5>Creator</h5>}
           {movie
             ? data.production_companies &&
@@ -74,7 +85,7 @@ function TabIntro({ data, movie }) {
               data.created_by.map((item) => {
                 return <span key={item.id}>{item.name}</span>;
               })}
-        </div>
+        </OverviewContent>
       </li>
     </ShowInfoUl>
   );
