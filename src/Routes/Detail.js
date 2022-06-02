@@ -3,9 +3,17 @@ import { useParams } from "react-router-dom";
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 
+const ShowMainInfoUl = styled.ul`
+  background-color: rgb(0, 0, 0, 0.5);
+`;
+
+const ShowMainInfoLi = styled.li`
+  display: flex;
+`;
+
 const SeparatePoster = styled.img`
   display: block;
-  margin: 1em 0 0 1em;
+  margin: 0.5em 0 0.5em 0.5em;
   width: 15em;
 `;
 
@@ -17,6 +25,29 @@ const SeparateVideos = styled.iframe`
 const MoreInfo = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const VoteRateCircle = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  background-color: ${(props) => props.theme.bgColor};
+  color: black;
+  opacity: 0.8;
+  &::before {
+    position: absolute;
+    content: "${(props) => props.value}";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    background-color: ${(props) => props.theme.whiteColor};
+  }
 `;
 
 function Detail({ movie }) {
@@ -54,26 +85,32 @@ function Detail({ movie }) {
   return (
     <>
       {data && (
-        <SeparatePoster
-          src={`https://${IMAGE_BASE_URL}/w200${data.poster_path}`}
-          alt={data.title}
-        />
+        <ShowMainInfoUl>
+          <ShowMainInfoLi>
+            <SeparatePoster
+              src={`https://${IMAGE_BASE_URL}/w200${data.poster_path}`}
+              alt={data.title}
+            />
+            <ul style={{ width: "70%", margin: "0 auto" }}>
+              <li>
+                {movie ? (
+                  <h3>
+                    {data.original_title}
+                    <span>({data.release_date.slice(0, 4)})</span>
+                  </h3>
+                ) : (
+                  <h3>{data.original_name}</h3>
+                )}
+                {data.genres.map((item) => {
+                  return <span>{item.name}</span>;
+                })}
+                {<VoteRateCircle value={data.vote_average}></VoteRateCircle>}
+                {<p>{data.overview.slice(0, 140)}...</p>}
+              </li>
+            </ul>
+          </ShowMainInfoLi>
+        </ShowMainInfoUl>
       )}
-      <div style={{ width: "15em", marginLeft: "1em" }}>
-        {data.genres &&
-          data.genres.map((item) => {
-            return (
-              <span
-                style={{
-                  display: "inline-block",
-                  margin: "0 0.5em",
-                }}
-              >
-                {item.name}
-              </span>
-            );
-          })}
-      </div>
       <MoreInfo>
         {showData.results &&
           showData.results.slice(0, 2).map((item) => {

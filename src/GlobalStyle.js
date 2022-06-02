@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         padding: 0;
         margin: 0;
-        list-style-type: style none;
+        list-style: none;
     }
     body {
         font-family: 'Indie Flower', cursive;
