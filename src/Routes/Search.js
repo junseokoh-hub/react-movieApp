@@ -8,8 +8,8 @@ const SearchBox = styled.input`
   box-shadow: ${(props) => props.theme.boxShadow};
   width: 80%;
   display: block;
-  margin: 1.5em auto;
-  padding: 0.5em;
+  margin: calc(${(props) => props.theme.smallGap}*3) auto;
+  padding: ${(props) => props.theme.smallGap};
   color: ${(props) => props.theme.whiteColor};
   &::placeholder {
     color: ${(props) => props.theme.whiteColor};

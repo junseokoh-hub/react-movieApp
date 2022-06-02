@@ -1,5 +1,5 @@
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -16,17 +16,17 @@ const List = styled.li`
   flex-direction: column;
   align-items: center;
   width: 6em;
-  margin: 1em 0.5em;
+  margin: 1em ${(props) => props.theme.smallGap};
 `;
 
 const ClassficiationTitle = styled.h2`
-  padding: 0.5em;
+  padding: ${(props) => props.theme.smallGap};
   text-transform: uppercase;
 `;
 
 const Poster = styled.img`
   width: 5em;
-  margin-bottom: 0.4em;
+  margin-bottom: ${(props) => props.theme.smallGap};
 `;
 
 const ListHeader = styled.span`

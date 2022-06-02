@@ -8,7 +8,7 @@ import Poster from "../components/Poster";
 
 const ShowMainInfo = styled.div`
   display: flex;
-  background-color: rgb(0, 0, 0, 0.5);
+  background-color: #1e272e;
 `;
 
 function Detail({ movie }) {

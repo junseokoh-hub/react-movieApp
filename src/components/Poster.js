@@ -4,7 +4,6 @@ import React from "react";
 
 const SeparatePoster = styled.img`
   display: block;
-  margin: 0.5em;
   width: 15em;
 `;
 function Poster({ data }) {

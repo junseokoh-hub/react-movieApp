@@ -12,13 +12,13 @@ const LoginForm = styled.form`
 
 const LoginInput = styled.input`
   padding: 1em;
-  margin: 0.5em 0;
+  margin: ${(props) => props.theme.smallGap} 0;
   border: none;
   outline: none;
   background-color: ${(props) => props.buttonBgColor && props.theme.bgColor};
   box-shadow: ${(props) => props.buttonShadow && props.theme.boxShadow};
   color: ${(props) => props.buttonColor && props.theme.whiteColor};
-  border-radius: 0.5em;
+  border-radius: ${(props) => props.theme.smallGap};
   cursor: ${(props) => props.buttonCursor && "pointer"};
 `;
 

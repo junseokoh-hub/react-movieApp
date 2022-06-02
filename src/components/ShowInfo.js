@@ -2,9 +2,10 @@ import styled from "styled-components";
 import React from "react";
 
 const ShowInfoUl = styled.ul`
-  width: 50%;
-  background-color: transparent;
-  margin-top: 0.5em;
+  width: 85%;
+  background-color: rgb(0, 0, 0, 0.5);
+  padding: ${(props) => props.theme.smallGap} 0 0
+    ${(props) => props.theme.smallGap};
 `;
 
 const VoteRateCircle = styled.div`
@@ -17,7 +18,7 @@ const VoteRateCircle = styled.div`
   background-color: ${(props) => props.theme.bgColor};
   color: black;
   opacity: 0.8;
-  margin-top: 0.5em;
+  margin-top: ${(props) => props.theme.smallGap};
   &::before {
     position: absolute;
     content: "${(props) => props.value}";
@@ -32,12 +33,16 @@ const VoteRateCircle = styled.div`
 `;
 
 const Overview = styled.p`
-  margin-top: 0.5em;
+  margin-top: ${(props) => props.theme.smallGap};
 `;
 
 function TabIntro({ data, movie }) {
   return (
     <ShowInfoUl>
+      <li>
+        <span>Info</span>
+        <span style={{ marginLeft: "0.5em" }}>Cast</span>
+      </li>
       <li>
         {movie ? (
           <h2>
