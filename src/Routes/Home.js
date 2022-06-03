@@ -1,4 +1,4 @@
-import MovieList from "../components/MovieList";
+import MovieList from "../components/MovieList/index";
 import React from "react";
 
 function Home() {

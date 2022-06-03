@@ -53,7 +53,9 @@ function ShowInformation({ data, movie }) {
         {movie ? (
           <h2>
             {data.original_title}
-            <span>({data.release_date && data.release_date.slice(0, 4)})</span>
+            <span style={{ marginLeft: "0.3em" }}>
+              ({data.release_date && data.release_date.slice(0, 4)})
+            </span>
           </h2>
         ) : (
           <h2>{data.original_name}</h2>

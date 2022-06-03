@@ -2,10 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { fetchMedia, fetchMediaVideos, fetchMediaReviews } from "../api";
-import ShowInformation from "../components/ShowInfo";
-import Trailers from "../components/Trailer";
-import Poster from "../components/Poster";
-import Reviews from "../components/Reviews";
+import ShowInformation from "../components/Detail/ShowInfo";
+import Trailers from "../components/Detail/Trailer";
+import Poster from "../components/Detail/Poster";
+import Reviews from "../components/Detail/Reviews";
 
 const ShowMainInfo = styled.div`
   display: flex;
