@@ -6,7 +6,7 @@ const MoreInfo = styled.div`
 `;
 
 const SeparateVideos = styled.iframe`
-  width: 15em;
+  width: 19em;
   height: 12em;
 `;
 

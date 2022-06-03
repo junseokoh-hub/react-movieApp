@@ -66,10 +66,12 @@ const OverviewCreator = styled.div`
 `;
 
 const PathToSimilar = styled.span`
-  font-size: 0.5em;
-  color: palevioletred;
-  margin-top: 0.5em;
-  padding: 0.5em;
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: ${(props) => props.theme.bgColor};
+  margin-top: ${(props) => props.theme.smallGap};
+  padding: ${(props) => props.theme.smallGap};
   border: 1px solid palevioletred;
   cursor: pointer;
 `;

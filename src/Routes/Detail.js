@@ -12,6 +12,12 @@ const ShowMainInfo = styled.div`
   background-color: #1e272e;
 `;
 
+const ShowOthers = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5em 0.5em 0 0.5em;
+`;
+
 function Detail({ movie }) {
   const [data, setData] = useState({});
   const [showData, setShowData] = useState({});
@@ -54,16 +60,10 @@ function Detail({ movie }) {
       showData.results[0] === undefined ? (
         <div>Hello</div>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            padding: "0.5em 0.5em 0 0.5em",
-          }}
-        >
+        <ShowOthers>
           <Reviews reviews={reviews} />
           <Trailers showData={showData} />
-        </div>
+        </ShowOthers>
       )}
     </>
   );
