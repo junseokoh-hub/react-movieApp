@@ -2,6 +2,36 @@ import React, { useEffect, useState, useCallback } from "react";
 import { fetchMediaSimilarShows } from "../api";
 import { useParams } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../Config";
+import styled from "styled-components";
+
+const SimilarList = styled.li`
+  display: flex;
+  margin: 0.5em 0;
+  border-bottom: 1px solid grey;
+  padding: 0.5em 0.1em;
+`;
+
+const SimilarShowUl = styled.ul`
+  width: 50%;
+  margin-left: 0.5em;
+`;
+
+const SimilarShowListTitle = styled.li`
+  margin-bottom: ${(props) => props.theme.smallGap};
+`;
+
+const SimilarShowListCreated = styled.span`
+  margin-left: ${(props) => props.theme.smallGap};
+`;
+
+const SimilarShowListOverview = styled(SimilarShowListTitle)`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SimilarShowListOverviewTitle = styled.span`
+  color: #192a56;
+`;
 
 function SimilarShows({ movie }) {
   const [similarities, setSimilarities] = useState({});
@@ -21,32 +51,34 @@ function SimilarShows({ movie }) {
       {similarities.results &&
         similarities.results.slice(0, 3).map((item) => {
           return (
-            <li style={{ display: "flex" }} key={item.id}>
+            <SimilarList key={item.id}>
               <img
                 src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                 alt={movie ? item.original_title : item.original_name}
               />
-              <ul>
-                <li style={{ marginBottom: "0.5em" }}>
+              <SimilarShowUl>
+                <SimilarShowListTitle>
                   {movie ? item.title : item.name}
-                  <span style={{ marginLeft: "0.5em" }}>
+                  <SimilarShowListCreated>
                     (
                     {movie
                       ? item.release_date.slice(0, 4)
                       : item.first_air_date.slice(0, 4)}
                     )
-                  </span>
-                </li>
-                <li style={{ display: "flex", flexDirection: "column" }}>
-                  <span style={{ color: `#192a56` }}>Overview</span>
+                  </SimilarShowListCreated>
+                </SimilarShowListTitle>
+                <SimilarShowListOverview>
+                  <SimilarShowListOverviewTitle>
+                    Overview
+                  </SimilarShowListOverviewTitle>
                   <span>{item.overview}...</span>
-                </li>
+                </SimilarShowListOverview>
                 <li>
                   {item.vote_average.toFixed(1)}&nbsp;
                   {item.original_language.toUpperCase()}
                 </li>
-              </ul>
-            </li>
+              </SimilarShowUl>
+            </SimilarList>
           );
         })}
     </ul>
