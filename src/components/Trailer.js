@@ -3,7 +3,6 @@ import React from "react";
 
 const MoreInfo = styled.div`
   display: flex;
-  justify-content: flex-end;
 `;
 
 const SeparateVideos = styled.iframe`

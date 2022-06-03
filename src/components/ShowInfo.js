@@ -1,11 +1,15 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ShowInfoUl = styled.ul`
   width: 85%;
   background-color: rgb(0, 0, 0, 0.5);
   padding: ${(props) => props.theme.smallGap} 0 0
     ${(props) => props.theme.smallGap};
+  a {
+    text-decoration-line: none;
+  }
 `;
 
 const TabSpan = styled.span`
@@ -13,6 +17,16 @@ const TabSpan = styled.span`
   padding: 0.2em 0.4em;
   border-radius: 0.2em;
   margin-left: ${(props) => props.marginLeft && `0.5em`};
+`;
+
+const ShowInfoLi = styled.li`
+  background-color: #3d3d3d;
+  height: 90%;
+  padding: 0.5em 0 0 0.5em;
+`;
+
+const ShowGenre = styled.span`
+  margin: 0 1em;
 `;
 
 const VoteRateCircle = styled.div`
@@ -39,22 +53,26 @@ const VoteRateCircle = styled.div`
   }
 `;
 
-const Overview = styled.p`
+const OverviewTitle = styled.h3`
+  margin-top: 0.5em;
+`;
+
+const OverviewContent = styled.p`
   margin-top: ${(props) => props.theme.smallGap};
 `;
 
-const OverviewContent = styled.div`
+const OverviewCreator = styled.div`
   margin-top: ${(props) => props.theme.smallGap};
 `;
 
-function TabIntro({ data, movie }) {
+function ShowInformation({ data, movie }) {
   return (
-    <ShowInfoUl>
+    <ShowInfoUl className="hi">
       <li>
         <TabSpan isToggled>Info</TabSpan>
         <TabSpan marginLeft>Cast</TabSpan>
       </li>
-      <li>
+      <ShowInfoLi>
         {movie ? (
           <h2>
             {data.original_title}
@@ -65,16 +83,14 @@ function TabIntro({ data, movie }) {
         )}
         {data.genres &&
           data.genres.map((item, index) => {
-            return (
-              <span key={index} style={{ margin: "0 1em" }}>
-                {item.name}
-              </span>
-            );
+            return <ShowGenre key={index}>{item.name}</ShowGenre>;
           })}
         <VoteRateCircle value={data.vote_average}></VoteRateCircle>
-        <h3 style={{ marginTop: "0.5em" }}>Overview</h3>
-        <Overview>{data.overview && data.overview.slice(0, 250)}...</Overview>
+        <OverviewTitle>Overview</OverviewTitle>
         <OverviewContent>
+          {data.overview && data.overview.slice(0, 250)}...
+        </OverviewContent>
+        <OverviewCreator>
           {movie ? <h5>Production</h5> : <h5>Creator</h5>}
           {movie
             ? data.production_companies &&
@@ -85,10 +101,26 @@ function TabIntro({ data, movie }) {
               data.created_by.map((item) => {
                 return <span key={item.id}>{item.name}</span>;
               })}
-        </OverviewContent>
-      </li>
+        </OverviewCreator>
+        {data && (
+          <Link to={`/${movie ? "movie" : "tv"}/${data.id}/similarShows`}>
+            <span
+              style={{
+                fontSize: "0.5em",
+                color: "palevioletred",
+                marginTop: "0.5em",
+                padding: "0.5em",
+                border: "1px solid palevioletred",
+                cursor: "pointer",
+              }}
+            >
+              Similar Shows
+            </span>
+          </Link>
+        )}
+      </ShowInfoLi>
     </ShowInfoUl>
   );
 }
 
-export default TabIntro;
+export default ShowInformation;
