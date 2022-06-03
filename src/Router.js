@@ -5,7 +5,7 @@ import Search from "./Routes/Search";
 import Tv from "./Routes/TV";
 import MyPage from "./Routes/MyPage";
 import Detail from "./Routes/Detail";
-import SimilarShows from "./Routes/SimilarMovies";
+import SimilarShows from "./Routes/SimilarShows";
 
 function Routing() {
   return (
