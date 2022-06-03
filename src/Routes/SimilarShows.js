@@ -6,14 +6,14 @@ import styled from "styled-components";
 
 const SimilarList = styled.li`
   display: flex;
-  margin: 0.5em 0;
+  margin: 0 0 0.5em 0;
   border-bottom: 1px solid grey;
-  padding: 0.5em 0.1em;
+  padding: ${(props) => props.theme.smallGap} 0.1em;
 `;
 
 const SimilarShowUl = styled.ul`
   width: 50%;
-  margin-left: 0.5em;
+  margin-left: ${(props) => props.theme.smallGap};
 `;
 
 const SimilarShowListTitle = styled.li`
@@ -47,9 +47,9 @@ function SimilarShows({ movie }) {
   }, [getMediaSimilarShows]);
 
   return (
-    <ul>
+    <ul style={{ backgroundColor: "#2f3640" }}>
       {similarities.results &&
-        similarities.results.slice(0, 3).map((item) => {
+        similarities.results.slice(0, 10).map((item) => {
           return (
             <SimilarList key={item.id}>
               <img

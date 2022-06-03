@@ -65,9 +65,18 @@ const OverviewCreator = styled.div`
   margin-top: ${(props) => props.theme.smallGap};
 `;
 
+const PathToSimilar = styled.span`
+  font-size: 0.5em;
+  color: palevioletred;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  border: 1px solid palevioletred;
+  cursor: pointer;
+`;
+
 function ShowInformation({ data, movie }) {
   return (
-    <ShowInfoUl className="hi">
+    <ShowInfoUl>
       <li>
         <TabSpan isToggled>Info</TabSpan>
         <TabSpan marginLeft>Cast</TabSpan>
@@ -104,18 +113,7 @@ function ShowInformation({ data, movie }) {
         </OverviewCreator>
         {data && (
           <Link to={`/${movie ? "movie" : "tv"}/${data.id}/similarShows`}>
-            <span
-              style={{
-                fontSize: "0.5em",
-                color: "palevioletred",
-                marginTop: "0.5em",
-                padding: "0.5em",
-                border: "1px solid palevioletred",
-                cursor: "pointer",
-              }}
-            >
-              Similar Shows
-            </span>
+            <PathToSimilar>Similar Shows</PathToSimilar>
           </Link>
         )}
       </ShowInfoLi>

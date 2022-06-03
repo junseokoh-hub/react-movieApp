@@ -48,16 +48,23 @@ function Detail({ movie }) {
         <Poster data={data} />
         <ShowInformation data={data} movie={movie} />
       </ShowMainInfo>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "0.5em 0.5em 0 0.5em",
-        }}
-      >
-        <Reviews reviews={reviews} />
-        <Trailers showData={showData} />
-      </div>
+      {reviews.results &&
+      showData.results &&
+      reviews.results[0] === undefined &&
+      showData.results[0] === undefined ? (
+        <div>Hello</div>
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            padding: "0.5em 0.5em 0 0.5em",
+          }}
+        >
+          <Reviews reviews={reviews} />
+          <Trailers showData={showData} />
+        </div>
+      )}
     </>
   );
 }
