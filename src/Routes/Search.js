@@ -18,15 +18,15 @@ const SearchBox = styled.input`
 
 function Search() {
   const [search, setSearch] = useState("");
-
   return (
     <SearchBox
       value={search}
       type="text"
+      placeholder="Search..."
       onChange={(e) => {
+        e.preventDefault();
         setSearch(e.target.value);
       }}
-      placeholder="Search..."
     />
   );
 }

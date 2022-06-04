@@ -5,6 +5,10 @@ const OverviewTitle = styled.h3`
   margin-top: 0.5em;
 `;
 
+const OverviewContent = styled.p`
+  font-style: oblique;
+`;
+
 const OverviewCreator = styled.div`
   margin-top: ${(props) => props.theme.smallGap};
 `;
@@ -13,7 +17,9 @@ function TotalOverview({ data, movie }) {
   return (
     <>
       <OverviewTitle>Overview</OverviewTitle>
-      <p>{data.overview && data.overview.slice(0, 200)}...</p>
+      <OverviewContent>
+        {data.overview && data.overview.slice(0, 200)}...
+      </OverviewContent>
       <OverviewCreator>
         {movie ? <h3>Production</h3> : <h3>Creator</h3>}
         {movie

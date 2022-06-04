@@ -63,7 +63,7 @@ function MovieList({ movie, apiList }) {
       <ClassficiationTitle>{apiList}</ClassficiationTitle>
       <UnorderedList>
         {data.results &&
-          data.results.map((item) => {
+          data.results.slice(0, 7).map((item) => {
             return (
               <List key={item.id}>
                 <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
