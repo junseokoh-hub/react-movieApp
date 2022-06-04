@@ -4,12 +4,6 @@ import { Link } from "react-router-dom";
 import TotalOverview from "./Overview";
 import Preference from "./Preference";
 
-const ShowInfoLi = styled.li`
-  background-color: #3d3d3d;
-  height: 90%;
-  padding: 0.5em 0 0.5em 0.5em;
-`;
-
 const ShowGenre = styled.span`
   margin: 0 1em;
 `;
@@ -27,7 +21,7 @@ const PathToSimilar = styled.span`
 
 function FirstMenuContent({ data, movie }) {
   return (
-    <ShowInfoLi>
+    <>
       {movie ? (
         <h2>
           {data.original_title}
@@ -36,7 +30,7 @@ function FirstMenuContent({ data, movie }) {
           </span>
         </h2>
       ) : (
-        <h2>{data.original_name}</h2>
+        <h2>{data.original_name && data.original_name}</h2>
       )}
       {data.genres &&
         data.genres.map((item, index) => {
@@ -49,7 +43,7 @@ function FirstMenuContent({ data, movie }) {
           <PathToSimilar>Similar Shows</PathToSimilar>
         </Link>
       )}
-    </ShowInfoLi>
+    </>
   );
 }
 

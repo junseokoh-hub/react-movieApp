@@ -1,26 +1,42 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import FirstMenuContent from "./TabArray";
+import FirstMenuContent from "./TabInfo";
+import SecondMenuContent from "./TabCast";
 
 const ShowInfoUl = styled.ul`
   width: 85%;
   background-color: rgb(0, 0, 0, 0.5);
   padding: ${(props) => props.theme.smallGap} 0 0
     ${(props) => props.theme.smallGap};
-  .tab__button {
-    width: 33.3%;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
+  .tab_button {
     cursor: pointer;
   }
   .isToggled {
-    background-color: #000;
+    background-color: #3d3d3d;
     color: #fff;
   }
   a {
     text-decoration-line: none;
   }
+`;
+
+const ShowInfoLi = styled.li`
+  background-color: #3d3d3d;
+  height: 90%;
+  padding: 0.5em 0 0.5em 0.5em;
+  .tab_button {
+    display: none;
+  }
+  .isToggled {
+    display: block;
+  }
+`;
+
+const TabSpan = styled.span`
+  cursor: pointer;
+  padding: 0.2em 1em;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
 `;
 
 function ShowInformation({ data, movie }) {
@@ -29,7 +45,7 @@ function ShowInformation({ data, movie }) {
       name: "Info",
       content: <FirstMenuContent data={data} movie={movie} />,
     },
-    { name: "Cast", content: <div>Good Morning</div> },
+    { name: "Cast", content: <SecondMenuContent /> },
   ];
   const [Toggled, setToggled] = useState(0);
   const handleToggled = (index) => {
@@ -37,11 +53,10 @@ function ShowInformation({ data, movie }) {
   };
   return (
     <ShowInfoUl>
-      <li style={{ display: "flex" }}>
+      <li>
         {TabMenu.map((tab, index) => {
           return (
-            <div
-              style={{ marginRight: "1em", cursor: "pointer" }}
+            <TabSpan
               key={index}
               className={
                 Toggled === index ? "tab_button isToggled" : "tab_button"
@@ -49,11 +64,11 @@ function ShowInformation({ data, movie }) {
               onClick={() => handleToggled(index)}
             >
               {tab.name}
-            </div>
+            </TabSpan>
           );
         })}
       </li>
-      <li>{TabMenu[Toggled].content}</li>
+      <ShowInfoLi>{TabMenu[Toggled].content}</ShowInfoLi>
     </ShowInfoUl>
   );
 }
