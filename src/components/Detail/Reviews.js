@@ -5,6 +5,7 @@ const ReviewContainer = styled.ul`
   width: 30em;
   height: 12em;
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const ReviewUsername = styled.span`

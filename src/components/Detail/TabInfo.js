@@ -5,7 +5,15 @@ import TotalOverview from "./Overview";
 import Preference from "./Preference";
 
 const ShowGenre = styled.span`
-  margin: 0 1em;
+  margin-right: 0.2em;
+  display: inline-block;
+  align-items: center;
+  font-size: 0.8em;
+`;
+
+const ReleaseDate = styled.span`
+  margin-left: 0.3em;
+  font-size: 0.6em;
 `;
 
 const PathToSimilar = styled.span`
@@ -25,16 +33,16 @@ function FirstMenuContent({ data, movie }) {
       {movie ? (
         <h2>
           {data.original_title}
-          <span style={{ marginLeft: "0.3em" }}>
+          <ReleaseDate>
             ({data.release_date && data.release_date.slice(0, 4)})
-          </span>
+          </ReleaseDate>
         </h2>
       ) : (
         <h2>{data.original_name && data.original_name}</h2>
       )}
       {data.genres &&
         data.genres.map((item, index) => {
-          return <ShowGenre key={index}>{item.name}</ShowGenre>;
+          return <ShowGenre key={index}>{item.name}&nbsp;/</ShowGenre>;
         })}
       <Preference data={data} />
       <TotalOverview data={data} movie={movie} />

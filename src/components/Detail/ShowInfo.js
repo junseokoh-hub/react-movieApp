@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import FirstMenuContent from "./TabInfo";
-import SecondMenuContent from "./TabCast";
+import SecondMenuContent from "./TabCredits";
 
 const ShowInfoUl = styled.ul`
   width: 85%;
@@ -24,28 +24,23 @@ const ShowInfoLi = styled.li`
   background-color: #3d3d3d;
   height: 90%;
   padding: 0.5em 0 0.5em 0.5em;
-  .tab_button {
-    display: none;
-  }
-  .isToggled {
-    display: block;
-  }
+  margin: 0.15em 0.5em 0 0;
 `;
 
 const TabSpan = styled.span`
   cursor: pointer;
-  padding: 0.2em 1em;
+  padding: 0.2em 4em;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
 `;
 
-function ShowInformation({ data, movie }) {
+function ShowInformation({ data, movie, credits }) {
   const TabMenu = [
     {
       name: "Info",
       content: <FirstMenuContent data={data} movie={movie} />,
     },
-    { name: "Cast", content: <SecondMenuContent /> },
+    { name: "Cast", content: <SecondMenuContent credits={credits} /> },
   ];
   const [Toggled, setToggled] = useState(0);
   const handleToggled = (index) => {

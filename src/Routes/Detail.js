@@ -1,7 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { fetchMedia, fetchMediaVideos, fetchMediaReviews } from "../api";
+import {
+  fetchMedia,
+  fetchMediaVideos,
+  fetchMediaReviews,
+  fetchMediaCredits,
+} from "../api";
 import ShowInformation from "../components/Detail/ShowInfo";
 import Trailers from "../components/Detail/Trailer";
 import Poster from "../components/Detail/Poster";
@@ -22,6 +27,7 @@ function Detail({ movie }) {
   const [data, setData] = useState({});
   const [showData, setShowData] = useState({});
   const [reviews, setReviews] = useState({});
+  const [credits, setCredits] = useState({});
   const { id } = useParams();
 
   const getMedia = useCallback(async () => {
@@ -42,17 +48,24 @@ function Detail({ movie }) {
     setReviews(json);
   }, [id, movie]);
 
+  const getMediaCredits = useCallback(async () => {
+    const json = await fetchMediaCredits(movie, id);
+    console.log("getMediaReviews json", json);
+    setCredits(json);
+  }, [id, movie]);
+
   useEffect(() => {
     getMedia();
     getMediaVideos();
     getMediaReviews();
-  }, [getMedia, getMediaVideos, getMediaReviews]);
+    getMediaCredits();
+  }, [getMedia, getMediaVideos, getMediaReviews, getMediaCredits]);
 
   return (
     <>
       <ShowMainInfo>
         <Poster data={data} />
-        <ShowInformation data={data} movie={movie} />
+        <ShowInformation data={data} movie={movie} credits={credits} />
       </ShowMainInfo>
       {reviews.results &&
       showData.results &&
@@ -62,7 +75,7 @@ function Detail({ movie }) {
       ) : (
         <ShowOthers>
           <Reviews reviews={reviews} />
-          <Trailers showData={showData} />
+          {/* <Trailers showData={showData} /> */}
         </ShowOthers>
       )}
     </>
