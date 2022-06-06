@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import FirstMenuContent from "./TabInfo";
-import SecondMenuContent from "./TabCredits";
+import FirstMenuContent from "../TabInfo/TabInfo";
+import SecondMenuContent from "../TabCredits";
 
 const ShowInfoUl = styled.ul`
   width: 85%;
@@ -34,7 +34,7 @@ const TabSpan = styled.span`
   border-top-right-radius: 0.5em;
 `;
 
-function ShowInformation({ data, movie, credits }) {
+function TabBundle({ data, movie, credits }) {
   const TabMenu = [
     {
       name: "Info",
@@ -68,4 +68,4 @@ function ShowInformation({ data, movie, credits }) {
   );
 }
 
-export default ShowInformation;
+export default TabBundle;

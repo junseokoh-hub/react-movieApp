@@ -1,4 +1,4 @@
-import { IMAGE_BASE_URL } from "../../Config";
+import { IMAGE_BASE_URL } from "../../../Config";
 import styled from "styled-components";
 import React from "react";
 

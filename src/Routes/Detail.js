@@ -7,10 +7,10 @@ import {
   fetchMediaReviews,
   fetchMediaCredits,
 } from "../api";
-import ShowInformation from "../components/Detail/ShowInfo";
+import TabBundle from "../components/Detail/TabBundle";
 import Trailers from "../components/Detail/Trailer";
 import Poster from "../components/Detail/Poster";
-import Reviews from "../components/Detail/Reviews";
+import Reviews from "../components/Detail/Review";
 
 const ShowMainInfo = styled.div`
   display: flex;
@@ -32,25 +32,21 @@ function Detail({ movie }) {
 
   const getMedia = useCallback(async () => {
     const json = await fetchMedia(movie, id);
-    console.log("getMedia json", json);
     setData(json);
   }, [id, movie]);
 
   const getMediaVideos = useCallback(async () => {
     const json = await fetchMediaVideos(movie, id);
-    console.log("getMediaVideos json", json);
     setShowData(json);
   }, [id, movie]);
 
   const getMediaReviews = useCallback(async () => {
     const json = await fetchMediaReviews(movie, id);
-    console.log("getMediaReviews json", json);
     setReviews(json);
   }, [id, movie]);
 
   const getMediaCredits = useCallback(async () => {
     const json = await fetchMediaCredits(movie, id);
-    console.log("getMediaReviews json", json);
     setCredits(json);
   }, [id, movie]);
 
@@ -65,7 +61,7 @@ function Detail({ movie }) {
     <>
       <ShowMainInfo>
         <Poster data={data} />
-        <ShowInformation data={data} movie={movie} credits={credits} />
+        <TabBundle data={data} movie={movie} credits={credits} />
       </ShowMainInfo>
       {reviews.results &&
       showData.results &&
@@ -75,7 +71,7 @@ function Detail({ movie }) {
       ) : (
         <ShowOthers>
           <Reviews reviews={reviews} />
-          {/* <Trailers showData={showData} /> */}
+          <Trailers showData={showData} />
         </ShowOthers>
       )}
     </>

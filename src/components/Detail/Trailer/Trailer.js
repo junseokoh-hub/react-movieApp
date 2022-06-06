@@ -3,6 +3,8 @@ import React from "react";
 
 const MoreInfo = styled.div`
   display: flex;
+  width: 100%;
+  justify-content: center;
 `;
 
 const SeparateVideos = styled.iframe`
@@ -19,7 +21,7 @@ function Trailers({ showData }) {
             <SeparateVideos
               key={item.id}
               title={item.name}
-              src={`https://www.youtube.com/embed/${item.key}?autoplay=1`}
+              src={`https://www.youtube.com/embed/${item.key}`}
             ></SeparateVideos>
           );
         })}

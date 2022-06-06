@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import TotalOverview from "./Overview";
-import Preference from "./Preference";
+import TotalOverview from "../Overview/Overview";
+import Preference from "../Preference/Preference";
 
 const ShowGenre = styled.span`
   margin-right: 0.2em;
