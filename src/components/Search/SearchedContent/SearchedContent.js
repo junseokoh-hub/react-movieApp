@@ -63,8 +63,14 @@ function SearchedContent({ searchData }) {
             .filter((item) => item.media_type === "movie")
             .map((item) => {
               return (
-                <Link to={`/movie/${item.id}`}>
-                  <SearchedLi key={item.id}>
+                <Link key={item.id} to={`/movie/${item.id}`}>
+                  <SearchedLi
+                    display={
+                      item.backdrop_path === null && item.poster_path === null
+                        ? "none"
+                        : "flex"
+                    }
+                  >
                     <SearchedImg
                       src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                       alt={item.title}
@@ -87,14 +93,13 @@ function SearchedContent({ searchData }) {
             .filter((item) => item.media_type === "tv")
             .map((item) => {
               return (
-                <Link to={`/tv/${item.id}`}>
+                <Link key={item.id} to={`/tv/${item.id}`}>
                   <SearchedLi
                     display={
                       item.backdrop_path === null && item.poster_path === null
                         ? "none"
                         : "flex"
                     }
-                    key={item.id}
                   >
                     <SearchedImg
                       src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
