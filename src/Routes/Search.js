@@ -1,33 +1,39 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-
-const SearchBox = styled.input`
-  border: none;
-  outline: none;
-  background-color: ${(props) => props.theme.bgColor};
-  box-shadow: ${(props) => props.theme.boxShadow};
-  width: 80%;
-  display: block;
-  margin: calc(${(props) => props.theme.smallGap}*3) auto;
-  padding: ${(props) => props.theme.smallGap};
-  color: ${(props) => props.theme.whiteColor};
-  &::placeholder {
-    color: ${(props) => props.theme.whiteColor};
-  }
-`;
+import { fetchSearchMedia } from "../api";
+import SearchBox from "../components/Search/SearchBox";
+import SearchedContent from "../components/Search/SearchedContent";
 
 function Search() {
   const [search, setSearch] = useState("");
+  const [timer, setTimer] = useState(0);
+  const [searchData, setSearchData] = useState({});
+
+  const onChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setSearch(value);
+    if (timer) {
+      console.log("clear timer");
+      clearTimeout(timer);
+    }
+    const newTimer = setTimeout(async () => {
+      console.log(value);
+      try {
+        const json = await fetchSearchMedia(value);
+        setSearchData(json);
+      } catch (error) {
+        console.log("error", error);
+      }
+    }, 400);
+    setTimer(newTimer);
+  };
+
   return (
-    <SearchBox
-      value={search}
-      type="text"
-      placeholder="Search..."
-      onChange={(e) => {
-        e.preventDefault();
-        setSearch(e.target.value);
-      }}
-    />
+    <>
+      <SearchBox search={search} onChange={onChange} />
+      <SearchedContent searchData={searchData} />
+    </>
   );
 }
 
