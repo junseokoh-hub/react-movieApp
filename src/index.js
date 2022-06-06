@@ -8,6 +8,7 @@ const theme = {
   boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.5)`,
   whiteColor: "#fff",
   smallGap: "0.5em",
+  darkBlueColor: "#40739e",
 };
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

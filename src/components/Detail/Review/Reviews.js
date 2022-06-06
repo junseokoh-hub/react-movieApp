@@ -9,7 +9,7 @@ const ReviewContainer = styled.ul`
 `;
 
 const ReviewUsername = styled.span`
-  color: #40739e;
+  color: ${(props) => props.theme.darkBlueColor};
   font-size: calc(${(props) => props.theme.smallGap}*3);
   font-weight: 900;
   padding-left: ${(props) => props.theme.smallGap};

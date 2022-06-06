@@ -52,7 +52,7 @@ export const fetchMediaCredits = async (movie, id) => {
 
 export const fetchSearchMedia = async (value) => {
   const response = await fetch(
-    `https://${API_URL}search/movie?api_key=${API_KEY}&language=en-US&query=${value}`,
+    `https://${API_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${value}`,
   );
   const json = await response.json();
   return json;

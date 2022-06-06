@@ -22,6 +22,7 @@ function Search() {
       try {
         const json = await fetchSearchMedia(value);
         setSearchData(json);
+        console.log(json);
       } catch (error) {
         console.log("error", error);
       }

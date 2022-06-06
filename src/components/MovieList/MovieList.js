@@ -22,6 +22,7 @@ const List = styled.li`
 const ClassficiationTitle = styled.h2`
   padding: ${(props) => props.theme.smallGap};
   text-transform: uppercase;
+  color: ${(props) => props.theme.darkBlueColor};
 `;
 
 const Poster = styled.img`
