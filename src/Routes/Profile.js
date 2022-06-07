@@ -1,11 +1,28 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
 import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 
 const ProfileTitle = styled.h3`
   color: ${(props) => props.theme.darkBlueColor};
+`;
+
+const ProfileLi = styled.li`
+  padding-left: ${(props) => props.theme.smallGap};
+  margin-top: 2em;
+  &:nth-child(3) {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
+  }
+`;
+
+const ProfileImg = styled.img`
+  display: block;
+  cursor: pointer;
+  border-radius: ${(props) => props.theme.smallGap};
+  margin-right: ${(props) => props.theme.smallGap};
 `;
 
 function Profile() {
@@ -31,46 +48,48 @@ function Profile() {
 
   return (
     <ul>
-      <li>
+      <ProfileLi>
         {individualDetail && (
-          <img
+          <ProfileImg
             src={`https://${IMAGE_BASE_URL}/w200${individualDetail.profile_path}`}
             alt={individualDetail.name}
-            style={{ display: "blcok", paddingTop: "1em" }}
           />
         )}
-      </li>
-      <li>
+        <span>
+          {individualDetail.also_known_as && individualDetail.also_known_as[0]}
+        </span>
+      </ProfileLi>
+      <ProfileLi>
         <ProfileTitle>Biography</ProfileTitle>
-        <p>
+        <p style={{ fontStyle: "oblique" }}>
           {individualDetail.biography &&
             individualDetail.biography.slice(0, 500)}
           ...
         </p>
-      </li>
-      <li
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          marginTop: "3em",
-          padding: "1em 0",
-        }}
-      >
+      </ProfileLi>
+      <ProfileLi>
         <ProfileTitle>Filmography</ProfileTitle>
         <div style={{ display: "flex", overflowX: "auto" }}>
           {individualFilm.cast &&
-            individualFilm.cast.map((item) => {
-              return (
-                <img
-                  key={item.id}
-                  src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                  alt={item.character}
-                  style={{ display: "inline-block" }}
-                />
-              );
-            })}
+            individualFilm.cast
+              .filter((item) => item.popularity > 100)
+              .map((item) => {
+                return (
+                  <Link
+                    to={`/${item.media_type === "movie" ? "movie" : "tv"}/${
+                      item.id
+                    }`}
+                    key={item.credit_id}
+                  >
+                    <ProfileImg
+                      src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                      alt={item.character}
+                    />
+                  </Link>
+                );
+              })}
         </div>
-      </li>
+      </ProfileLi>
     </ul>
   );
 }
