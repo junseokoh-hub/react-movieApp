@@ -13,6 +13,10 @@ const GlobalStyle = createGlobalStyle`
         color: #fff;
         height: 100vh;
     }
+    a {
+        text-decoration-line: none;
+        color: ${(props) => props.theme.whiteColor};
+    }
 `;
 
 export default GlobalStyle;

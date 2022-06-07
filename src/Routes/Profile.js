@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
 import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
+import CommonImg from "../components/CommonImg/CommonImg";
 
 const ProfileTitle = styled.h3`
   color: ${(props) => props.theme.darkBlueColor};
@@ -23,6 +24,11 @@ const ProfileImg = styled.img`
   cursor: pointer;
   border-radius: ${(props) => props.theme.smallGap};
   margin-right: ${(props) => props.theme.smallGap};
+`;
+
+const ProfileFilmography = styled.div`
+  display: flex;
+  overflow-x: auto;
 `;
 
 function Profile() {
@@ -49,12 +55,15 @@ function Profile() {
   return (
     <ul>
       <ProfileLi>
-        {individualDetail && (
-          <ProfileImg
-            src={`https://${IMAGE_BASE_URL}/w200${individualDetail.profile_path}`}
-            alt={individualDetail.name}
-          />
-        )}
+        {/* <ProfileImg
+          src={`https://${IMAGE_BASE_URL}/w200/${individualDetail.profile_path}`}
+          alt={individualDetail.name}
+        /> */}
+        <CommonImg
+          path={individualDetail.profile_path}
+          size={200}
+          alt={individualDetail.name}
+        />
         <span>
           {individualDetail.also_known_as && individualDetail.also_known_as[0]}
         </span>
@@ -69,7 +78,7 @@ function Profile() {
       </ProfileLi>
       <ProfileLi>
         <ProfileTitle>Filmography</ProfileTitle>
-        <div style={{ display: "flex", overflowX: "auto" }}>
+        <ProfileFilmography>
           {individualFilm.cast &&
             individualFilm.cast
               .filter((item) => item.popularity > 100)
@@ -81,14 +90,20 @@ function Profile() {
                     }`}
                     key={item.credit_id}
                   >
-                    <ProfileImg
-                      src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                    <CommonImg
+                      size={200}
+                      path={item.poster_path}
                       alt={item.character}
                     />
+                    <span>
+                      {item.media_type === "movie"
+                        ? item.original_title
+                        : item.original_name}
+                    </span>
                   </Link>
                 );
               })}
-        </div>
+        </ProfileFilmography>
       </ProfileLi>
     </ul>
   );

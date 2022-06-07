@@ -11,9 +11,6 @@ const SearchedUl = styled.ul`
   display: flex;
   flex-wrap: wrap;
   margin: 1.5em 0;
-  a {
-    text-decoration-line: none;
-  }
 `;
 
 const SearchedLi = styled.li`

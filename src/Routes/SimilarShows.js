@@ -15,8 +15,6 @@ const SimilarList = styled.li`
   border-bottom: 1px solid grey;
   padding: ${(props) => props.theme.smallGap} 0.1em;
   a {
-    text-decoration-line: none;
-    color: ${(props) => props.theme.whiteColor};
     display: flex;
   }
 `;

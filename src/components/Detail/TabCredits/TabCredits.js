@@ -11,10 +11,6 @@ const IndividualCredit = styled.li`
   display: flex;
   flex-direction: column;
   margin-right: 1em;
-  a {
-    text-decoration-line: none;
-    color: ${(props) => props.theme.whiteColor};
-  }
 `;
 
 const CreditsImg = styled.img`
