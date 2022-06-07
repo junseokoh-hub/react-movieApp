@@ -1,6 +1,7 @@
 import React from "react";
 import { IMAGE_BASE_URL } from "../../../Config";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const CreditsContainer = styled.ul`
   display: flex;
@@ -10,10 +11,15 @@ const IndividualCredit = styled.li`
   display: flex;
   flex-direction: column;
   margin-right: 1em;
+  a {
+    text-decoration-line: none;
+    color: ${(props) => props.theme.whiteColor};
+  }
 `;
 
 const CreditsImg = styled.img`
   width: 7.5em;
+  border-radius: ${(props) => props.theme.smallGap};
 `;
 
 const IndividualInfo = styled.div`
@@ -36,19 +42,21 @@ function SecondMenuContent({ credits }) {
         credits.cast.slice(0, 8).map((item) => {
           return (
             <IndividualCredit key={item.credit_id}>
-              <CreditsImg
-                src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
-                alt={item.original_name}
-              />
-              <IndividualInfo>
-                <span>{item.name}</span>
-                <span>Position : {item.known_for_department}</span>
-                {item.character.length > 10 ? (
-                  <span>Character : {item.character.slice(0, 8)}...</span>
-                ) : (
-                  <span>Character : {item.character}</span>
-                )}
-              </IndividualInfo>
+              <Link to={`/profile/${item.id}`}>
+                <CreditsImg
+                  src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
+                  alt={item.original_name}
+                />
+                <IndividualInfo>
+                  <span>{item.name}</span>
+                  <span>Position : {item.known_for_department}</span>
+                  {item.character.length > 10 ? (
+                    <span>Character : {item.character.slice(0, 8)}...</span>
+                  ) : (
+                    <span>Character : {item.character}</span>
+                  )}
+                </IndividualInfo>
+              </Link>
             </IndividualCredit>
           );
         })}
