@@ -1,15 +1,24 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { fetchMediaSimilarShows } from "../api";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 import SimilarShowContent from "../components/SimilarShows/SimilarShowContent";
+
+const SimilarUl = styled.ul`
+  background-color: #2f3640;
+`;
 
 const SimilarList = styled.li`
   display: flex;
   margin: 0 0 0.5em 0;
   border-bottom: 1px solid grey;
   padding: ${(props) => props.theme.smallGap} 0.1em;
+  a {
+    text-decoration-line: none;
+    color: ${(props) => props.theme.whiteColor};
+    display: flex;
+  }
 `;
 
 function SimilarShows({ movie }) {
@@ -26,20 +35,22 @@ function SimilarShows({ movie }) {
   }, [getMediaSimilarShows]);
 
   return (
-    <ul style={{ backgroundColor: "#2f3640" }}>
+    <SimilarUl>
       {similarities.results &&
         similarities.results.slice(0, 10).map((item) => {
           return (
             <SimilarList key={item.id}>
-              <img
-                src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                alt={movie ? item.original_title : item.original_name}
-              />
-              <SimilarShowContent movie={movie} item={item} />
+              <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
+                <img
+                  src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                  alt={movie ? item.original_title : item.original_name}
+                />
+                <SimilarShowContent movie={movie} item={item} />
+              </Link>
             </SimilarList>
           );
         })}
-    </ul>
+    </SimilarUl>
   );
 }
 
