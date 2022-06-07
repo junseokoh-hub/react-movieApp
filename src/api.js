@@ -57,3 +57,11 @@ export const fetchSearchMedia = async (value) => {
   const json = await response.json();
   return json;
 };
+
+export const fetchIndividual = async (id) => {
+  const response = await fetch(
+    `https://${API_URL}person/${id}/combined_credits?api_key=${API_KEY}&language=en-US`,
+  );
+  const json = await response.json();
+  return json;
+};
