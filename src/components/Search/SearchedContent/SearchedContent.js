@@ -54,63 +54,73 @@ function SearchedContent({ searchData }) {
       >
         Movie
       </SearchedType>
-      <SearchedUl>
-        {searchData.results &&
-          searchData.results
-            .filter((item) => item.media_type === "movie")
-            .map((item) => {
-              return (
-                <Link key={item.id} to={`/movie/${item.id}`}>
-                  <SearchedLi
-                    display={
-                      item.backdrop_path === null && item.poster_path === null
-                        ? "none"
-                        : "flex"
-                    }
-                  >
-                    <SearchedImg
-                      src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                      alt={item.title}
-                    />
-                    <SearchedTitle>{item.original_title}</SearchedTitle>
-                    <SearchedDate>{item.release_date.slice(0, 4)}</SearchedDate>
-                  </SearchedLi>
-                </Link>
-              );
-            })}
-      </SearchedUl>
+      {searchData.results && searchData.results[0] === undefined ? (
+        <span>No results...</span>
+      ) : (
+        <SearchedUl>
+          {searchData.results &&
+            searchData.results
+              .filter((item) => item.media_type === "movie")
+              .map((item) => {
+                return (
+                  <Link key={item.id} to={`/movie/${item.id}`}>
+                    <SearchedLi
+                      display={
+                        item.backdrop_path === null && item.poster_path === null
+                          ? "none"
+                          : "flex"
+                      }
+                    >
+                      <SearchedImg
+                        src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                        alt={item.title}
+                      />
+                      <SearchedTitle>{item.original_title}</SearchedTitle>
+                      <SearchedDate>
+                        {item.release_date.slice(0, 4)}
+                      </SearchedDate>
+                    </SearchedLi>
+                  </Link>
+                );
+              })}
+        </SearchedUl>
+      )}
       <SearchedType
         display={searchData.results === undefined ? "none" : "flex"}
       >
         TV Show
       </SearchedType>
-      <SearchedUl>
-        {searchData.results &&
-          searchData.results
-            .filter((item) => item.media_type === "tv")
-            .map((item) => {
-              return (
-                <Link key={item.id} to={`/tv/${item.id}`}>
-                  <SearchedLi
-                    display={
-                      item.backdrop_path === null && item.poster_path === null
-                        ? "none"
-                        : "flex"
-                    }
-                  >
-                    <SearchedImg
-                      src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                      alt={item.title}
-                    />
-                    <SearchedTitle>{item.original_name}</SearchedTitle>
-                    <SearchedDate>
-                      {item.first_air_date.slice(0, 4)}
-                    </SearchedDate>
-                  </SearchedLi>
-                </Link>
-              );
-            })}
-      </SearchedUl>
+      {searchData.results && searchData.results[0] === undefined ? (
+        <span>No results...</span>
+      ) : (
+        <SearchedUl>
+          {searchData.results &&
+            searchData.results
+              .filter((item) => item.media_type === "tv")
+              .map((item) => {
+                return (
+                  <Link key={item.id} to={`/tv/${item.id}`}>
+                    <SearchedLi
+                      display={
+                        item.backdrop_path === null && item.poster_path === null
+                          ? "none"
+                          : "flex"
+                      }
+                    >
+                      <SearchedImg
+                        src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                        alt={item.title}
+                      />
+                      <SearchedTitle>{item.original_name}</SearchedTitle>
+                      <SearchedDate>
+                        {item.first_air_date.slice(0, 4)}
+                      </SearchedDate>
+                    </SearchedLi>
+                  </Link>
+                );
+              })}
+        </SearchedUl>
+      )}
     </SearchContainer>
   );
 }
