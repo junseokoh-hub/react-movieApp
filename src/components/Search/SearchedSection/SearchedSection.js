@@ -82,9 +82,13 @@ function SearchedSection({ movie, searchData }) {
                         src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                         alt={item.title}
                       />
-                      <SearchedTitle>{item.original_title}</SearchedTitle>
+                      <SearchedTitle>
+                        {movie ? item.original_title : item.original_name}
+                      </SearchedTitle>
                       <SearchedDate>
-                        {item.release_date && item.release_date.slice(0, 4)}
+                        {movie
+                          ? item.release_date.slice(0, 4)
+                          : item.first_air_date.slice(0, 4)}
                       </SearchedDate>
                     </SearchedLi>
                   </Link>
