@@ -84,7 +84,7 @@ function SearchedSection({ movie, searchData }) {
                       />
                       <SearchedTitle>{item.original_title}</SearchedTitle>
                       <SearchedDate>
-                        {item.release_date.slice(0, 4)}
+                        {item.release_date && item.release_date.slice(0, 4)}
                       </SearchedDate>
                     </SearchedLi>
                   </Link>

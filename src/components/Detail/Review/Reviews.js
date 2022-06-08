@@ -9,8 +9,9 @@ const ReviewContainer = styled.ul`
   overflow-y: auto;
   overflow-x: hidden;
   margin: 0 auto;
-  padding-bottom: ${(props) => props.theme.smallGap};
+  padding: 0.5em;
   margin-bottom: ${(props) => props.theme.smallGap};
+  box-shadow: ${(props) => props.theme.boxShadow};
 `;
 
 const ReviewUsername = styled.span`

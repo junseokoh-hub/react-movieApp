@@ -3,13 +3,16 @@ import styled from "styled-components";
 
 const DeleteButton = styled.button``;
 
-function ReviewContent({ text, todo, todos, setTodos }) {
+function ReviewContent({ writer, text, todo, todos, setTodos }) {
   const handleDelete = () => {
     setTodos(todos.filter((element) => element.id !== todo.id));
   };
   return (
-    <div>
-      <div>{text}</div>
+    <div style={{ marginBottom: "1em" }}>
+      <div>
+        <span>{writer}</span>
+        <p>{text}</p>
+      </div>
       <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
     </div>
   );

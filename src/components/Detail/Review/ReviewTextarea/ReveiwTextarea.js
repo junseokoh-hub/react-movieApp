@@ -1,16 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  width: 80%;
 `;
 
 const Textarea = styled.textarea`
-  width: 30em;
   height: 10em;
   margin-bottom: 1em;
+  &::placeholder {
+    padding-left: 0.5em;
+  }
 `;
 
 const SubmitButton = styled.button`
@@ -20,9 +23,12 @@ const SubmitButton = styled.button`
   color: ${(props) => props.theme.whiteColor};
   padding: 1em 0;
   cursor: pointer;
+  margin: 0 auto;
 `;
 
 function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
+  const [logIn, setLogIn] = useState(false);
+
   const inputTextHandler = (event) => {
     const {
       target: { value },
@@ -33,10 +39,17 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    setTodos([
-      ...todos,
-      { text: inputText, completed: false, id: Math.random() * 1000 },
-    ]);
+    logIn
+      ? setTodos([
+          ...todos,
+          {
+            writer: "Username",
+            text: inputText,
+            completed: false,
+            id: Math.random() * 1000,
+          },
+        ])
+      : alert(`Please Log In!`);
     setInputText("");
   };
 

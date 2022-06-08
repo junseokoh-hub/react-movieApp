@@ -8,6 +8,7 @@ function ReviewList({ todos, setTodos }) {
         return (
           <ReviewContent
             key={todo.id}
+            writer={todo.writer}
             text={todo.text}
             todo={todo}
             todos={todos}
