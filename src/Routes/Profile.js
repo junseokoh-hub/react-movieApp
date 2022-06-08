@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
-import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 import CommonImg from "../components/CommonImg/CommonImg";
 
@@ -17,13 +16,6 @@ const ProfileLi = styled.li`
     flex-direction: column;
     padding-bottom: 1em;
   }
-`;
-
-const ProfileImg = styled.img`
-  display: block;
-  cursor: pointer;
-  border-radius: ${(props) => props.theme.smallGap};
-  margin-right: ${(props) => props.theme.smallGap};
 `;
 
 const ProfileFilmography = styled.div`

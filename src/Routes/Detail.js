@@ -19,8 +19,12 @@ const ShowMainInfo = styled.div`
 
 const ShowOthers = styled.div`
   display: flex;
-  justify-content: space-between;
-  padding: 0.5em 0.5em 0 0.5em;
+  padding: ${(props) => props.theme.smallGap};
+  flex-direction: column;
+  h3 {
+    text-align: center;
+    color: #000;
+  }
 `;
 
 function Detail({ movie }) {
@@ -70,7 +74,9 @@ function Detail({ movie }) {
         <div>Hello</div>
       ) : (
         <ShowOthers>
+          <h3>Reviews</h3>
           <Reviews reviews={reviews} />
+          <h3>Trailers</h3>
           <Trailers showData={showData} />
         </ShowOthers>
       )}

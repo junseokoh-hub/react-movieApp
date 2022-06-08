@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import ReviewTextarea from "./ReviewTextarea";
+import ReviewList from "./ReviewList";
 
 const ReviewContainer = styled.ul`
-  width: 30em;
+  width: 80%;
   height: 12em;
   overflow-y: auto;
   overflow-x: hidden;
+  margin: 0 auto;
+  padding-bottom: ${(props) => props.theme.smallGap};
+  margin-bottom: ${(props) => props.theme.smallGap};
 `;
 
 const ReviewUsername = styled.span`
@@ -20,18 +25,30 @@ const ReviewContent = styled.p`
 `;
 
 function Reviews({ reviews }) {
+  const [inputText, setInputText] = useState("");
+  const [todos, setTodos] = useState([]);
+
   return (
-    <ReviewContainer>
-      {reviews.results &&
-        reviews.results.map((item) => {
-          return (
-            <li key={item.id}>
-              <ReviewUsername>*{item.author_details.username}</ReviewUsername>
-              <ReviewContent>{item.content.slice(0, 200)}...</ReviewContent>
-            </li>
-          );
-        })}
-    </ReviewContainer>
+    <>
+      <ReviewContainer>
+        {reviews.results &&
+          reviews.results.map((item) => {
+            return (
+              <li key={item.id}>
+                <ReviewUsername>*{item.author_details.username}</ReviewUsername>
+                <ReviewContent>{item.content.slice(0, 200)}...</ReviewContent>
+              </li>
+            );
+          })}
+        <ReviewList todos={todos} setTodos={setTodos} />
+      </ReviewContainer>
+      <ReviewTextarea
+        todos={todos}
+        setTodos={setTodos}
+        inputText={inputText}
+        setInputText={setInputText}
+      />
+    </>
   );
 }
 
