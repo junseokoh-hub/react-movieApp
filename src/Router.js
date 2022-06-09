@@ -11,6 +11,7 @@ import { useState } from "react";
 
 function Routing() {
   const [login, setLogin] = useState(false);
+
   return (
     <Router>
       <Head />
@@ -22,8 +23,8 @@ function Routing() {
           path="/myPage"
           element={<MyPage login={login} setLogin={setLogin} />}
         />
-        <Route path="/movie/:id" element={<Detail movie />} />
-        <Route path="/tv/:id" element={<Detail />} />
+        <Route path="/movie/:id" element={<Detail movie login={login} />} />
+        <Route path="/tv/:id" element={<Detail login={login} />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route
           path="/movie/:id/similarShows"

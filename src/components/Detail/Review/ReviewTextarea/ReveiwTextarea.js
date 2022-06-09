@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const InputContainer = styled.div`
@@ -26,9 +26,7 @@ const SubmitButton = styled.button`
   margin: 0 auto;
 `;
 
-function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
-  const [logIn, setLogIn] = useState(false);
-
+function ReviewTextarea({ todos, setTodos, inputText, setInputText, login }) {
   const inputTextHandler = (event) => {
     const {
       target: { value },
@@ -39,7 +37,7 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    logIn
+    login
       ? setTodos([
           ...todos,
           {

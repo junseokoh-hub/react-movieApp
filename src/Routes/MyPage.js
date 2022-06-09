@@ -48,15 +48,26 @@ function MyPage({ login, setLogin }) {
     setLogin(true);
   };
 
+  const savedUsername = localStorage.getItem("username");
+
+  const onLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("username");
+    setLogin(false);
+    setEmail("");
+  };
+
   return (
     <>
-      {login ? (
+      {login || savedUsername !== null ? (
         <ul>
           <li>My Profile</li>
           <li>My Ratings</li>
           <li>Preference</li>
           <li>Settings</li>
-          <li>Log Out</li>
+          <li onClick={onLogout} style={{ cursor: "pointer" }}>
+            Log Out
+          </li>
         </ul>
       ) : (
         <LoginForm onSubmit={onLogin}>
