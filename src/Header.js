@@ -46,7 +46,7 @@ const Li = styled.li`
   align-items: center;
 `;
 
-function Head() {
+function Head({ login, onLogout }) {
   const [open, setOpen] = useState(false);
 
   const openSearch = () => {
@@ -77,6 +77,7 @@ function Head() {
           <Link to="/myPage">
             <span>My Page</span>
           </Link>
+          {login && <span onClick={onLogout}>LogOut</span>}
         </Li>
       </Ul>
     </Header>

@@ -44,7 +44,7 @@ function ReviewTextarea({
 
   const submitHandler = (event) => {
     event.preventDefault();
-    login || savedUsername !== -null
+    login || savedUsername !== null
       ? setTodos([
           ...todos,
           {

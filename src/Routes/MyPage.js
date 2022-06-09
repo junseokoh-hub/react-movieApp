@@ -31,15 +31,7 @@ const LoginButton = styled(LoginInput)`
   cursor: pointer;
 `;
 
-function MyPage({
-  login,
-  setLogin,
-  onChange,
-  onLogin,
-  email,
-  setEmail,
-  savedUsername,
-}) {
+function MyPage({ login, onChange, onLogin, onLogout, email, savedUsername }) {
   // const [email, setEmail] = useState("");
 
   // const onChange = (e) => {
@@ -58,12 +50,12 @@ function MyPage({
 
   // const savedUsername = localStorage.getItem("username");
 
-  const onLogout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("username");
-    setLogin(false);
-    setEmail("");
-  };
+  // const onLogout = (e) => {
+  //   e.preventDefault();
+  //   localStorage.removeItem("username");
+  //   setLogin(false);
+  //   setEmail("");
+  // };
 
   return (
     <>

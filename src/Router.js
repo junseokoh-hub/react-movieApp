@@ -27,11 +27,18 @@ function Routing() {
     setLogin(true);
   };
 
+  const onLogout = (e) => {
+    e.preventDefault();
+    localStorage.removeItem("username");
+    setLogin(false);
+    setEmail("");
+  };
+
   const savedUsername = localStorage.getItem("username");
 
   return (
     <Router>
-      <Head />
+      <Head login={login} onLogout={onLogout} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
@@ -41,11 +48,10 @@ function Routing() {
           element={
             <MyPage
               login={login}
-              setLogin={setLogin}
               onChange={onChange}
               onLogin={onLogin}
+              onLogout={onLogout}
               email={email}
-              setEmail={setEmail}
               savedUsername={savedUsername}
             />
           }
