@@ -27,7 +27,7 @@ const ShowOthers = styled.div`
   }
 `;
 
-function Detail({ movie, login }) {
+function Detail({ movie, login, savedUsername }) {
   const [data, setData] = useState({});
   const [showData, setShowData] = useState({});
   const [reviews, setReviews] = useState({});
@@ -75,7 +75,11 @@ function Detail({ movie, login }) {
       ) : (
         <ShowOthers>
           <h3>Reviews</h3>
-          <Reviews reviews={reviews} login={login} />
+          <Reviews
+            reviews={reviews}
+            login={login}
+            savedUsername={savedUsername}
+          />
           <h3>Trailers</h3>
           <Trailers showData={showData} />
         </ShowOthers>

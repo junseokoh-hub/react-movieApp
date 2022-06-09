@@ -26,7 +26,14 @@ const SubmitButton = styled.button`
   margin: 0 auto;
 `;
 
-function ReviewTextarea({ todos, setTodos, inputText, setInputText, login }) {
+function ReviewTextarea({
+  todos,
+  setTodos,
+  inputText,
+  setInputText,
+  login,
+  savedUsername,
+}) {
   const inputTextHandler = (event) => {
     const {
       target: { value },
@@ -37,7 +44,7 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText, login }) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    login
+    login || savedUsername !== -null
       ? setTodos([
           ...todos,
           {

@@ -11,6 +11,23 @@ import { useState } from "react";
 
 function Routing() {
   const [login, setLogin] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    console.log(value);
+    setEmail(value);
+  };
+
+  const onLogin = (e) => {
+    e.preventDefault();
+    localStorage.setItem("username", email);
+    setLogin(true);
+  };
+
+  const savedUsername = localStorage.getItem("username");
 
   return (
     <Router>
@@ -21,10 +38,26 @@ function Routing() {
         <Route path="/tv" element={<Tv />} />
         <Route
           path="/myPage"
-          element={<MyPage login={login} setLogin={setLogin} />}
+          element={
+            <MyPage
+              login={login}
+              setLogin={setLogin}
+              onChange={onChange}
+              onLogin={onLogin}
+              email={email}
+              setEmail={setEmail}
+              savedUsername={savedUsername}
+            />
+          }
         />
-        <Route path="/movie/:id" element={<Detail movie login={login} />} />
-        <Route path="/tv/:id" element={<Detail login={login} />} />
+        <Route
+          path="/movie/:id"
+          element={<Detail movie login={login} savedUsername={savedUsername} />}
+        />
+        <Route
+          path="/tv/:id"
+          element={<Detail login={login} savedUsername={savedUsername} />}
+        />
         <Route path="/profile/:id" element={<Profile />} />
         <Route
           path="/movie/:id/similarShows"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 const LoginTitle = styled.h2`
@@ -31,24 +31,32 @@ const LoginButton = styled(LoginInput)`
   cursor: pointer;
 `;
 
-function MyPage({ login, setLogin }) {
-  const [email, setEmail] = useState("");
+function MyPage({
+  login,
+  setLogin,
+  onChange,
+  onLogin,
+  email,
+  setEmail,
+  savedUsername,
+}) {
+  // const [email, setEmail] = useState("");
 
-  const onChange = (e) => {
-    const {
-      target: { value },
-    } = e;
-    console.log(value);
-    setEmail(value);
-  };
+  // const onChange = (e) => {
+  //   const {
+  //     target: { value },
+  //   } = e;
+  //   console.log(value);
+  //   setEmail(value);
+  // };
 
-  const onLogin = (e) => {
-    e.preventDefault();
-    localStorage.setItem("username", email);
-    setLogin(true);
-  };
+  // const onLogin = (e) => {
+  //   e.preventDefault();
+  //   localStorage.setItem("username", email);
+  //   setLogin(true);
+  // };
 
-  const savedUsername = localStorage.getItem("username");
+  // const savedUsername = localStorage.getItem("username");
 
   const onLogout = (e) => {
     e.preventDefault();
