@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 
+const Username = styled.span`
+  color: ${(props) => props.theme.darkBlueColor};
+  font-size: calc(${(props) => props.theme.smallGap}*3);
+  font-weight: 900;
+  padding-left: ${(props) => props.theme.smallGap};
+`;
+
 const DeleteButton = styled.button``;
 
 function ReviewContent({ writer, text, todo, todos, setTodos }) {
@@ -10,7 +17,7 @@ function ReviewContent({ writer, text, todo, todos, setTodos }) {
   return (
     <div style={{ marginBottom: "1em" }}>
       <div>
-        <span>{writer}</span>
+        <Username>*{writer}</Username>
         <p>{text}</p>
       </div>
       <DeleteButton onClick={handleDelete}>Delete</DeleteButton>

@@ -48,7 +48,7 @@ function ReviewTextarea({
       ? setTodos([
           ...todos,
           {
-            writer: "Username",
+            writer: savedUsername,
             text: inputText,
             completed: false,
             id: Math.random() * 1000,
