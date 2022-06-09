@@ -46,7 +46,7 @@ const Li = styled.li`
   align-items: center;
 `;
 
-function Head({ login, onLogout }) {
+function Head({ login, onLogout, savedUsername }) {
   const [open, setOpen] = useState(false);
 
   const openSearch = () => {
@@ -77,7 +77,11 @@ function Head({ login, onLogout }) {
           <Link to="/myPage">
             <span>My Page</span>
           </Link>
-          {login && <span onClick={onLogout}>LogOut</span>}
+          {login || savedUsername !== null ? (
+            <span onClick={onLogout}>LogOut</span>
+          ) : (
+            <span style={{ display: "none" }}></span>
+          )}
         </Li>
       </Ul>
     </Header>

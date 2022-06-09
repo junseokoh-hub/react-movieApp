@@ -16,7 +16,7 @@ const LoginForm = styled.form`
   box-shadow: ${(props) => props.theme.boxShadow};
 `;
 
-const LoginInput = styled.input.attrs({ required: true })`
+const LoginInput = styled.input`
   padding: 1em;
   margin: ${(props) => props.theme.smallGap} 0;
   border: none;
@@ -32,31 +32,6 @@ const LoginButton = styled(LoginInput)`
 `;
 
 function MyPage({ login, onChange, onLogin, onLogout, email, savedUsername }) {
-  // const [email, setEmail] = useState("");
-
-  // const onChange = (e) => {
-  //   const {
-  //     target: { value },
-  //   } = e;
-  //   console.log(value);
-  //   setEmail(value);
-  // };
-
-  // const onLogin = (e) => {
-  //   e.preventDefault();
-  //   localStorage.setItem("username", email);
-  //   setLogin(true);
-  // };
-
-  // const savedUsername = localStorage.getItem("username");
-
-  // const onLogout = (e) => {
-  //   e.preventDefault();
-  //   localStorage.removeItem("username");
-  //   setLogin(false);
-  //   setEmail("");
-  // };
-
   return (
     <>
       {login || savedUsername !== null ? (

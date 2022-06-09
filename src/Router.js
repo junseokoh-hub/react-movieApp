@@ -38,7 +38,7 @@ function Routing() {
 
   return (
     <Router>
-      <Head login={login} onLogout={onLogout} />
+      <Head login={login} onLogout={onLogout} savedUsername={savedUsername} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
