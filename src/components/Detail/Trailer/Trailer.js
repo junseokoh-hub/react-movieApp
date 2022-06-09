@@ -3,15 +3,13 @@ import React from "react";
 
 const MoreInfo = styled.div`
   display: flex;
-  width: 80%;
   justify-content: center;
-  margin: 0 auto;
   overflow-x: auto;
 `;
 
 const SeparateVideos = styled.iframe`
-  width: 70%;
-  height: 12em;
+  width: 50%;
+  height: 20em;
 `;
 
 function Trailers({ showData }) {

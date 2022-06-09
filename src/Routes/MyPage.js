@@ -1,5 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+
+const LoginTitle = styled.h2`
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 1em;
+`;
 
 const LoginForm = styled.form`
   display: flex;
@@ -10,49 +16,64 @@ const LoginForm = styled.form`
   box-shadow: ${(props) => props.theme.boxShadow};
 `;
 
-const LoginInput = styled.input`
+const LoginInput = styled.input.attrs({ required: true })`
   padding: 1em;
   margin: ${(props) => props.theme.smallGap} 0;
   border: none;
   outline: none;
-  background-color: ${(props) => props.buttonBgColor && props.theme.bgColor};
-  box-shadow: ${(props) => props.buttonShadow && props.theme.boxShadow};
-  color: ${(props) => props.buttonColor && props.theme.whiteColor};
   border-radius: ${(props) => props.theme.smallGap};
-  cursor: ${(props) => props.buttonCursor && "pointer"};
 `;
 
-function MyPage() {
+const LoginButton = styled(LoginInput)`
+  background-color: ${(props) => props.theme.bgColor};
+  box-shadow: ${(props) => props.theme.boxShadow};
+  color: ${(props) => props.theme.whiteColor};
+  cursor: pointer;
+`;
+
+function MyPage({ login, setLogin }) {
+  const [email, setEmail] = useState("");
+
+  const onChange = (e) => {
+    const {
+      target: { value },
+    } = e;
+    console.log(value);
+    setEmail(value);
+  };
+
+  const onLogin = (e) => {
+    e.preventDefault();
+    localStorage.setItem("username", email);
+    setLogin(true);
+  };
+
   return (
-    <LoginForm>
-      <h2
-        style={{
-          textTransform: "uppercase",
-          textAlign: "center",
-          marginBottom: "1em",
-        }}
-      >
-        login
-      </h2>
-      <LoginInput type="text" placeholder="Username" />
-      <LoginInput type="password" placeholder="Password" />
-      <LoginInput
-        buttonCursor
-        buttonColor
-        buttonShadow
-        buttonBgColor
-        type="button"
-        value="LogIn"
-      />
-      <LoginInput
-        buttonCursor
-        buttonColor
-        buttonShadow
-        buttonBgColor
-        type="button"
-        value="Create Account"
-      />
-    </LoginForm>
+    <>
+      {login ? (
+        <ul>
+          <li>My Profile</li>
+          <li>My Ratings</li>
+          <li>Preference</li>
+          <li>Settings</li>
+          <li>Log Out</li>
+        </ul>
+      ) : (
+        <LoginForm onSubmit={onLogin}>
+          <LoginTitle>login</LoginTitle>
+          <LoginInput
+            value={email}
+            onChange={onChange}
+            type="email"
+            name="email"
+            placeholder="Username"
+          />
+          <LoginInput type="password" name="password" placeholder="Password" />
+          <LoginButton onClick={onLogin} type="submit" value="LogIn" />
+          <LoginButton type="button" value="Create Account" />
+        </LoginForm>
+      )}
+    </>
   );
 }
 

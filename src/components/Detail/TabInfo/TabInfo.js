@@ -41,13 +41,13 @@ function FirstMenuContent({ data, movie }) {
         <h2>
           {data.original_name}
           <ReleaseDate>
-            {data.first_air_date && data.first_air_date.slice(0, 4)}
+            ({data.first_air_date && data.first_air_date.slice(0, 4)})
           </ReleaseDate>
         </h2>
       )}
       {data.genres &&
         data.genres.map((item, index) => {
-          return <ShowGenre key={index}>{item.name}&nbsp;/</ShowGenre>;
+          return <ShowGenre key={index}>{item.name}/</ShowGenre>;
         })}
       <Preference data={data} />
       <TotalOverview data={data} movie={movie} />
