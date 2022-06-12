@@ -24,7 +24,6 @@ function SimilarShows({ movie }) {
   const { id } = useParams();
   const getMediaSimilarShows = useCallback(async () => {
     const json = await fetchMediaSimilarShows(movie, id);
-    console.log("getMediaSimilarShows json", json);
     setSimilarities(json);
   }, [id, movie]);
 

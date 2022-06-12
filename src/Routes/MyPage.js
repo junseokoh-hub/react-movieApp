@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { onLogin, onLogout, getItemfromLocalStorage } from "../LocalStorage";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -22,6 +23,7 @@ const LoginInput = styled.input`
   border: none;
   outline: none;
   border-radius: ${(props) => props.theme.smallGap};
+  width: 100%;
 `;
 
 const LoginButton = styled(LoginInput)`
@@ -31,21 +33,56 @@ const LoginButton = styled(LoginInput)`
   cursor: pointer;
 `;
 
-function MyPage({ login, onChange, onLogin, onLogout, email, savedUsername }) {
+function MyPage({ login, setLogin }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const [login, setLogin] = useState(getItemfromLocalStorage() !== null);
+
+  const onChange = (e) => {
+    console.log(e);
+    const {
+      target: { value, name },
+    } = e;
+    if (name === "email") {
+      setEmail(value);
+    } else {
+      setPassword(value);
+    }
+  };
+
+  const getLogin = (e) => {
+    e.preventDefault();
+    if (email && password) {
+      onLogin(email, password);
+      setLogin(getItemfromLocalStorage() !== null);
+      setEmail("");
+      setPassword("");
+    } else {
+      alert(`입력해주세요`);
+    }
+    console.log(`get login`);
+  };
+
+  const getLogout = (e) => {
+    e.preventDefault();
+    onLogout();
+    setLogin(getItemfromLocalStorage() !== null);
+  };
+
   return (
     <>
-      {login || savedUsername !== null ? (
+      {login ? (
         <ul>
           <li>My Profile</li>
           <li>My Ratings</li>
           <li>Preference</li>
           <li>Settings</li>
-          <li onClick={onLogout} style={{ cursor: "pointer" }}>
+          <li onClick={getLogout} style={{ cursor: "pointer" }}>
             Log Out
           </li>
         </ul>
       ) : (
-        <LoginForm onSubmit={onLogin}>
+        <LoginForm onSubmit={getLogin}>
           <LoginTitle>login</LoginTitle>
           <LoginInput
             value={email}
@@ -54,8 +91,14 @@ function MyPage({ login, onChange, onLogin, onLogout, email, savedUsername }) {
             name="email"
             placeholder="Username"
           />
-          <LoginInput type="password" name="password" placeholder="Password" />
-          <LoginButton onClick={onLogin} type="submit" value="LogIn" />
+          <LoginInput
+            value={password}
+            onChange={onChange}
+            type="password"
+            name="password"
+            placeholder="Password"
+          />
+          <LoginButton type="submit" value="LogIn" />
           <LoginButton type="button" value="Create Account" />
         </LoginForm>
       )}

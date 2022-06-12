@@ -14,15 +14,12 @@ function Search() {
     } = event;
     setSearch(value);
     if (timer) {
-      console.log("clear timer");
       clearTimeout(timer);
     }
     const newTimer = setTimeout(async () => {
-      console.log(value);
       try {
         const json = await fetchSearchMedia(value);
         setSearchData(json);
-        console.log(json);
       } catch (error) {
         console.log("error", error);
       }

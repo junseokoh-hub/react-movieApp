@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { getItemfromLocalStorage, onLogout } from "./LocalStorage";
 
 const Header = styled.header`
   width: 100%;
@@ -46,11 +47,17 @@ const Li = styled.li`
   align-items: center;
 `;
 
-function Head({ login, onLogout, savedUsername }) {
+function Head({ login, setLogin }) {
   const [open, setOpen] = useState(false);
 
   const openSearch = () => {
     setOpen((open) => !open);
+  };
+
+  const getLogout = (e) => {
+    e.preventDefault();
+    onLogout();
+    setLogin(getItemfromLocalStorage() !== null);
   };
 
   return (
@@ -77,8 +84,8 @@ function Head({ login, onLogout, savedUsername }) {
           <Link to="/myPage">
             <span>My Page</span>
           </Link>
-          {login || savedUsername !== null ? (
-            <span onClick={onLogout}>LogOut</span>
+          {login ? (
+            <span onClick={getLogout}>LogOut</span>
           ) : (
             <span style={{ display: "none" }}></span>
           )}

@@ -25,7 +25,7 @@ const ReviewContent = styled.p`
   margin-bottom: calc(${(props) => props.theme.smallGap}*2);
 `;
 
-function Reviews({ reviews, login, savedUsername }) {
+function Reviews({ reviews }) {
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
 
@@ -48,8 +48,6 @@ function Reviews({ reviews, login, savedUsername }) {
         setTodos={setTodos}
         inputText={inputText}
         setInputText={setInputText}
-        login={login}
-        savedUsername={savedUsername}
       />
     </>
   );

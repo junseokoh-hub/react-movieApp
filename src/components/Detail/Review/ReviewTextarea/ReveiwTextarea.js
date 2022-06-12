@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { getItemfromLocalStorage } from "../../../../LocalStorage";
 
 const InputContainer = styled.div`
   display: flex;
@@ -26,14 +27,7 @@ const SubmitButton = styled.button`
   margin: 0 auto;
 `;
 
-function ReviewTextarea({
-  todos,
-  setTodos,
-  inputText,
-  setInputText,
-  login,
-  savedUsername,
-}) {
+function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
   const inputTextHandler = (event) => {
     const {
       target: { value },
@@ -44,11 +38,12 @@ function ReviewTextarea({
 
   const submitHandler = (event) => {
     event.preventDefault();
-    login || savedUsername !== null
+    const writer = getItemfromLocalStorage();
+    writer !== null
       ? setTodos([
           ...todos,
           {
-            writer: savedUsername,
+            writer,
             text: inputText,
             completed: false,
             id: Math.random() * 1000,

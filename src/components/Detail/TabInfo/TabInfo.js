@@ -47,7 +47,12 @@ function FirstMenuContent({ data, movie }) {
       )}
       {data.genres &&
         data.genres.map((item, index) => {
-          return <ShowGenre key={index}>{item.name}/</ShowGenre>;
+          return (
+            <ShowGenre key={index}>
+              {item.name}
+              {data.genres.length - 1 !== index && <span> / </span>}
+            </ShowGenre>
+          );
         })}
       <Preference data={data} />
       <TotalOverview data={data} movie={movie} />

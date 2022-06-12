@@ -50,7 +50,6 @@ function MovieList({ movie, apiList }) {
           }/${apiList}?api_key=${API_KEY}&language=en-US`,
         );
         const json = await response.json();
-        console.log(json);
         setData(json);
       } catch (err) {
         console.log(err);
