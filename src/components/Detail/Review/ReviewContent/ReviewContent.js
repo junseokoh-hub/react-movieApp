@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { LoginContext } from "../../../../Context/LoginContext";
 
 const Username = styled.span`
   color: ${(props) => props.theme.darkBlueColor};
@@ -11,6 +12,8 @@ const Username = styled.span`
 const DeleteButton = styled.button``;
 
 function ReviewContent({ writer, text, todo, todos, setTodos }) {
+  const { login } = useContext(LoginContext);
+
   const handleDelete = () => {
     setTodos(todos.filter((element) => element.id !== todo.id));
   };
@@ -21,7 +24,7 @@ function ReviewContent({ writer, text, todo, todos, setTodos }) {
         <Username>*{writer}</Username>
         <p>{text}</p>
       </div>
-      <DeleteButton onClick={handleDelete}>Delete</DeleteButton>
+      {login && <DeleteButton onClick={handleDelete}>Delete</DeleteButton>}
     </div>
   );
 }

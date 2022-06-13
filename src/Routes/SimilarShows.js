@@ -20,11 +20,13 @@ const SimilarList = styled.li`
 `;
 
 function SimilarShows({ movie }) {
-  const [similarities, setSimilarities] = useState({});
+  const [similarities, setSimilarities] = useState([]);
+
   const { id } = useParams();
+
   const getMediaSimilarShows = useCallback(async () => {
     const json = await fetchMediaSimilarShows(movie, id);
-    setSimilarities(json);
+    setSimilarities(json.results);
   }, [id, movie]);
 
   useEffect(() => {
@@ -33,20 +35,19 @@ function SimilarShows({ movie }) {
 
   return (
     <SimilarUl>
-      {similarities.results &&
-        similarities.results.slice(0, 10).map((item) => {
-          return (
-            <SimilarList key={item.id}>
-              <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
-                <img
-                  src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                  alt={movie ? item.original_title : item.original_name}
-                />
-                <SimilarShowContent movie={movie} item={item} />
-              </Link>
-            </SimilarList>
-          );
-        })}
+      {similarities.slice(0, 10).map((item) => {
+        return (
+          <SimilarList key={item.id}>
+            <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
+              <img
+                src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                alt={movie ? item.original_title : item.original_name}
+              />
+              <SimilarShowContent movie={movie} item={item} />
+            </Link>
+          </SimilarList>
+        );
+      })}
     </SimilarUl>
   );
 }

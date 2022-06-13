@@ -29,9 +29,9 @@ const ShowOthers = styled.div`
 
 function Detail({ movie }) {
   const [data, setData] = useState({});
-  const [showData, setShowData] = useState({});
-  const [reviews, setReviews] = useState({});
-  const [credits, setCredits] = useState({});
+  const [showData, setShowData] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [credits, setCredits] = useState([]);
   const { id } = useParams();
 
   const getMedia = useCallback(async () => {
@@ -41,17 +41,17 @@ function Detail({ movie }) {
 
   const getMediaVideos = useCallback(async () => {
     const json = await fetchMediaVideos(movie, id);
-    setShowData(json);
+    setShowData(json.results);
   }, [id, movie]);
 
   const getMediaReviews = useCallback(async () => {
     const json = await fetchMediaReviews(movie, id);
-    setReviews(json);
+    setReviews(json.results);
   }, [id, movie]);
 
   const getMediaCredits = useCallback(async () => {
     const json = await fetchMediaCredits(movie, id);
-    setCredits(json);
+    setCredits(json.cast);
   }, [id, movie]);
 
   useEffect(() => {
@@ -67,10 +67,7 @@ function Detail({ movie }) {
         <Poster data={data} />
         <TabBundle data={data} movie={movie} credits={credits} />
       </ShowMainInfo>
-      {reviews.results &&
-      showData.results &&
-      reviews.results.length === 0 &&
-      showData.results.length === 0 ? (
+      {reviews.length === 0 && showData.length === 0 ? (
         <div>Hello</div>
       ) : (
         <ShowOthers>

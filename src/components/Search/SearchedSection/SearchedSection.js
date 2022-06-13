@@ -51,44 +51,52 @@ const SearchedException = styled.span`
 `;
 
 function SearchedSection({ movie, searchData }) {
+  const { results } = searchData;
+
   return (
     <>
-      <SearchedType
-        display={searchData.results === undefined ? "none" : "flex"}
-      >
+      <SearchedType display={results === undefined ? "none" : "flex"}>
         {movie ? "Movie" : "TV Show"}
       </SearchedType>
-      {searchData.results && searchData.results[0] === undefined ? (
+      {results && results[0] === undefined ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {searchData.results &&
-            searchData.results
+          {results &&
+            results
               .filter((item) => item.media_type === `${movie ? "movie" : "tv"}`)
               .map((item) => {
+                const {
+                  id,
+                  backdrop_path,
+                  poster_path,
+                  title,
+                  original_name,
+                  original_title,
+                  release_date,
+                  first_air_date,
+                } = item;
+
                 return (
-                  <Link
-                    key={item.id}
-                    to={`/${movie ? "movie" : "tv"}/${item.id}`}
-                  >
+                  <Link key={id} to={`/${movie ? "movie" : "tv"}/${id}`}>
                     <SearchedLi
                       display={
-                        item.backdrop_path === null && item.poster_path === null
+                        backdrop_path === null && poster_path === null
                           ? "none"
                           : "flex"
                       }
                     >
                       <SearchedImg
-                        src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                        alt={item.title}
+                        src={`https://${IMAGE_BASE_URL}/w200${poster_path}`}
+                        alt={title}
                       />
                       <SearchedTitle>
-                        {movie ? item.original_title : item.original_name}
+                        {movie ? original_title : original_name}
                       </SearchedTitle>
                       <SearchedDate>
                         {movie
-                          ? item.release_date.slice(0, 4)
-                          : item.first_air_date.slice(0, 4)}
+                          ? release_date.slice(0, 4)
+                          : first_air_date.slice(0, 4)}
                       </SearchedDate>
                     </SearchedLi>
                   </Link>

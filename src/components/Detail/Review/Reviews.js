@@ -32,15 +32,14 @@ function Reviews({ reviews }) {
   return (
     <>
       <ReviewContainer>
-        {reviews.results &&
-          reviews.results.map((item) => {
-            return (
-              <li key={item.id}>
-                <ReviewUsername>*{item.author_details.username}</ReviewUsername>
-                <ReviewContent>{item.content.slice(0, 200)}...</ReviewContent>
-              </li>
-            );
-          })}
+        {reviews.map((item) => {
+          return (
+            <li key={item.id}>
+              <ReviewUsername>*{item.author_details.username}</ReviewUsername>
+              <ReviewContent>{item.content.slice(0, 200)}...</ReviewContent>
+            </li>
+          );
+        })}
         <ReviewList todos={todos} setTodos={setTodos} />
       </ReviewContainer>
       <ReviewTextarea

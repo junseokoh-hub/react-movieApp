@@ -87,10 +87,15 @@ function Profile() {
                       path={item.poster_path}
                       alt={item.character}
                     />
-                    <span>
+                    <p>
                       {item.media_type === "movie"
                         ? item.original_title
                         : item.original_name}
+                    </p>
+                    <span style={{ fontStyle: "oblique" }}>
+                      {item.media_type === "movie"
+                        ? item.release_date.slice(0, 4)
+                        : item.first_air_date.slice(0, 4)}
                     </span>
                   </Link>
                 );

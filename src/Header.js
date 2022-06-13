@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { getItemfromLocalStorage, onLogout } from "./LocalStorage";
+import { LoginContext } from "./Context/LoginContext";
 
 const Header = styled.header`
   width: 100%;
@@ -47,9 +48,9 @@ const Li = styled.li`
   align-items: center;
 `;
 
-function Head({ login, setLogin }) {
+function Head(/*{ login, setLogin }*/) {
   const [open, setOpen] = useState(false);
-
+  const { login, setLogin } = useContext(LoginContext);
   const openSearch = () => {
     setOpen((open) => !open);
   };
@@ -84,11 +85,7 @@ function Head({ login, setLogin }) {
           <Link to="/myPage">
             <span>My Page</span>
           </Link>
-          {login ? (
-            <span onClick={getLogout}>LogOut</span>
-          ) : (
-            <span style={{ display: "none" }}></span>
-          )}
+          {login && <span onClick={getLogout}>LogOut</span>}
         </Li>
       </Ul>
     </Header>

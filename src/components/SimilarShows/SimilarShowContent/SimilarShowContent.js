@@ -69,28 +69,34 @@ const SimilarShowLanguage = styled.span`
 `;
 
 function SimilarShowContent({ movie, item }) {
+  const {
+    title,
+    name,
+    release_date,
+    first_air_date,
+    overview,
+    vote_average,
+    original_language,
+  } = item;
+
   return (
     <SimilarShowUl>
       <SimilarShowListTitle>
-        <h3>{movie ? item.title : item.name}</h3>
+        <h3>{movie ? title : name}</h3>
         <SimilarShowListCreated>
-          (
-          {movie
-            ? item.release_date.slice(0, 4)
-            : item.first_air_date.slice(0, 4)}
-          )
+          ({movie ? release_date.slice(0, 4) : first_air_date.slice(0, 4)})
         </SimilarShowListCreated>
       </SimilarShowListTitle>
       <SimilarShowListOverview>
         <SimilarShowListOverviewTitle>Overview</SimilarShowListOverviewTitle>
         <SimilarShowListOverviewContent>
-          {item.overview}...
+          {overview}...
         </SimilarShowListOverviewContent>
       </SimilarShowListOverview>
       <SimilarShowPreference>
-        <VoteRateCircle value={item.vote_average.toFixed(1)}></VoteRateCircle>
+        <VoteRateCircle value={vote_average.toFixed(1)}></VoteRateCircle>
         <SimilarShowLanguage>
-          {item.original_language.toUpperCase()}
+          {original_language.toUpperCase()}
         </SimilarShowLanguage>
       </SimilarShowPreference>
     </SimilarShowUl>

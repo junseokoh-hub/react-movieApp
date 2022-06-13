@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { LoginContext } from "../Context/LoginContext";
 import { onLogin, onLogout, getItemfromLocalStorage } from "../LocalStorage";
 
 const LoginTitle = styled.h2`
@@ -33,10 +34,12 @@ const LoginButton = styled(LoginInput)`
   cursor: pointer;
 `;
 
-function MyPage({ login, setLogin }) {
+function MyPage(/*{ login, setLogin }*/) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   // const [login, setLogin] = useState(getItemfromLocalStorage() !== null);
+
+  const { login, setLogin } = useContext(LoginContext);
 
   const onChange = (e) => {
     console.log(e);

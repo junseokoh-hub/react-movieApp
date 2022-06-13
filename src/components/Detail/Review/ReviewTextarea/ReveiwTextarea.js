@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
+import { LoginContext } from "../../../../Context/LoginContext";
 import { getItemfromLocalStorage } from "../../../../LocalStorage";
 
 const InputContainer = styled.div`
@@ -28,6 +29,8 @@ const SubmitButton = styled.button`
 `;
 
 function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
+  const { login } = useContext(LoginContext);
+
   const inputTextHandler = (event) => {
     const {
       target: { value },
@@ -38,12 +41,13 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    const writer = getItemfromLocalStorage();
-    writer !== null
+    // const writer = getItemfromLocalStorage();
+    // writer !== null
+    login
       ? setTodos([
           ...todos,
           {
-            writer,
+            writer: getItemfromLocalStorage(),
             text: inputText,
             completed: false,
             id: Math.random() * 1000,

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 
 const CreditsContainer = styled.ul`
   display: flex;
+  overflow-x: auto;
 `;
 
 const IndividualCredit = styled.li`
@@ -34,28 +35,27 @@ const IndividualInfo = styled.div`
 function SecondMenuContent({ credits }) {
   return (
     <CreditsContainer>
-      {credits.cast &&
-        credits.cast.slice(0, 8).map((item) => {
-          return (
-            <IndividualCredit key={item.credit_id}>
-              <Link to={`/profile/${item.id}`}>
-                <CreditsImg
-                  src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
-                  alt={item.original_name}
-                />
-                <IndividualInfo>
-                  <span>{item.name}</span>
-                  <span>Position : {item.known_for_department}</span>
-                  {item.character.length > 10 ? (
-                    <span>Character : {item.character.slice(0, 8)}...</span>
-                  ) : (
-                    <span>Character : {item.character}</span>
-                  )}
-                </IndividualInfo>
-              </Link>
-            </IndividualCredit>
-          );
-        })}
+      {credits.slice(0, 8).map((item) => {
+        return (
+          <IndividualCredit key={item.credit_id}>
+            <Link to={`/profile/${item.id}`}>
+              <CreditsImg
+                src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
+                alt={item.original_name}
+              />
+              <IndividualInfo>
+                <span>{item.name}</span>
+                <span>Position : {item.known_for_department}</span>
+                {item.character.length > 10 ? (
+                  <span>Character : {item.character.slice(0, 8)}...</span>
+                ) : (
+                  <span>Character : {item.character}</span>
+                )}
+              </IndividualInfo>
+            </Link>
+          </IndividualCredit>
+        );
+      })}
     </CreditsContainer>
   );
 }

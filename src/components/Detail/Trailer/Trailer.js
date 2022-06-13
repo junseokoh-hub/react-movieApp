@@ -15,16 +15,15 @@ const SeparateVideos = styled.iframe`
 function Trailers({ showData }) {
   return (
     <MoreInfo>
-      {showData.results &&
-        showData.results.slice(0, 4).map((item) => {
-          return (
-            <SeparateVideos
-              key={item.id}
-              title={item.name}
-              src={`https://www.youtube.com/embed/${item.key}`}
-            ></SeparateVideos>
-          );
-        })}
+      {showData.slice(0, 4).map((item) => {
+        return (
+          <SeparateVideos
+            key={item.id}
+            title={item.name}
+            src={`https://www.youtube.com/embed/${item.key}`}
+          ></SeparateVideos>
+        );
+      })}
     </MoreInfo>
   );
 }

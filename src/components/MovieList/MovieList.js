@@ -39,7 +39,7 @@ const ListHeader = styled.span`
 `;
 
 function MovieList({ movie, apiList }) {
-  const [data, setData] = useState({});
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     async function apiCall() {
@@ -50,7 +50,7 @@ function MovieList({ movie, apiList }) {
           }/${apiList}?api_key=${API_KEY}&language=en-US`,
         );
         const json = await response.json();
-        setData(json);
+        setData(json.results);
       } catch (err) {
         console.log(err);
       }
@@ -62,28 +62,27 @@ function MovieList({ movie, apiList }) {
     <>
       <ClassficiationTitle>{apiList}</ClassficiationTitle>
       <UnorderedList>
-        {data.results &&
-          data.results.slice(0, 10).map((item) => {
-            return (
-              <List key={item.id}>
-                <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
-                  <Poster
-                    src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                    alt={item.original_title}
-                  />
-                  {movie ? (
-                    <ListHeader>
-                      {item.title.length > 10
-                        ? `${item.title.slice(0, 10)}...`
-                        : item.title}
-                    </ListHeader>
-                  ) : (
-                    <ListHeader>{item.original_name}</ListHeader>
-                  )}
-                </Link>
-              </List>
-            );
-          })}
+        {data.slice(0, 10).map((item) => {
+          return (
+            <List key={item.id}>
+              <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
+                <Poster
+                  src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                  alt={item.original_title}
+                />
+                {movie ? (
+                  <ListHeader>
+                    {item.title.length > 10
+                      ? `${item.title.slice(0, 10)}...`
+                      : item.title}
+                  </ListHeader>
+                ) : (
+                  <ListHeader>{item.original_name}</ListHeader>
+                )}
+              </Link>
+            </List>
+          );
+        })}
       </UnorderedList>
       <br />
     </>
