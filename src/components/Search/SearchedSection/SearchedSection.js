@@ -51,19 +51,19 @@ const SearchedException = styled.span`
 `;
 
 function SearchedSection({ movie, searchData }) {
-  const { results } = searchData;
-
   return (
     <>
-      <SearchedType display={results === undefined ? "none" : "flex"}>
+      <SearchedType
+        display={searchData && searchData.length === 0 ? "none" : "flex"}
+      >
         {movie ? "Movie" : "TV Show"}
       </SearchedType>
-      {results && results[0] === undefined ? (
+      {searchData && searchData === undefined ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {results &&
-            results
+          {searchData &&
+            searchData
               .filter((item) => item.media_type === `${movie ? "movie" : "tv"}`)
               .map((item) => {
                 const {
