@@ -6,17 +6,17 @@ import { Link } from "react-router-dom";
 const UnorderedList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  a {
-    text-decoration-line: none;
-  }
 `;
 
 const List = styled.li`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 6em;
   margin: 1em ${(props) => props.theme.smallGap};
+  a {
+    text-decoration-line: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
 `;
 
 const ClassficiationTitle = styled.h2`
@@ -28,6 +28,7 @@ const ClassficiationTitle = styled.h2`
 const Poster = styled.img`
   width: 5em;
   margin-bottom: ${(props) => props.theme.smallGap};
+  border-radius: ${(props) => props.theme.smallGap};
   transition: transform 0.1s linear;
   &:hover {
     transform: scale(1.1);
@@ -36,7 +37,7 @@ const Poster = styled.img`
 
 const ListHeader = styled.span`
   font-size: 0.8em;
-  font-weight: 600;
+  font-weight: bold;
   text-align: center;
   letter-spacing: 0.2em;
   color: ${(props) => props.theme.whiteColor};
@@ -66,7 +67,7 @@ function MovieList({ movie, apiList }) {
     <>
       <ClassficiationTitle>{apiList}</ClassficiationTitle>
       <UnorderedList>
-        {data.slice(0, 10).map((item) => {
+        {data.map((item) => {
           return (
             <List key={item.id}>
               <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
