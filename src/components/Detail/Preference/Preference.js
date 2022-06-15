@@ -30,16 +30,19 @@ const HeartLike = styled.div`
   border: 1px solid black;
   border-radius: 50%;
   margin-left: ${(props) => props.theme.smallGap};
-  background-color: ${(props) => props.color};
+  background-color: ${(props) => (props.colorState ? "red" : "transparent")};
   cursor: pointer;
 `;
 
 function Preference({ data }) {
-  const [color, setColor] = useState();
+  const [colorState, setColorState] = useState(false);
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <VoteRateCircle value={data.vote_average}></VoteRateCircle>
-      <HeartLike color={color} onClick={() => setColor("red")} />
+      <HeartLike
+        colorState={colorState}
+        onClick={() => setColorState((prev) => !prev)}
+      />
     </div>
   );
 }

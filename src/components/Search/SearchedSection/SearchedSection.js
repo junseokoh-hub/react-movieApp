@@ -10,16 +10,23 @@ const SearchedUl = styled.ul`
 `;
 
 const SearchedLi = styled.li`
-  width: 10em;
+  width: 11em;
   display: ${(props) => props.display};
   flex-direction: column;
   margin: 0 1em;
+  margin-bottom: ${(props) => props.theme.smallGap};
   cursor: pointer;
 `;
 
 const SearchedImg = styled.img`
   height: 15em;
   display: block;
+  border-radius: ${(props) => props.theme.smallGap};
+  margin-bottom: ${(props) => props.theme.smallGap};
+  transition: transform 0.1s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const SearchedTitle = styled.p`
@@ -54,52 +61,42 @@ function SearchedSection({ movie, searchData }) {
   return (
     <>
       <SearchedType
-        display={searchData && searchData.length === 0 ? "none" : "flex"}
+        display={searchData.results === undefined ? "none" : "flex"}
       >
         {movie ? "Movie" : "TV Show"}
       </SearchedType>
-      {searchData && searchData === undefined ? (
+      {searchData.results && searchData.results[0] === undefined ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {searchData &&
-            searchData
+          {searchData.results &&
+            searchData.results
               .filter((item) => item.media_type === `${movie ? "movie" : "tv"}`)
               .map((item) => {
-                const {
-                  id,
-                  backdrop_path,
-                  poster_path,
-                  title,
-                  original_name,
-                  original_title,
-                  release_date,
-                  first_air_date,
-                } = item;
-
                 return (
-                  <Link key={id} to={`/${movie ? "movie" : "tv"}/${id}`}>
-                    <SearchedLi
-                      display={
-                        backdrop_path === null && poster_path === null
-                          ? "none"
-                          : "flex"
-                      }
-                    >
+                  <SearchedLi
+                    key={item.id}
+                    display={
+                      item.backdrop_path === null && item.poster_path === null
+                        ? "none"
+                        : "flex"
+                    }
+                  >
+                    <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
                       <SearchedImg
-                        src={`https://${IMAGE_BASE_URL}/w200${poster_path}`}
-                        alt={title}
+                        src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                        alt={item.title}
                       />
                       <SearchedTitle>
-                        {movie ? original_title : original_name}
+                        {movie ? item.original_title : item.original_name}
                       </SearchedTitle>
                       <SearchedDate>
                         {movie
-                          ? release_date.slice(0, 4)
-                          : first_air_date.slice(0, 4)}
+                          ? item.release_date.slice(0, 4)
+                          : item.first_air_date.slice(0, 4)}
                       </SearchedDate>
-                    </SearchedLi>
-                  </Link>
+                    </Link>
+                  </SearchedLi>
                 );
               })}
         </SearchedUl>

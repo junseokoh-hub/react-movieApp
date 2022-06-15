@@ -6,7 +6,7 @@ import SearchedContent from "../components/Search/SearchedContent";
 function Search() {
   const [search, setSearch] = useState("");
   const [timer, setTimer] = useState(0);
-  const [searchData, setSearchData] = useState([]);
+  const [searchData, setSearchData] = useState({});
 
   const onChange = (event) => {
     const {
@@ -19,14 +19,13 @@ function Search() {
     const newTimer = setTimeout(async () => {
       try {
         const json = await fetchSearchMedia(value);
-        setSearchData(json.results);
+        setSearchData(json);
       } catch (error) {
         console.log("error", error);
       }
     }, 400);
     setTimer(newTimer);
   };
-
   return (
     <>
       <SearchBox search={search} onChange={onChange} />

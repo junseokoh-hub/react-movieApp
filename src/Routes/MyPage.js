@@ -76,8 +76,8 @@ function MyPage(/*{ login, setLogin }*/) {
     <>
       {login ? (
         <ul>
-          <li>My Profile</li>
           <li>My Ratings</li>
+          <li>My WatchList</li>
           <li>Preference</li>
           <li>Settings</li>
           <li onClick={getLogout} style={{ cursor: "pointer" }}>

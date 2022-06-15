@@ -28,6 +28,10 @@ const ClassficiationTitle = styled.h2`
 const Poster = styled.img`
   width: 5em;
   margin-bottom: ${(props) => props.theme.smallGap};
+  transition: transform 0.1s linear;
+  &:hover {
+    transform: scale(1.1);
+  }
 `;
 
 const ListHeader = styled.span`
