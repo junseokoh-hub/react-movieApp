@@ -8,9 +8,7 @@ const ShowInfoUl = styled.ul`
   background-color: rgb(0, 0, 0, 0.5);
   padding: ${(props) => props.theme.smallGap} 0 0
     ${(props) => props.theme.smallGap};
-  .tab_button {
-    cursor: pointer;
-  }
+  cursor: pointer;
   .isToggled {
     background-color: #3d3d3d;
     color: #fff;
@@ -53,9 +51,7 @@ function TabBundle({ data, movie, credits }) {
           return (
             <TabSpan
               key={index}
-              className={
-                Toggled === index ? "tab_button isToggled" : "tab_button"
-              }
+              className={Toggled === index && "isToggled"}
               onClick={() => handleToggled(index)}
             >
               {tab.name}

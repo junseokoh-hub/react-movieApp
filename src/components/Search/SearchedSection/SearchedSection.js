@@ -23,9 +23,10 @@ const SearchedImg = styled.img`
   display: block;
   border-radius: ${(props) => props.theme.smallGap};
   margin-bottom: ${(props) => props.theme.smallGap};
-  transition: transform 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
   &:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    opacity: 0.5;
   }
 `;
 
@@ -57,20 +58,39 @@ const SearchedException = styled.span`
   display: inline-block;
 `;
 
-function SearchedSection({ movie, searchData }) {
+function SearchedSection({ filtered, movie, search, searchData }) {
+  console.log(search === "");
+  console.log(Array.isArray(searchData));
+  console.log(filtered);
+  // const searchedType = () => {
+  //   if (searchData === undefined) {
+  //     return "none";
+  //   }
+  //   if (search === "") {
+  //     return "none";
+  //   } else {
+  //     return "flex";
+  //   }
+  // };
   return (
     <>
       <SearchedType
-        display={searchData.results === undefined ? "none" : "flex"}
+        display={
+          // searchedType()
+          (searchData && searchData.length === 0) || searchData === undefined
+            ? "none"
+            : "flex"
+        }
       >
         {movie ? "Movie" : "TV Show"}
       </SearchedType>
-      {searchData.results && searchData.results[0] === undefined ? (
+
+      {searchData && searchData[0] === undefined && searchData === undefined ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {searchData.results &&
-            searchData.results
+          {filtered &&
+            filtered
               .filter((item) => item.media_type === `${movie ? "movie" : "tv"}`)
               .map((item) => {
                 return (

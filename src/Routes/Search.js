@@ -6,7 +6,9 @@ import SearchedContent from "../components/Search/SearchedContent";
 function Search() {
   const [search, setSearch] = useState("");
   const [timer, setTimer] = useState(0);
-  const [searchData, setSearchData] = useState({});
+  const [searchData, setSearchData] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [activeGenre, setActiveGenre] = useState(0);
 
   const onChange = (event) => {
     const {
@@ -19,7 +21,8 @@ function Search() {
     const newTimer = setTimeout(async () => {
       try {
         const json = await fetchSearchMedia(value);
-        setSearchData(json);
+        setSearchData(json.results);
+        setFiltered(json.results);
       } catch (error) {
         console.log("error", error);
       }
@@ -29,7 +32,14 @@ function Search() {
   return (
     <>
       <SearchBox search={search} onChange={onChange} />
-      <SearchedContent searchData={searchData} />
+      <SearchedContent
+        search={search}
+        filtered={filtered}
+        searchData={searchData}
+        setFiltered={setFiltered}
+        activeGenre={activeGenre}
+        setActiveGenre={setActiveGenre}
+      />
     </>
   );
 }
