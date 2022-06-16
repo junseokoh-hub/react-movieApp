@@ -58,67 +58,44 @@ const SearchedException = styled.span`
   display: inline-block;
 `;
 
-function SearchedSection({ filtered, movie, search, searchData }) {
-  console.log(search === "");
-  console.log(Array.isArray(searchData));
-  console.log(filtered);
-  // const searchedType = () => {
-  //   if (searchData === undefined) {
-  //     return "none";
-  //   }
-  //   if (search === "") {
-  //     return "none";
-  //   } else {
-  //     return "flex";
-  //   }
-  // };
+function SearchedSection({ filtered = [], movie }) {
+  const mediaType = movie ? "movie" : "tv";
+  const filteredData = filtered.filter((item) => item.media_type === mediaType);
+
   return (
     <>
-      <SearchedType
-        display={
-          // searchedType()
-          (searchData && searchData.length === 0) || searchData === undefined
-            ? "none"
-            : "flex"
-        }
-      >
-        {movie ? "Movie" : "TV Show"}
-      </SearchedType>
+      <SearchedType>{movie ? "Movie" : "TV Show"}</SearchedType>
 
-      {searchData && searchData[0] === undefined && searchData === undefined ? (
+      {filteredData.length === 0 ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {filtered &&
-            filtered
-              .filter((item) => item.media_type === `${movie ? "movie" : "tv"}`)
-              .map((item) => {
-                return (
-                  <SearchedLi
-                    key={item.id}
-                    display={
-                      item.backdrop_path === null && item.poster_path === null
-                        ? "none"
-                        : "flex"
-                    }
-                  >
-                    <Link to={`/${movie ? "movie" : "tv"}/${item.id}`}>
-                      <SearchedImg
-                        src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
-                        alt={item.title}
-                      />
-                      <SearchedTitle>
-                        {movie ? item.original_title : item.original_name}
-                      </SearchedTitle>
-                      <SearchedDate>
-                        {movie
-                          ? item.release_date.slice(0, 4)
-                          : item.first_air_date.slice(0, 4)}
-                      </SearchedDate>
-                    </Link>
-                  </SearchedLi>
-                );
-              })}
+          {filteredData.map((item) => {
+            const date = movie ? item.release_date : item.first_air_date;
+            return (
+              <SearchedLi
+                key={item.id}
+                display={
+                  item.backdrop_path === null && item.poster_path === null
+                    ? "none"
+                    : "flex"
+                }
+              >
+                <Link to={`/${mediaType}/${item.id}`}>
+                  <SearchedImg
+                    src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
+                    alt={item.title}
+                  />
+                  <SearchedTitle>
+                    {movie ? item.original_title : item.original_name}
+                  </SearchedTitle>
+                  <SearchedDate>
+                    {date ? date.slice(0, 4) : "미정"}
+                  </SearchedDate>
+                </Link>
+              </SearchedLi>
+            );
+          })}
         </SearchedUl>
       )}
     </>

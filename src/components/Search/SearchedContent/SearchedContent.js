@@ -8,11 +8,11 @@ const SearchContainer = styled.div`
 `;
 
 function SearchedContent({
+  keyword,
   filtered,
   activeGenre,
   setActiveGenre,
   setFiltered,
-  search,
   searchData,
 }) {
   return (
@@ -23,17 +23,14 @@ function SearchedContent({
         activeGenre={activeGenre}
         setActiveGenre={setActiveGenre}
       />
-      <SearchedSection
-        filtered={filtered}
-        search={search}
-        searchData={searchData}
-        movie
-      />
-      <SearchedSection
-        filtered={filtered}
-        search={search}
-        searchData={searchData}
-      />
+      {searchData.length > 0 ? (
+        <>
+          <SearchedSection filtered={filtered} movie />
+          <SearchedSection filtered={filtered} />
+        </>
+      ) : (
+        keyword && <span>{keyword}로 검색한 결과가 없습니다.</span>
+      )}
     </SearchContainer>
   );
 }

@@ -76,11 +76,7 @@ function MovieList({ movie, apiList }) {
                   alt={item.original_title}
                 />
                 {movie ? (
-                  <ListHeader>
-                    {item.title.length > 10
-                      ? `${item.title.slice(0, 10)}...`
-                      : item.title}
-                  </ListHeader>
+                  <ListHeader>{item.title}</ListHeader>
                 ) : (
                   <ListHeader>{item.original_name}</ListHeader>
                 )}
