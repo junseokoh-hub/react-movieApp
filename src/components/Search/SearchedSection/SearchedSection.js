@@ -24,9 +24,21 @@ const SearchedImg = styled.img`
   border-radius: ${(props) => props.theme.smallGap};
   margin-bottom: ${(props) => props.theme.smallGap};
   transition: all 0.1s ease-in-out;
+  position: relative;
   &:hover {
     transform: scale(1.05);
     opacity: 0.5;
+  }
+  &::after {
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 100;
   }
 `;
 
@@ -72,6 +84,7 @@ function SearchedSection({ filtered = [], movie }) {
         <SearchedUl>
           {filteredData.map((item) => {
             const date = movie ? item.release_date : item.first_air_date;
+            const name = movie ? item.original_title : item.original_name;
             return (
               <SearchedLi
                 key={item.id}
@@ -86,9 +99,7 @@ function SearchedSection({ filtered = [], movie }) {
                     src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                     alt={item.title}
                   />
-                  <SearchedTitle>
-                    {movie ? item.original_title : item.original_name}
-                  </SearchedTitle>
+                  <SearchedTitle>{name}</SearchedTitle>
                   <SearchedDate>
                     {date ? date.slice(0, 4) : "미정"}
                   </SearchedDate>

@@ -33,23 +33,31 @@ const IndividualInfo = styled.div`
 `;
 
 function SecondMenuContent({ credits }) {
+  const noImageUrl = "/logo192.png";
+
+  const handleImgError = (e) => {
+    e.target.src = noImageUrl;
+  };
+
   return (
     <CreditsContainer>
       {credits.slice(0, 8).map((item) => {
+        const character = item.character;
         return (
           <IndividualCredit key={item.credit_id}>
             <Link to={`/profile/${item.id}`}>
               <CreditsImg
                 src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
                 alt={item.original_name}
+                onError={handleImgError}
               />
               <IndividualInfo>
                 <span>{item.name}</span>
                 <span>Position : {item.known_for_department}</span>
-                {item.character.length > 10 ? (
-                  <span>Character : {item.character.slice(0, 8)}...</span>
+                {character.length > 10 ? (
+                  <span>Character : {character.slice(0, 8)}...</span>
                 ) : (
-                  <span>Character : {item.character}</span>
+                  <span>Character : {character}</span>
                 )}
               </IndividualInfo>
             </Link>

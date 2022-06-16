@@ -75,11 +75,10 @@ function Profile() {
             individualFilm.cast
               .filter((item) => item.popularity > 100)
               .map((item) => {
+                const mediaType = item.media_type === "movie";
                 return (
                   <Link
-                    to={`/${item.media_type === "movie" ? "movie" : "tv"}/${
-                      item.id
-                    }`}
+                    to={`/${mediaType ? "movie" : "tv"}/${item.id}`}
                     key={item.credit_id}
                   >
                     <CommonImg
@@ -88,12 +87,10 @@ function Profile() {
                       alt={item.character}
                     />
                     <p>
-                      {item.media_type === "movie"
-                        ? item.original_title
-                        : item.original_name}
+                      {mediaType ? item.original_title : item.original_name}
                     </p>
-                    <span style={{ fontStyle: "oblique" }}>
-                      {item.media_type === "movie"
+                    <span style={{ fontStyle: "oblique", fontSize: "0.5em" }}>
+                      {mediaType
                         ? item.release_date.slice(0, 4)
                         : item.first_air_date.slice(0, 4)}
                     </span>
