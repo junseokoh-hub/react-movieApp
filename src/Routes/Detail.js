@@ -83,7 +83,7 @@ function Detail({ movie }) {
           <div>Hello</div>
         ) : (
           <>
-            <h3>Trailers</h3>
+            <h3 style={{ marginTop: "3em" }}>Trailers</h3>
             <Trailers showData={showData} />
           </>
         )}

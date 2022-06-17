@@ -9,7 +9,11 @@ const Header = styled.header`
   height: 7vh;
   display: flex;
   align-items: center;
+  background-color: ${(props) => props.theme.bgColor};
   box-shadow: ${(props) => props.theme.boxShadow};
+  position: fixed;
+  top: 0;
+  left: 0;
   a {
     text-decoration-line: none;
   }
@@ -50,7 +54,9 @@ const Li = styled.li`
 
 function Head(/*{ login, setLogin }*/) {
   const [open, setOpen] = useState(false);
+
   const { login, setLogin } = useContext(LoginContext);
+
   const openSearch = () => {
     setOpen((open) => !open);
   };
