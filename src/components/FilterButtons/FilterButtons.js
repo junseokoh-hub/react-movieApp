@@ -40,9 +40,7 @@ function FilterButtons({
     }
     const filtered =
       searchData &&
-      searchData.filter(
-        (item) => searchData && item.genre_ids?.includes(activeGenre),
-      );
+      searchData.filter((item) => item.genre_ids?.includes(activeGenre));
     setFiltered(filtered);
   }, [activeGenre, searchData, setFiltered]);
 

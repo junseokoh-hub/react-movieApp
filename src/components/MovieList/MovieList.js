@@ -2,6 +2,7 @@ import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const UnorderedList = styled.ul`
   display: flex;
@@ -65,6 +66,9 @@ function MovieList({ movie, apiList }) {
 
   return (
     <>
+      <Helmet>
+        <title>{movie ? "Movie" : "TV"}</title>
+      </Helmet>
       <ClassficiationTitle>{apiList}</ClassficiationTitle>
       <UnorderedList>
         {data.map((item) => {

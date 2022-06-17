@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
 import styled from "styled-components";
 import CommonImg from "../components/CommonImg/CommonImg";
+import { Helmet } from "react-helmet-async";
 
 const ProfileTitle = styled.h3`
   color: ${(props) => props.theme.darkBlueColor};
@@ -45,61 +46,64 @@ function Profile() {
   }, [getIndividualFilm, getIndividual]);
 
   return (
-    <ul>
-      <ProfileLi>
-        {/* <ProfileImg
+    <>
+      <Helmet>
+        <title>{individualDetail.name}</title>
+      </Helmet>
+      <ul>
+        <ProfileLi>
+          {/* <ProfileImg
           src={`https://${IMAGE_BASE_URL}/w200/${individualDetail.profile_path}`}
           alt={individualDetail.name}
         /> */}
-        <CommonImg
-          path={individualDetail.profile_path}
-          size={200}
-          alt={individualDetail.name}
-        />
-        <span>
-          {individualDetail.also_known_as && individualDetail.also_known_as[0]}
-        </span>
-      </ProfileLi>
-      <ProfileLi>
-        <ProfileTitle>Biography</ProfileTitle>
-        <p style={{ fontStyle: "oblique" }}>
-          {individualDetail.biography &&
-            individualDetail.biography.slice(0, 500)}
-          ...
-        </p>
-      </ProfileLi>
-      <ProfileLi>
-        <ProfileTitle>Filmography</ProfileTitle>
-        <ProfileFilmography>
-          {individualFilm.cast &&
-            individualFilm.cast
-              .filter((item) => item.popularity > 100)
-              .map((item) => {
-                const mediaType = item.media_type === "movie";
-                return (
-                  <Link
-                    to={`/${mediaType ? "movie" : "tv"}/${item.id}`}
-                    key={item.credit_id}
-                  >
-                    <CommonImg
-                      size={200}
-                      path={item.poster_path}
-                      alt={item.character}
-                    />
-                    <p>
-                      {mediaType ? item.original_title : item.original_name}
-                    </p>
-                    <span style={{ fontStyle: "oblique", fontSize: "0.5em" }}>
-                      {mediaType
-                        ? item.release_date.slice(0, 4)
-                        : item.first_air_date.slice(0, 4)}
-                    </span>
-                  </Link>
-                );
-              })}
-        </ProfileFilmography>
-      </ProfileLi>
-    </ul>
+          <CommonImg
+            path={individualDetail.profile_path}
+            size={200}
+            alt={individualDetail.name}
+          />
+          <span>{individualDetail.name}</span>
+        </ProfileLi>
+        <ProfileLi>
+          <ProfileTitle>Biography</ProfileTitle>
+          <p style={{ fontStyle: "oblique" }}>
+            {individualDetail.biography &&
+              individualDetail.biography.slice(0, 500)}
+            ...
+          </p>
+        </ProfileLi>
+        <ProfileLi>
+          <ProfileTitle>Filmography</ProfileTitle>
+          <ProfileFilmography>
+            {individualFilm.cast &&
+              individualFilm.cast
+                .filter((item) => item.popularity > 100)
+                .map((item) => {
+                  const mediaType = item.media_type === "movie";
+                  return (
+                    <Link
+                      to={`/${mediaType ? "movie" : "tv"}/${item.id}`}
+                      key={item.credit_id}
+                    >
+                      <CommonImg
+                        size={200}
+                        path={item.poster_path}
+                        alt={item.character}
+                      />
+                      <p>
+                        {mediaType ? item.original_title : item.original_name}
+                      </p>
+                      <span style={{ fontStyle: "oblique", fontSize: "0.5em" }}>
+                        {mediaType
+                          ? item.release_date.slice(0, 4)
+                          : item.first_air_date.slice(0, 4)}
+                      </span>
+                    </Link>
+                  );
+                })}
+          </ProfileFilmography>
+        </ProfileLi>
+      </ul>
+    </>
   );
 }
 

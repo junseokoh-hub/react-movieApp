@@ -11,6 +11,7 @@ import TabBundle from "../components/Detail/TabBundle";
 import Trailers from "../components/Detail/Trailer";
 import Poster from "../components/Detail/Poster";
 import Reviews from "../components/Detail/Review";
+import { Helmet } from "react-helmet-async";
 
 const ShowMainInfo = styled.div`
   display: flex;
@@ -63,6 +64,13 @@ function Detail({ movie }) {
 
   return (
     <>
+      <Helmet>
+        <title>
+          {movie
+            ? `Movie - ${data.original_title}`
+            : `TV - ${data.original_name}`}
+        </title>
+      </Helmet>
       <ShowMainInfo>
         <Poster data={data} />
         <TabBundle data={data} movie={movie} credits={credits} />

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
 import { onLogin, onLogout, getItemfromLocalStorage } from "../LocalStorage";
@@ -74,6 +75,9 @@ function MyPage(/*{ login, setLogin }*/) {
 
   return (
     <>
+      <Helmet>
+        <title>My Page</title>
+      </Helmet>
       {login ? (
         <ul>
           <li>My Ratings</li>

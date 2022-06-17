@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { fetchSearchMedia } from "../api";
 import SearchBox from "../components/Search/SearchBox";
 import SearchedContent from "../components/Search/SearchedContent";
+import { Helmet } from "react-helmet-async";
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -39,6 +40,11 @@ function Search() {
   };
   return (
     <>
+      <Helmet>
+        <title>
+          {searchData.length > 0 && keyword ? `Search - ${keyword}` : `Search`}
+        </title>
+      </Helmet>
       <SearchBox search={search} onChange={onChange} />
       <SearchedContent
         keyword={keyword}
