@@ -14,7 +14,7 @@ const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
   width: 50%;
-  margin: 7em auto;
+  margin: 9em auto;
   padding: 3em;
   box-shadow: ${(props) => props.theme.boxShadow};
 `;

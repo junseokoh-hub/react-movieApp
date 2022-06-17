@@ -22,7 +22,6 @@ const ReviewUsername = styled.span`
 `;
 
 const ReviewContent = styled.p`
-  margin-bottom: calc(${(props) => props.theme.smallGap}*2);
   a {
     display: inline-block;
     padding: 0.3em;
@@ -50,6 +49,12 @@ function Reviews({ reviews }) {
                   all comments
                 </a>
               </ReviewContent>
+              <span style={{ fontStyle: "oblique", fontSize: "0.5em" }}>
+                {item.author_details.rating.toFixed(1)}
+              </span>
+              <p style={{ fontStyle: "oblique", fontSize: "0.5em" }}>
+                last update : {item.updated_at}
+              </p>
             </li>
           );
         })}
