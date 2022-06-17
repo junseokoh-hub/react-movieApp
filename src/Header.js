@@ -14,6 +14,7 @@ const Header = styled.header`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
   a {
     text-decoration-line: none;
   }
@@ -88,10 +89,18 @@ function Head(/*{ login, setLogin }*/) {
           <Link to="/search">
             <span>Search</span>
           </Link>
-          <Link to="/myPage">
-            <span>My Page</span>
-          </Link>
-          {login && <span onClick={getLogout}>LogOut</span>}
+          {login ? (
+            <>
+              <Link to="/myPage">
+                <span>My Page</span>
+              </Link>
+              <span onClick={getLogout}>LogOut</span>
+            </>
+          ) : (
+            <Link to="/myPage">
+              <span>LogIn</span>
+            </Link>
+          )}
         </Li>
       </Ul>
     </Header>
