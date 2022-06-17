@@ -1,5 +1,7 @@
 import { API_KEY, API_URL } from "./Config";
 
+/* Detail */
+
 export const fetchMedia = async (movie, id) => {
   const response = await fetch(
     `https://${API_URL}${
@@ -50,6 +52,8 @@ export const fetchMediaCredits = async (movie, id) => {
   return json;
 };
 
+/* Search */
+
 export const fetchSearchMedia = async (value) => {
   const response = await fetch(
     `https://${API_URL}search/multi?api_key=${API_KEY}&language=en-US&query=${value}`,
@@ -57,6 +61,8 @@ export const fetchSearchMedia = async (value) => {
   const json = await response.json();
   return json;
 };
+
+/* Profile */
 
 export const fetchIndividualFilm = async (id) => {
   const response = await fetch(

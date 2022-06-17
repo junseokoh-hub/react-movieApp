@@ -66,8 +66,7 @@ function Profile() {
         <ProfileLi>
           <ProfileTitle>Biography</ProfileTitle>
           <p style={{ fontStyle: "oblique" }}>
-            {individualDetail.biography &&
-              individualDetail.biography.slice(0, 500)}
+            {individualDetail.biography?.slice(0, 500)}
             ...
           </p>
         </ProfileLi>

@@ -23,6 +23,13 @@ const ReviewUsername = styled.span`
 
 const ReviewContent = styled.p`
   margin-bottom: calc(${(props) => props.theme.smallGap}*2);
+  a {
+    display: inline-block;
+    padding: 0.3em;
+    background-color: ${(props) => props.theme.bgColor};
+    border: 1px solid #fff;
+    border-radius: ${(props) => props.theme.smallGap};
+  }
 `;
 
 function Reviews({ reviews }) {
@@ -35,8 +42,14 @@ function Reviews({ reviews }) {
         {reviews.map((item) => {
           return (
             <li key={item.id}>
+              <img src={item.author_details?.avatar_pathd} alt={item.author} />
               <ReviewUsername>*{item.author_details.username}</ReviewUsername>
-              <ReviewContent>{item.content.slice(0, 200)}...</ReviewContent>
+              <ReviewContent>
+                {item.content.slice(0, 200)}...{" "}
+                <a href={item.url} target={`_blank`}>
+                  all comments
+                </a>
+              </ReviewContent>
             </li>
           );
         })}

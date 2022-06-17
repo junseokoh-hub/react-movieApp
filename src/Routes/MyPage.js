@@ -35,10 +35,9 @@ const LoginButton = styled(LoginInput)`
   cursor: pointer;
 `;
 
-function MyPage(/*{ login, setLogin }*/) {
+function MyPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [login, setLogin] = useState(getItemfromLocalStorage() !== null);
 
   const { login, setLogin } = useContext(LoginContext);
 
@@ -76,7 +75,7 @@ function MyPage(/*{ login, setLogin }*/) {
   return (
     <>
       <Helmet>
-        <title>My Page</title>
+        <title>{login ? `My Page` : `Log In`}</title>
       </Helmet>
       {login ? (
         <ul>

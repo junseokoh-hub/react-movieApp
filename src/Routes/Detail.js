@@ -75,16 +75,19 @@ function Detail({ movie }) {
         <Poster data={data} />
         <TabBundle data={data} movie={movie} credits={credits} />
       </ShowMainInfo>
-      {reviews.length === 0 && showData.length === 0 ? (
-        <div>Hello</div>
-      ) : (
-        <ShowOthers>
-          <h3>Reviews</h3>
-          <Reviews reviews={reviews} />
-          <h3>Trailers</h3>
-          <Trailers showData={showData} />
-        </ShowOthers>
-      )}
+
+      <ShowOthers>
+        <h3>Reviews</h3>
+        <Reviews reviews={reviews} />
+        {showData.length === 0 ? (
+          <div>Hello</div>
+        ) : (
+          <>
+            <h3>Trailers</h3>
+            <Trailers showData={showData} />
+          </>
+        )}
+      </ShowOthers>
     </>
   );
 }
