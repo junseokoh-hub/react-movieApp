@@ -12,9 +12,9 @@ export const LogoutProvider = ({ children }) => {
     setLogin(getItemfromLocalStorage() !== null);
   };
 
+  const value = { login, setLogin, getLogout };
+
   return (
-    <LoginContext.Provider value={{ login, setLogin, getLogout }}>
-      {children}
-    </LoginContext.Provider>
+    <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
   );
 };
