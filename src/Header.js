@@ -1,7 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
+
+const Container = styled.div`
+  .active {
+    display: none;
+  }
+`;
 
 const Header = styled.header`
   width: 100%;
@@ -53,50 +59,65 @@ const Li = styled.li`
 `;
 
 function Head() {
+  const { login, getLogout } = useContext(LoginContext);
   const [open, setOpen] = useState(false);
 
-  const { login, getLogout } = useContext(LoginContext);
+  const navbar = useRef(null);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (navbar.current !== null) {
+        if (window.scrollY > navbar.current.offsetHeight + 100) {
+          navbar.current.classList.add("active");
+        } else {
+          navbar.current.classList.remove("active");
+        }
+      }
+    });
+  }, []);
 
   const openSearch = () => {
     setOpen((open) => !open);
   };
 
   return (
-    <Header>
-      <Ul>
-        <Li>
-          <Link to="/">
-            <span>Movies</span>
-          </Link>
-          <Link to="/tv">
-            <span>TV</span>
-          </Link>
-        </Li>
-        <Li>
-          <span onClick={openSearch}>🔍</span>
-          <input
-            className={!open ? "disappear" : "appear"}
-            type="text"
-            placeholder="Search..."
-          />
-          <Link to="/search">
-            <span>Search</span>
-          </Link>
-          {login ? (
-            <>
-              <Link to="/myPage">
-                <span>My Page</span>
-              </Link>
-              <span onClick={getLogout}>LogOut</span>
-            </>
-          ) : (
-            <Link to="/myPage">
-              <span>LogIn</span>
+    <Container>
+      <Header ref={navbar}>
+        <Ul>
+          <Li>
+            <Link to="/">
+              <span>Movies</span>
             </Link>
-          )}
-        </Li>
-      </Ul>
-    </Header>
+            <Link to="/tv">
+              <span>TV</span>
+            </Link>
+          </Li>
+          <Li>
+            <span onClick={openSearch}>🔍</span>
+            <input
+              className={!open ? "disappear" : "appear"}
+              type="text"
+              placeholder="Search..."
+            />
+            <Link to="/search">
+              <span>Search</span>
+            </Link>
+            {login ? (
+              <>
+                <Link to="/myPage">
+                  <span>My Page</span>
+                </Link>
+                <span onClick={getLogout}>LogOut</span>
+              </>
+            ) : (
+              <Link to="/myPage">
+                <span>LogIn</span>
+              </Link>
+            )}
+          </Li>
+        </Ul>
+      </Header>
+    </Container>
   );
 }
 
