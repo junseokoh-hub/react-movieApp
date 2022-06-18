@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { getItemfromLocalStorage, onLogout } from "./LocalStorage";
 import { LoginContext } from "./Context/LoginContext";
 
 const Header = styled.header`
@@ -53,19 +52,13 @@ const Li = styled.li`
   align-items: center;
 `;
 
-function Head(/*{ login, setLogin }*/) {
+function Head() {
   const [open, setOpen] = useState(false);
 
-  const { login, setLogin } = useContext(LoginContext);
+  const { login, getLogout } = useContext(LoginContext);
 
   const openSearch = () => {
     setOpen((open) => !open);
-  };
-
-  const getLogout = (e) => {
-    e.preventDefault();
-    onLogout();
-    setLogin(getItemfromLocalStorage() !== null);
   };
 
   return (

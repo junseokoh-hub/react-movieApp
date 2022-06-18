@@ -35,14 +35,11 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
     const {
       target: { value },
     } = event;
-    console.log(value);
     setInputText(value);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    // const writer = getItemfromLocalStorage();
-    // writer !== null
     login
       ? setTodos([
           ...todos,

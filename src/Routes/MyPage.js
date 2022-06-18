@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
-import { onLogin, onLogout, getItemfromLocalStorage } from "../LocalStorage";
+import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -39,10 +39,9 @@ function MyPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, setLogin } = useContext(LoginContext);
+  const { login, setLogin, getLogout } = useContext(LoginContext);
 
   const onChange = (e) => {
-    console.log(e);
     const {
       target: { value, name },
     } = e;
@@ -64,12 +63,6 @@ function MyPage() {
       alert(`입력해주세요`);
     }
     console.log(`get login`);
-  };
-
-  const getLogout = (e) => {
-    e.preventDefault();
-    onLogout();
-    setLogin(getItemfromLocalStorage() !== null);
   };
 
   return (
