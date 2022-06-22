@@ -40,7 +40,6 @@ function Detail({ movie }) {
 
   useEffect(() => {
     getMedia();
-
     getMediaCredits();
   }, [getMedia, getMediaCredits]);
 

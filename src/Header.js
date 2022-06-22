@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 
 const Container = styled.div`
@@ -80,17 +80,35 @@ function Head() {
     setOpen((open) => !open);
   };
 
+  let navigate = useNavigate();
+
+  const toLink = (e) => {
+    const {
+      target: { innerHTML },
+    } = e;
+    if (innerHTML === "Movies") {
+      navigate(`/`);
+    } else if (innerHTML === "TV") {
+      navigate(`/tv`);
+    } else if (innerHTML === "Search") {
+      navigate(`/search`);
+    } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
+      navigate(`/myPage`);
+    }
+    console.log(e.target.innerHTML);
+  };
+
   return (
     <Container>
       <Header ref={navbar}>
         <Ul>
           <Li>
-            <Link to="/">
-              <span>Movies</span>
-            </Link>
-            <Link to="/tv">
-              <span>TV</span>
-            </Link>
+            {/* <Link to="/"> */}
+            <span onClick={toLink}>Movies</span>
+            {/* </Link> */}
+            {/* <Link to="/tv"> */}
+            <span onClick={toLink}>TV</span>
+            {/* </Link> */}
           </Li>
           <Li>
             <span onClick={openSearch}>🔍</span>
@@ -99,20 +117,20 @@ function Head() {
               type="text"
               placeholder="Search..."
             />
-            <Link to="/search">
-              <span>Search</span>
-            </Link>
+            {/* <Link to="/search"> */}
+            <span onClick={toLink}>Search</span>
+            {/* </Link> */}
             {login ? (
               <>
-                <Link to="/myPage">
-                  <span>My Page</span>
-                </Link>
+                {/* <Link to="/myPage"> */}
+                <span onClick={toLink}>My Page</span>
+                {/* </Link> */}
                 <span onClick={getLogout}>LogOut</span>
               </>
             ) : (
-              <Link to="/myPage">
-                <span>LogIn</span>
-              </Link>
+              // <Link to="/myPage">
+              <span onClick={toLink}>LogIn</span>
+              //  </Link>
             )}
           </Li>
         </Ul>
