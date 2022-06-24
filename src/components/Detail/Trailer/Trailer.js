@@ -3,6 +3,13 @@ import React /*,{ useState, useEffect, useCallback }*/ from "react";
 import { fetchMediaVideos } from "../../../api";
 import { useQuery } from "react-query";
 
+const TrailersIndicator = styled.h4`
+  color: ${(props) => props.theme.whiteColor};
+  margin: 0 auto;
+  margin-top: 2em;
+  padding-bottom: 0.6em;
+`;
+
 const MoreInfo = styled.div`
   display: flex;
   justify-content: center;
@@ -41,7 +48,7 @@ function Trailers({ movie, id }) {
         <div>Hello</div>
       ) : (
         <>
-          <h3 style={{ marginTop: "3em" }}>Trailers</h3>
+          <TrailersIndicator>Trailers</TrailersIndicator>
           <MoreInfo>
             {videos?.results.slice(0, 4).map((item) => {
               return (

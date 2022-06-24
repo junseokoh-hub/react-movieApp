@@ -124,7 +124,14 @@ function Head() {
             {login ? (
               <>
                 <span onClick={toNavigate}>My Page</span>
-                <span onClick={getLogout}>LogOut</span>
+                <span
+                  onClick={(e) => {
+                    getLogout(e);
+                    setNavOpen(false);
+                  }}
+                >
+                  LogOut
+                </span>
               </>
             ) : (
               <span onClick={toNavigate}>LogIn</span>

@@ -5,8 +5,11 @@ import ReviewList from "./ReviewList";
 import { fetchMediaReviews } from "../../../api";
 import { useQuery } from "react-query";
 
-const ReviewIndicator = styled.h3`
-  color: white;
+const ReviewIndicator = styled.h4`
+  color: ${(props) => props.theme.whiteColor};
+  margin: 0 auto;
+  margin-top: 2em;
+  padding-bottom: 0.6em;
 `;
 
 const ReviewContainer = styled.ul`

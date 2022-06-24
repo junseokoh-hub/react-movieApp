@@ -54,7 +54,10 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
           },
         ])
       : alert(`Please Log In!`);
-    inputText === "" && alert("Please write something!");
+    if (inputText === "") {
+      alert("Please write something!!!");
+      setTodos([...todos]);
+    }
     setInputText("");
   };
 
