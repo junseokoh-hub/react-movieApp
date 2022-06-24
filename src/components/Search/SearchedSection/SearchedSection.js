@@ -10,12 +10,18 @@ const SearchedUl = styled.ul`
 `;
 
 const SearchedLi = styled.li`
+  margin: 0 1em 0.5em 1em;
+  padding: 0.5em 0 0 0.5em;
   width: 11em;
   display: ${(props) => props.display};
   flex-direction: column;
-  margin: 0 1em;
-  margin-bottom: ${(props) => props.theme.smallGap};
   cursor: pointer;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  border-radius: ${(props) => props.theme.smallGap};
+  @media screen and (max-width: 300px) {
+    width: 5em;
+    margin: 0 0 0.5em 1em;
+  }
 `;
 
 const SearchedImg = styled.img`
@@ -29,16 +35,8 @@ const SearchedImg = styled.img`
     transform: scale(1.05);
     opacity: 0.5;
   }
-  &::after {
-    content: "";
-    display: inline-block;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background-color: black;
-    z-index: 100;
+  @media screen and (max-width: 300px) {
+    height: 6em;
   }
 `;
 
@@ -46,6 +44,9 @@ const SearchedTitle = styled.p`
   font-size: 1.1em;
   font-weight: 700;
   color: ${(props) => props.theme.whiteColor};
+  @media screen and (max-width: 300px) {
+    font-size: 0.4em;
+  }
 `;
 
 const SearchedDate = styled.span`

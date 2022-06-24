@@ -25,6 +25,9 @@ const FilterButton = styled.button`
     background-color: #3d3d3d;
     transform: scale(0.95);
   }
+  @media screen and (max-width: 300px) {
+    font-size: 0.5em;
+  }
 `;
 
 function FilterButtons({

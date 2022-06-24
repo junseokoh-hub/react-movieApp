@@ -20,10 +20,10 @@ const PathToSimilar = styled.span`
   display: inline-block;
   font-size: 0.9em;
   font-weight: 600;
-  color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.whiteColor};
   margin-top: ${(props) => props.theme.smallGap};
   padding: ${(props) => props.theme.smallGap};
-  border: 1px solid palevioletred;
+  border: 1px solid rgb(20, 20, 20);
   cursor: pointer;
 `;
 

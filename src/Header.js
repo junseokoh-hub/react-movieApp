@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  height: 7vh;
+  padding: 0.5em 0;
   display: flex;
   align-items: center;
   background-color: ${(props) => props.theme.bgColor};
@@ -20,8 +20,8 @@ const Header = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-  a {
-    text-decoration-line: none;
+  h2 {
+    display: none;
   }
   span {
     color: ${(props) => props.theme.whiteColor};
@@ -34,6 +34,19 @@ const Header = styled.header`
   .appear {
     display: inline-block;
   }
+  @media screen and (max-width: 300px) {
+    flex-direction: column;
+    h2 {
+      display: flex;
+    }
+    span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 0.1em 0;
+    }
+  }
 `;
 
 const Ul = styled.ul`
@@ -42,26 +55,24 @@ const Ul = styled.ul`
   justify-content: space-between;
   list-style: none;
   padding: 0 1em;
-  input {
-    border: 1px solid #fff;
-    padding: 0.2em 0.3em;
-    outline: none;
-    background-color: ${(props) => props.theme.bgColor};
-    &::placeholder {
-      color: ${(props) => props.theme.whiteColor};
-    }
+  @media screen and (max-width: 300px) {
+    display: ${(props) => props.open};
+    flex-direction: column;
+    padding: 0;
   }
 `;
 
 const Li = styled.li`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 300px) {
+    flex-direction: column;
+  }
 `;
 
 function Head() {
   const { login, getLogout } = useContext(LoginContext);
   const [open, setOpen] = useState(false);
-
   const navbar = useRef(null);
 
   useEffect(() => {
@@ -75,10 +86,6 @@ function Head() {
       }
     });
   }, []);
-
-  const openSearch = () => {
-    setOpen((open) => !open);
-  };
 
   let navigate = useNavigate();
 
@@ -97,21 +104,20 @@ function Head() {
     }
   };
 
+  const openNav = () => {
+    setOpen((prev) => !prev);
+  };
+
   return (
     <Container>
       <Header ref={navbar}>
-        <Ul>
+        <h2 onClick={openNav}>Click!</h2>
+        <Ul open={open ? "flex" : "none"}>
           <Li>
             <span onClick={toNavigate}>Movies</span>
             <span onClick={toNavigate}>TV</span>
           </Li>
           <Li>
-            <span onClick={openSearch}>🔍</span>
-            <input
-              className={!open ? "disappear" : "appear"}
-              type="text"
-              placeholder="Search..."
-            />
             <span onClick={toNavigate}>Search</span>
             {login ? (
               <>

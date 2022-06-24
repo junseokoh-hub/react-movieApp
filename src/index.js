@@ -6,8 +6,8 @@ import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = {
-  bgColor: "palevioletred",
-  boxShadow: `0px 0px 10px rgba(0, 0, 0, 0.5)`,
+  bgColor: `rgb(20,20,20)`,
+  boxShadow: `rgb(0 0 0 / 80%) 0px 1px 5px 2px`,
   whiteColor: "#fff",
   smallGap: "0.5em",
   darkBlueColor: "#40739e",

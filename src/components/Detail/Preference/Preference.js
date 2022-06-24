@@ -27,10 +27,11 @@ const VoteRateCircle = styled.div`
 const HeartLike = styled.div`
   width: 2em;
   height: 2em;
-  border: 1px solid black;
+  border: ${(props) => (props.colorState ? "none" : `1px solid black`)};
   border-radius: 50%;
   margin-left: ${(props) => props.theme.smallGap};
-  background-color: ${(props) => (props.colorState ? "red" : "transparent")};
+  background-color: ${(props) =>
+    props.colorState ? `rgba(255, 0, 0, 0.8)` : "transparent"};
   cursor: pointer;
 `;
 

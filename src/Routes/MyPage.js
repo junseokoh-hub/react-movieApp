@@ -13,10 +13,14 @@ const LoginTitle = styled.h2`
 const LoginForm = styled.form`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  align-items: center;
+  width: 50em;
   margin: 9em auto;
-  padding: 3em;
+  padding: 3em 1em;
   box-shadow: ${(props) => props.theme.boxShadow};
+  @media screen and (max-width: 300px) {
+    width: 17em;
+  }
 `;
 
 const LoginInput = styled.input`
