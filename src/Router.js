@@ -1,13 +1,13 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import React from "react";
 import Head from "./Header";
 import Home from "./Routes/Home";
-import Search from "./Routes/Search";
 import Tv from "./Routes/TV";
+import Search from "./Routes/Search";
 import MyPage from "./Routes/MyPage";
 import Detail from "./Routes/Detail";
 import SimilarShows from "./Routes/SimilarShows";
 import Profile from "./Routes/Profile";
-import React from "react";
 
 function Routing() {
   return (

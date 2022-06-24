@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ThemeProvider } from "styled-components";
 import { HelmetProvider } from "react-helmet-async";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const theme = {
   bgColor: "palevioletred",
@@ -12,11 +13,15 @@ const theme = {
   darkBlueColor: "#40739e",
 };
 
+const queryClient = new QueryClient();
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <ThemeProvider theme={theme}>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
-  </ThemeProvider>,
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider theme={theme}>
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
+    </ThemeProvider>
+  </QueryClientProvider>,
 );

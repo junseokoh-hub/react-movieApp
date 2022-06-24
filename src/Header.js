@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 
 const Container = styled.div`
@@ -82,7 +82,7 @@ function Head() {
 
   let navigate = useNavigate();
 
-  const toLink = (e) => {
+  const toNavigate = (e) => {
     const {
       target: { innerHTML },
     } = e;
@@ -95,7 +95,6 @@ function Head() {
     } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
       navigate(`/myPage`);
     }
-    console.log(e.target.innerHTML);
   };
 
   return (
@@ -103,12 +102,8 @@ function Head() {
       <Header ref={navbar}>
         <Ul>
           <Li>
-            {/* <Link to="/"> */}
-            <span onClick={toLink}>Movies</span>
-            {/* </Link> */}
-            {/* <Link to="/tv"> */}
-            <span onClick={toLink}>TV</span>
-            {/* </Link> */}
+            <span onClick={toNavigate}>Movies</span>
+            <span onClick={toNavigate}>TV</span>
           </Li>
           <Li>
             <span onClick={openSearch}>🔍</span>
@@ -117,20 +112,14 @@ function Head() {
               type="text"
               placeholder="Search..."
             />
-            {/* <Link to="/search"> */}
-            <span onClick={toLink}>Search</span>
-            {/* </Link> */}
+            <span onClick={toNavigate}>Search</span>
             {login ? (
               <>
-                {/* <Link to="/myPage"> */}
-                <span onClick={toLink}>My Page</span>
-                {/* </Link> */}
+                <span onClick={toNavigate}>My Page</span>
                 <span onClick={getLogout}>LogOut</span>
               </>
             ) : (
-              // <Link to="/myPage">
-              <span onClick={toLink}>LogIn</span>
-              //  </Link>
+              <span onClick={toNavigate}>LogIn</span>
             )}
           </Li>
         </Ul>
