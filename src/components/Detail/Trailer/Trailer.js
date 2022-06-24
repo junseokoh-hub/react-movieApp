@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import React, { useState, useEffect, useCallback } from "react";
+import React /*,{ useState, useEffect, useCallback }*/ from "react";
 import { fetchMediaVideos } from "../../../api";
+import { useQuery } from "react-query";
 
 const MoreInfo = styled.div`
   display: flex;
@@ -14,26 +15,29 @@ const SeparateVideos = styled.iframe`
 `;
 
 function Trailers({ movie, id }) {
-  const [showData, setShowData] = useState([]);
+  const { data: videos } = useQuery(["videos", id], () =>
+    fetchMediaVideos(movie, id),
+  );
+  // const [showData, setShowData] = useState([]);
 
-  const getMediaVideos = useCallback(async () => {
-    const json = await fetchMediaVideos(movie, id);
-    setShowData(json.results);
-  }, [id, movie]);
+  // const getMediaVideos = useCallback(async () => {
+  //   const json = await fetchMediaVideos(movie, id);
+  //   setShowData(json.results);
+  // }, [id, movie]);
 
-  useEffect(() => {
-    getMediaVideos();
-  }, [getMediaVideos]);
+  // useEffect(() => {
+  //   getMediaVideos();
+  // }, [getMediaVideos]);
 
   return (
     <>
-      {showData.length === 0 ? (
+      {videos?.results.length === 0 ? (
         <div>Hello</div>
       ) : (
         <>
           <h3 style={{ marginTop: "3em" }}>Trailers</h3>
           <MoreInfo>
-            {showData.slice(0, 4).map((item) => {
+            {videos?.results.slice(0, 4).map((item) => {
               return (
                 <SeparateVideos
                   key={item.id}
