@@ -102,10 +102,13 @@ function Head() {
     } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
       navigate(`/myPage`);
     }
+<<<<<<< HEAD
   };
 
   const openNav = () => {
     setOpen((prev) => !prev);
+=======
+>>>>>>> 795357fad7918481b8330497b7ac107e8044dcfa
   };
 
   return (
@@ -118,6 +121,15 @@ function Head() {
             <span onClick={toNavigate}>TV</span>
           </Li>
           <Li>
+<<<<<<< HEAD
+=======
+            <span onClick={openSearch}>🔍</span>
+            <input
+              className={!open ? "disappear" : "appear"}
+              type="text"
+              placeholder="Search..."
+            />
+>>>>>>> 795357fad7918481b8330497b7ac107e8044dcfa
             <span onClick={toNavigate}>Search</span>
             {login ? (
               <>
