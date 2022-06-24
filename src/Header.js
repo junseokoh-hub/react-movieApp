@@ -102,6 +102,7 @@ function Head() {
     } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
       navigate(`/myPage`);
     }
+    setOpen(false);
   };
 
   const openNav = () => {

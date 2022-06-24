@@ -7,6 +7,9 @@ import { Helmet } from "react-helmet-async";
 const UnorderedList = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  @media screen and (max-width: 300px) {
+    padding-left: 0.3em;
+  }
 `;
 
 const List = styled.li`
@@ -17,6 +20,9 @@ const List = styled.li`
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+  @media screen and (max-width: 300px) {
+    margin: 1em 0 0 0;
   }
 `;
 
@@ -34,6 +40,9 @@ const Poster = styled.img`
   &:hover {
     transform: scale(1.1);
   }
+  @media screen and (max-width: 300px) {
+    width: 4em;
+  }
 `;
 
 const ListHeader = styled.span`
@@ -42,6 +51,9 @@ const ListHeader = styled.span`
   text-align: center;
   letter-spacing: 0.2em;
   color: ${(props) => props.theme.whiteColor};
+  @media screen and (max-width: 300px) {
+    font-size: 0.4em;
+  }
 `;
 
 function MovieList({ movie, apiList }) {
