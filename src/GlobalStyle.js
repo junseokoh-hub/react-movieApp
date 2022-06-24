@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
         background-color: ${(props) => props.theme.bgColor};
         color: #fff;
         height: 110vh;
-        padding-top: 4em;
+        padding-top: 3em;
     }
     a {
         text-decoration-line: none;

@@ -1,7 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
+import { NavContext } from "./Context/NavContext";
 
 const Container = styled.div`
   .active {
@@ -72,7 +73,7 @@ const Li = styled.li`
 
 function Head() {
   const { login, getLogout } = useContext(LoginContext);
-  const [open, setOpen] = useState(false);
+  const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 
   useEffect(() => {
@@ -102,18 +103,18 @@ function Head() {
     } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
       navigate(`/myPage`);
     }
-    setOpen(false);
+    setNavOpen(false);
   };
 
-  const openNav = () => {
-    setOpen((prev) => !prev);
-  };
+  // const openNav = () => {
+  //   setOpen((prev) => !prev);
+  // };
 
   return (
     <Container>
       <Header ref={navbar}>
-        <h2 onClick={openNav}>Click!</h2>
-        <Ul open={open ? "flex" : "none"}>
+        <h2 onClick={navToggle}>Click!</h2>
+        <Ul open={navOpen ? "flex" : "none"}>
           <Li>
             <span onClick={toNavigate}>Movies</span>
             <span onClick={toNavigate}>TV</span>

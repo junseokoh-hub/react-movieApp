@@ -20,9 +20,9 @@ const ShowInfoUl = styled.ul`
 
 const ShowInfoLi = styled.li`
   background-color: #3d3d3d;
-  height: 90%;
-  padding: 0.5em 0 0.5em 0.5em;
-  margin: 0.15em 0.5em 0 0;
+  height: 95%;
+  padding: 0.5em;
+  margin: 0 0.5em 0 0;
 `;
 
 const TabSpan = styled.span`

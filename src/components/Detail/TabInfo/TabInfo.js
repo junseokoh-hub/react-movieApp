@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import TotalOverview from "../Overview/Overview";
 import Preference from "../Preference/Preference";
+import { NavContext } from "../../../Context/NavContext";
 
 const ShowGenre = styled.span`
   margin-right: 0.2em;
@@ -28,6 +29,7 @@ const PathToSimilar = styled.span`
 `;
 
 function FirstMenuContent({ data, movie }) {
+  const { setNavOpen } = useContext(NavContext);
   return (
     <>
       {movie ? (
@@ -58,7 +60,9 @@ function FirstMenuContent({ data, movie }) {
       <TotalOverview data={data} movie={movie} />
       {data && (
         <Link to={`/${movie ? "movie" : "tv"}/${data.id}/similarShows`}>
-          <PathToSimilar>Similar Shows</PathToSimilar>
+          <PathToSimilar onClick={() => setNavOpen(false)}>
+            Similar Shows
+          </PathToSimilar>
         </Link>
       )}
     </>

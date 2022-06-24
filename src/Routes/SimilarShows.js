@@ -7,6 +7,10 @@ import SimilarShowContent from "../components/SimilarShows/SimilarShowContent";
 
 const SimilarUl = styled.ul`
   background-color: #2f3640;
+  @media screen and (max-width: 300px) {
+    width: 100%;
+    padding: 0 1em 0 0;
+  }
 `;
 
 const SimilarList = styled.li`
@@ -16,6 +20,19 @@ const SimilarList = styled.li`
   padding: ${(props) => props.theme.smallGap} 0.1em;
   a {
     display: flex;
+  }
+  @media screen and (max-width: 300px) {
+    a {
+      display: flex;
+      flex-direction: column;
+
+      img {
+        display: inline-block;
+        width: 15em;
+        height: 15em;
+        margin: 0 auto;
+      }
+    }
   }
 `;
 

@@ -7,6 +7,9 @@ import { Helmet } from "react-helmet-async";
 
 const ProfileTitle = styled.h3`
   color: ${(props) => props.theme.darkBlueColor};
+  @media screen and (max-width: 300px) {
+    margin-bottom: 0.5em;
+  }
 `;
 
 const ProfileLi = styled.li`
@@ -16,6 +19,13 @@ const ProfileLi = styled.li`
     display: flex;
     flex-direction: column;
     padding-bottom: 1em;
+  }
+  @media screen and (max-width: 300px) {
+    &:nth-child(1) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   }
 `;
 

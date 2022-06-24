@@ -5,6 +5,10 @@ import ReviewList from "./ReviewList";
 import { fetchMediaReviews } from "../../../api";
 import { useQuery } from "react-query";
 
+const ReviewIndicator = styled.h3`
+  color: white;
+`;
+
 const ReviewContainer = styled.ul`
   width: 80%;
   height: 12em;
@@ -58,7 +62,7 @@ function Reviews({ movie, id }) {
 
   return (
     <>
-      <h3>Reviews</h3>
+      <ReviewIndicator>Reviews</ReviewIndicator>
       <ReviewContainer>
         {reviews?.results.map((item) => {
           return (
