@@ -7,11 +7,17 @@ const MoreInfo = styled.div`
   display: flex;
   justify-content: center;
   overflow-x: auto;
+  @media screen and (max-width: 300px) {
+    flex-direction: column;
+  }
 `;
 
 const SeparateVideos = styled.iframe`
   width: 50%;
   height: 20em;
+  @media screen and (max-width: 300px) {
+    width: 100%;
+  }
 `;
 
 function Trailers({ movie, id }) {

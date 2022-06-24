@@ -6,6 +6,9 @@ import { Link } from "react-router-dom";
 const CreditsContainer = styled.ul`
   display: flex;
   overflow-x: auto;
+  @media screen and (max-width: 300px) {
+    width: 100%;
+  }
 `;
 
 const IndividualCredit = styled.li`

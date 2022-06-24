@@ -20,6 +20,7 @@ const LoginForm = styled.form`
   box-shadow: ${(props) => props.theme.boxShadow};
   @media screen and (max-width: 300px) {
     width: 17em;
+    margin: 6em auto;
   }
 `;
 

@@ -26,6 +26,9 @@ const SubmitButton = styled.button`
   padding: 1em 0;
   cursor: pointer;
   margin: 0 auto;
+  @media screen and (max-width: 300px) {
+    width: 10em;
+  }
 `;
 
 function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
@@ -51,6 +54,7 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
           },
         ])
       : alert(`Please Log In!`);
+    inputText === "" && alert("Please write something!");
     setInputText("");
   };
 

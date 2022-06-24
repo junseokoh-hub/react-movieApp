@@ -13,8 +13,8 @@ const ShowInfoUl = styled.ul`
     background-color: #3d3d3d;
     color: #fff;
   }
-  a {
-    text-decoration-line: none;
+  @media screen and (max-width: 300px) {
+    width: 100%;
   }
 `;
 
@@ -30,6 +30,9 @@ const TabSpan = styled.span`
   padding: 0.2em 4em;
   border-top-left-radius: 0.5em;
   border-top-right-radius: 0.5em;
+  @media screen and (max-width: 300px) {
+    padding: 0.2em 2em;
+  }
 `;
 
 function TabBundle({ data, movie, credits }) {
