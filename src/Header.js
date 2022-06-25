@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
 import styled from "styled-components";
+import { FaHome, FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
@@ -9,6 +10,8 @@ const Container = styled.div`
     display: none;
   }
 `;
+
+const IconContainer = styled.div``;
 
 const Header = styled.header`
   width: 100%;
@@ -21,9 +24,7 @@ const Header = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-  h2 {
-    display: none;
-  }
+
   span {
     color: ${(props) => props.theme.whiteColor};
     padding: 0 0.5em;
@@ -35,17 +36,27 @@ const Header = styled.header`
   .appear {
     display: inline-block;
   }
+  ${IconContainer} {
+    display: none;
+  }
   @media screen and (max-width: 300px) {
     flex-direction: column;
-    h2 {
-      display: flex;
-    }
     span {
       display: block;
       width: 100%;
       height: 100%;
       text-align: center;
       padding: 0.1em 0;
+    }
+    ${IconContainer} {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1em;
+      svg {
+        cursor: pointer;
+      }
     }
   }
 `;
@@ -113,7 +124,10 @@ function Head() {
   return (
     <Container>
       <Header ref={navbar}>
-        <h2 onClick={navToggle}>Click!</h2>
+        <IconContainer>
+          <FaHome onClick={() => navigate("/")} />
+          <FaBars onClick={navToggle} />
+        </IconContainer>
         <Ul open={navOpen ? "flex" : "none"}>
           <Li>
             <span onClick={toNavigate}>Movies</span>

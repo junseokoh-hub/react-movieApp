@@ -39,7 +39,7 @@ function Preference({ data }) {
   const [colorState, setColorState] = useState(false);
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
-      <VoteRateCircle value={data.vote_average}></VoteRateCircle>
+      <VoteRateCircle value={data.vote_average?.toFixed(1)}></VoteRateCircle>
       <HeartLike
         colorState={colorState}
         onClick={() => setColorState((prev) => !prev)}

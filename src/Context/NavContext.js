@@ -1,6 +1,6 @@
 import React, { createContext, useState } from "react";
 
-export const NavContext = createContext(null);
+export const NavContext = createContext(false);
 
 export const NavProvider = ({ children }) => {
   const [navOpen, setNavOpen] = useState(false);
