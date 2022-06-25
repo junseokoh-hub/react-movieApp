@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const CreditsContainer = styled.ul`
   display: flex;
   overflow-x: auto;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;

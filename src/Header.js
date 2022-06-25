@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FaHome, FaBars, FaCookie } from "react-icons/fa";
+import { FaHome, FaBars, FaCookie, FaAngleDown } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
@@ -12,7 +12,16 @@ const Container = styled.div`
   }
 `;
 
-const IconContainer = styled.div``;
+const IconContainer = styled.div`
+  display: none;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+  }
+`;
 
 const Header = styled.header`
   width: 100%;
@@ -25,40 +34,8 @@ const Header = styled.header`
   top: 0;
   left: 0;
   z-index: 100;
-
-  span {
-    color: ${(props) => props.theme.whiteColor};
-    padding: 0 0.5em;
-    cursor: pointer;
-  }
-  .disappear {
-    display: none;
-  }
-  .appear {
-    display: inline-block;
-  }
-  ${IconContainer} {
-    display: none;
-  }
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
-    span {
-      display: block;
-      width: 100%;
-      height: 100%;
-      text-align: center;
-      padding: 0.1em 0;
-    }
-    ${IconContainer} {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1em;
-      svg {
-        cursor: pointer;
-      }
-    }
   }
 `;
 
@@ -68,7 +45,7 @@ const Ul = styled.ul`
   justify-content: space-between;
   list-style: none;
   padding: 0 1em;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     display: ${(props) => props.open};
     flex-direction: column;
     padding: 0;
@@ -78,20 +55,39 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: flex;
   align-items: center;
-  svg {
-    cursor: pointer;
-  }
   &:nth-child(2) {
     position: relative;
-    span:nth-child(3) {
-      display: none;
+    span {
+      color: ${(props) => props.theme.whiteColor};
+      cursor: pointer;
+      &:nth-child(3) {
+        display: none;
+      }
+    }
+    svg {
+      cursor: pointer;
+      color: #fff;
+      &:nth-child(4) {
+        display: none;
+      }
     }
   }
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
+    span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      padding: 0.3em 0;
+      border-bottom: 1px solid #fff;
+    }
     &:nth-child(2) {
       svg {
         display: none;
+        &:nth-child(4) {
+          display: block;
+        }
       }
       span:nth-child(3) {
         display: block;
@@ -130,8 +126,10 @@ function Head() {
       navigate(`/tv`);
     } else if (innerHTML === "Search") {
       navigate(`/search`);
-    } else if (innerHTML === "LogIn" || innerHTML === "My Page") {
+    } else if (innerHTML === "LogIn" || (!login && innerHTML === "My Page")) {
       navigate(`/myPage`);
+    } else if (login && innerHTML === "My Page") {
+      navigate(`/myPage/myProfile`);
     }
     setNavOpen(false);
     setMenuOpen(false);
@@ -159,9 +157,13 @@ function Head() {
               <>
                 <FaCookie onClick={OpenMenu} />
                 {menuOpen ? (
-                  <Menu setMenuOpen={setMenuOpen} />
+                  <>
+                    <Menu setMenuOpen={setMenuOpen} />
+                  </>
                 ) : (
-                  <span onClick={toNavigate}>My Page</span>
+                  <>
+                    <span onClick={toNavigate}>My Page</span>
+                  </>
                 )}
               </>
             ) : (

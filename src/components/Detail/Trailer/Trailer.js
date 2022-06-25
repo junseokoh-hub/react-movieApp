@@ -14,7 +14,7 @@ const MoreInfo = styled.div`
   display: flex;
   justify-content: center;
   overflow-x: auto;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     flex-direction: column;
   }
 `;
@@ -22,7 +22,7 @@ const MoreInfo = styled.div`
 const SeparateVideos = styled.iframe`
   width: 50%;
   height: 20em;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;

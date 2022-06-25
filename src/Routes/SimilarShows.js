@@ -7,7 +7,7 @@ import SimilarShowContent from "../components/SimilarShows/SimilarShowContent";
 
 const SimilarUl = styled.ul`
   background-color: #2f3640;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
     padding: 0 1em 0 0;
   }
@@ -21,11 +21,10 @@ const SimilarList = styled.li`
   a {
     display: flex;
   }
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     a {
       display: flex;
       flex-direction: column;
-
       img {
         display: inline-block;
         width: 15em;

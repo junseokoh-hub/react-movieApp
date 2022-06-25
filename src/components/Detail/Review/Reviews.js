@@ -21,7 +21,7 @@ const ReviewContainer = styled.ul`
   padding: 0.5em;
   margin-bottom: ${(props) => props.theme.smallGap};
   box-shadow: ${(props) => props.theme.boxShadow};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     li {
       margin-bottom: 1em;
     }

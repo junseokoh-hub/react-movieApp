@@ -5,7 +5,7 @@ import React from "react";
 const SeparatePoster = styled.img`
   display: block;
   width: 15em;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     margin: 0 auto;
   }
 `;

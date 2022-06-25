@@ -20,7 +20,7 @@ const LoginForm = styled.form`
   margin: 9em auto;
   padding: 3em 1em;
   box-shadow: ${(props) => props.theme.boxShadow};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 17em;
     margin: 6em auto;
   }
@@ -46,7 +46,7 @@ function MyPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login, setLogin, getLogout } = useContext(LoginContext);
+  const { login, setLogin } = useContext(LoginContext);
 
   let navigate = useNavigate();
 
@@ -83,7 +83,6 @@ function MyPage() {
       {login ? (
         <>
           <MyProfile />
-          <span onClick={getLogout}>Log Out</span>
         </>
       ) : (
         <LoginForm onSubmit={getLogin}>

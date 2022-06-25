@@ -18,7 +18,7 @@ const SearchedLi = styled.li`
   cursor: pointer;
   box-shadow: ${(props) => props.theme.boxShadow};
   border-radius: ${(props) => props.theme.smallGap};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 5em;
     margin: 0 0 0.5em 1em;
   }
@@ -35,7 +35,7 @@ const SearchedImg = styled.img`
     transform: scale(1.05);
     opacity: 0.5;
   }
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     height: 6em;
   }
 `;
@@ -44,7 +44,7 @@ const SearchedTitle = styled.p`
   font-size: 1.1em;
   font-weight: 700;
   color: ${(props) => props.theme.whiteColor};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     font-size: 0.4em;
   }
 `;

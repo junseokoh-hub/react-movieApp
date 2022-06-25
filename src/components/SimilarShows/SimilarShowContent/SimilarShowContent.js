@@ -4,7 +4,7 @@ import styled from "styled-components";
 const SimilarShowUl = styled.ul`
   width: 50%;
   margin-left: ${(props) => props.theme.smallGap};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;
@@ -13,7 +13,7 @@ const SimilarShowListTitle = styled.li`
   display: flex;
   align-items: center;
   margin-bottom: ${(props) => props.theme.smallGap};
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     justify-content: center;
     margin: 0.5em 0 0 0;
   }
@@ -28,7 +28,7 @@ const SimilarShowListOverview = styled(SimilarShowListTitle)`
   align-items: flex-start;
   flex-direction: column;
   margin-top: calc(${(props) => props.theme.smallGap}*4);
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     margin-top: 1em;
   }
 `;
