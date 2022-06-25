@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
@@ -46,6 +47,8 @@ function MyPage() {
 
   const { login, setLogin, getLogout } = useContext(LoginContext);
 
+  let navigate = useNavigate();
+
   const onChange = (e) => {
     const {
       target: { value, name },
@@ -62,6 +65,7 @@ function MyPage() {
     if (email && password) {
       onLogin(email, password);
       setLogin(getItemfromLocalStorage() !== null);
+      navigate("/");
       setEmail("");
       setPassword("");
     } else {
@@ -76,15 +80,7 @@ function MyPage() {
         <title>{login ? `My Page` : `Log In`}</title>
       </Helmet>
       {login ? (
-        <ul>
-          <li>My Ratings</li>
-          <li>My WatchList</li>
-          <li>Preference</li>
-          <li>Settings</li>
-          <li onClick={getLogout} style={{ cursor: "pointer" }}>
-            Log Out
-          </li>
-        </ul>
+        <span onClick={getLogout}>Log Out</span>
       ) : (
         <LoginForm onSubmit={getLogin}>
           <LoginTitle>login</LoginTitle>

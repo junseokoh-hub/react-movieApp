@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FaHome, FaBars } from "react-icons/fa";
+import { FaHome, FaBars, FaCookie } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
+import Menu from "./components/Menu";
 
 const Container = styled.div`
   .active {
@@ -77,13 +78,23 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: flex;
   align-items: center;
+  svg {
+    cursor: pointer;
+  }
+  &:nth-child(2) {
+    position: relative;
+  }
   @media screen and (max-width: 300px) {
     flex-direction: column;
+    &:nth-child(2) svg {
+      display: none;
+    }
   }
 `;
 
 function Head() {
-  const { login, getLogout } = useContext(LoginContext);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const { login } = useContext(LoginContext);
   const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 
@@ -117,9 +128,9 @@ function Head() {
     setNavOpen(false);
   };
 
-  // const openNav = () => {
-  //   setOpen((prev) => !prev);
-  // };
+  const OpenMenu = () => {
+    setMenuOpen((prev) => !prev);
+  };
 
   return (
     <Container>
@@ -137,15 +148,9 @@ function Head() {
             <span onClick={toNavigate}>Search</span>
             {login ? (
               <>
+                <FaCookie onClick={OpenMenu} />
+                {menuOpen && <Menu />}
                 <span onClick={toNavigate}>My Page</span>
-                <span
-                  onClick={(e) => {
-                    getLogout(e);
-                    setNavOpen(false);
-                  }}
-                >
-                  LogOut
-                </span>
               </>
             ) : (
               <span onClick={toNavigate}>LogIn</span>
