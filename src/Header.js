@@ -83,11 +83,19 @@ const Li = styled.li`
   }
   &:nth-child(2) {
     position: relative;
+    span:nth-child(3) {
+      display: none;
+    }
   }
   @media screen and (max-width: 300px) {
     flex-direction: column;
-    &:nth-child(2) svg {
-      display: none;
+    &:nth-child(2) {
+      svg {
+        display: none;
+      }
+      span:nth-child(3) {
+        display: block;
+      }
     }
   }
 `;
@@ -126,6 +134,7 @@ function Head() {
       navigate(`/myPage`);
     }
     setNavOpen(false);
+    setMenuOpen(false);
   };
 
   const OpenMenu = () => {
@@ -149,8 +158,11 @@ function Head() {
             {login ? (
               <>
                 <FaCookie onClick={OpenMenu} />
-                {menuOpen && <Menu />}
-                <span onClick={toNavigate}>My Page</span>
+                {menuOpen ? (
+                  <Menu setMenuOpen={setMenuOpen} />
+                ) : (
+                  <span onClick={toNavigate}>My Page</span>
+                )}
               </>
             ) : (
               <span onClick={toNavigate}>LogIn</span>

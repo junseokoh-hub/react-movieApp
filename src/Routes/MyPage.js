@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
 import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
+import MyProfile from "../components/MyPage/MyProfile";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -80,7 +81,10 @@ function MyPage() {
         <title>{login ? `My Page` : `Log In`}</title>
       </Helmet>
       {login ? (
-        <span onClick={getLogout}>Log Out</span>
+        <>
+          <MyProfile />
+          <span onClick={getLogout}>Log Out</span>
+        </>
       ) : (
         <LoginForm onSubmit={getLogin}>
           <LoginTitle>login</LoginTitle>
@@ -99,7 +103,11 @@ function MyPage() {
             placeholder="Password"
           />
           <LoginButton type="submit" value="LogIn" />
-          <LoginButton type="button" value="Create Account" />
+          <LoginButton
+            type="button"
+            value="Create Account"
+            onClick={() => navigate("/createAccount")}
+          />
         </LoginForm>
       )}
     </>
