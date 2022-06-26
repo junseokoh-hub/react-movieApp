@@ -21,8 +21,7 @@ const LoginForm = styled.form`
   padding: 3em 1em;
   box-shadow: ${(props) => props.theme.boxShadow};
   @media screen and (max-width: 500px) {
-    width: 17em;
-    margin: 6em auto;
+    width: 80%;
   }
 `;
 
@@ -32,7 +31,7 @@ const LoginInput = styled.input`
   border: none;
   outline: none;
   border-radius: ${(props) => props.theme.smallGap};
-  width: 100%;
+  width: 80%;
 `;
 
 const LoginButton = styled(LoginInput)`

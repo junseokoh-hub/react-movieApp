@@ -8,7 +8,7 @@ const UnorderedList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   @media screen and (max-width: 500px) {
-    padding-left: 0.3em;
+    padding-left: 0.6em;
   }
 `;
 
@@ -30,6 +30,9 @@ const ClassficiationTitle = styled.h2`
   padding: ${(props) => props.theme.smallGap};
   text-transform: uppercase;
   color: ${(props) => props.theme.darkBlueColor};
+  @media screen and (max-width: 500px) {
+    padding-left: 0.6em;
+  }
 `;
 
 const Poster = styled.img`

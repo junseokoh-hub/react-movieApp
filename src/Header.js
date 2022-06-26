@@ -43,7 +43,6 @@ const Ul = styled.ul`
   display: flex;
   width: 100%;
   justify-content: space-between;
-  list-style: none;
   padding: 0 1em;
   @media screen and (max-width: 500px) {
     display: ${(props) => props.open};
@@ -55,21 +54,21 @@ const Ul = styled.ul`
 const Li = styled.li`
   display: flex;
   align-items: center;
+  span {
+    margin-right: 0.5em;
+    cursor: pointer;
+  }
   &:nth-child(2) {
     position: relative;
-    span {
-      color: ${(props) => props.theme.whiteColor};
-      cursor: pointer;
-      &:nth-child(3) {
-        display: none;
-      }
+    span:nth-child(3) {
+      display: none;
     }
-    svg {
-      cursor: pointer;
-      color: #fff;
-      &:nth-child(4) {
-        display: none;
-      }
+  }
+  svg {
+    cursor: pointer;
+    color: #fff;
+    &:nth-child(4) {
+      display: none;
     }
   }
   @media screen and (max-width: 500px) {

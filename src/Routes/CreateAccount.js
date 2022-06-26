@@ -17,8 +17,9 @@ const AccountForm = styled.form`
   width: 50em;
   padding: 2em 0;
   margin: 9em auto;
-  @media screen and (max-width: 300px) {
-    width: 17em;
+  box-shadow: ${(props) => props.theme.boxShadow};
+  @media screen and (max-width: 500px) {
+    width: 80%;
   }
 `;
 
@@ -27,20 +28,23 @@ const AccountInput = styled.input`
   margin-bottom: 2em;
   width: 30em;
   padding: 0.5em 0em;
-  @media screen and (max-width: 300px) {
+  border-radius: ${(props) => props.theme.smallGap};
+  @media screen and (max-width: 500px) {
     width: 17em;
   }
 `;
 
 const AccountBtn = styled.button`
+  padding: 0.5em 0;
+  margin: 0 auto;
+  width: 30em;
   background-color: ${(props) => props.theme.bgColor};
   box-shadow: ${(props) => props.theme.boxShadow};
   color: ${(props) => props.theme.whiteColor};
-  margin: 0 auto;
-  width: 30em;
+  border-radius: ${(props) => props.theme.smallGap};
+  border: none;
   cursor: pointer;
-  padding: 0.5em 0;
-  @media screen and (max-width: 300px) {
+  @media screen and (max-width: 500px) {
     width: 17em;
   }
 `;
