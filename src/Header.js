@@ -53,7 +53,6 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   display: flex;
-  align-items: center;
   span {
     margin-right: 0.5em;
     cursor: pointer;
@@ -66,27 +65,18 @@ const Li = styled.li`
   }
   svg {
     cursor: pointer;
-    color: #fff;
-    &:nth-child(4) {
-      display: none;
-    }
   }
   @media screen and (max-width: 500px) {
     flex-direction: column;
     span {
       display: block;
-      width: 100%;
-      height: 100%;
       text-align: center;
       padding: 0.3em 0;
-      border-bottom: 1px solid #fff;
+      margin: 0;
     }
     &:nth-child(2) {
-      svg {
+      .faCookie {
         display: none;
-        &:nth-child(4) {
-          display: block;
-        }
       }
       span:nth-child(3) {
         display: block;
@@ -154,14 +144,21 @@ function Head() {
             <span onClick={toNavigate}>Search</span>
             {login ? (
               <>
-                <FaCookie onClick={OpenMenu} />
+                <FaCookie className="faCookie" onClick={OpenMenu} />
                 {menuOpen ? (
-                  <>
-                    <Menu setMenuOpen={setMenuOpen} />
-                  </>
+                  <Menu setMenuOpen={setMenuOpen} />
                 ) : (
                   <>
                     <span onClick={toNavigate}>My Page</span>
+                    <span
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <FaAngleDown className="faAngleDown" />
+                    </span>
                   </>
                 )}
               </>
