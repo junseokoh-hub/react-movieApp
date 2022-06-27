@@ -7,9 +7,6 @@ import { Helmet } from "react-helmet-async";
 const UnorderedList = styled.ul`
   display: flex;
   flex-wrap: wrap;
-  @media screen and (max-width: 500px) {
-    padding-left: 0.6em;
-  }
 `;
 
 const List = styled.li`
@@ -22,7 +19,8 @@ const List = styled.li`
     flex-direction: column;
   }
   @media screen and (max-width: 500px) {
-    margin: 1em 0 0 0;
+    /* margin: 1em 0 0 0; */
+    margin: 0 auto;
   }
 `;
 
