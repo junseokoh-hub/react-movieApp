@@ -1,25 +1,17 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../../Context/LoginContext";
+import React from "react";
 import MyInfo from "../MyInfo/MyInfo";
+import SideMenu from "../SideMenu/SideMenu";
 
 function MyProfile() {
-  const { getLogout } = useContext(LoginContext);
-  let navigate = useNavigate();
   return (
-    <ul>
-      <MyInfo />
-      <li
-        onClick={(e) => {
-          getLogout(e);
-          navigate("/");
-        }}
-      >
-        Log Out
-      </li>
-      <li>c</li>
-      <li>d</li>
-    </ul>
+    <>
+      <ul>
+        <MyInfo />
+        <li>c</li>
+        <li>d</li>
+      </ul>
+      <SideMenu />
+    </>
   );
 }
 

@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Times New Roman', Times, serif;
         background-color: ${(props) => props.theme.bgColor};
         color: #fff;
+        width: 100vw;
         height: 110vh;
         padding-top: 3em;
     }

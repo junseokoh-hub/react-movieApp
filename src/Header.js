@@ -15,7 +15,7 @@ const Container = styled.div`
 const IconContainer = styled.div`
   display: none;
   @media screen and (max-width: 500px) {
-    width: 100%;
+    width: 100vw;
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -36,6 +36,7 @@ const Header = styled.header`
   z-index: 100;
   @media screen and (max-width: 500px) {
     flex-direction: column;
+    align-items: flex-start;
   }
 `;
 
@@ -64,6 +65,9 @@ const Li = styled.li`
     cursor: pointer;
   }
   .fa-cookie {
+    display: block;
+  }
+  .span-mypage {
     display: none;
   }
 

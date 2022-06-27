@@ -58,7 +58,13 @@ function CreateAccount() {
         <AccountInput type="email" placeholder="Email..." />
         <AccountInput type="password" placeholder="Password..." />
         <AccountInput type="password" placeholder="Password Again..." />
-        <AccountBtn>Create</AccountBtn>
+        <AccountBtn
+          onClick={(e) => {
+            e.preventDefault();
+          }}
+        >
+          Create
+        </AccountBtn>
       </AccountForm>
     </AccountContainer>
   );
