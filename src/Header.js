@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FaHome, FaBars, FaCookie, FaAngleDown } from "react-icons/fa";
+import { FaHome, FaBars, FaCookie } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
@@ -53,19 +53,20 @@ const Ul = styled.ul`
 
 const Li = styled.li`
   display: flex;
-  span {
-    margin-right: 0.5em;
-    cursor: pointer;
-  }
   &:nth-child(2) {
     position: relative;
-    span:nth-child(3) {
-      display: none;
-    }
   }
   svg {
     cursor: pointer;
   }
+  span {
+    margin-right: 0.5em;
+    cursor: pointer;
+  }
+  .fa-cookie {
+    display: none;
+  }
+
   @media screen and (max-width: 500px) {
     flex-direction: column;
     span {
@@ -74,13 +75,11 @@ const Li = styled.li`
       padding: 0.3em 0;
       margin: 0;
     }
-    &:nth-child(2) {
-      .faCookie {
-        display: none;
-      }
-      span:nth-child(3) {
-        display: block;
-      }
+    .fa-cookie {
+      display: none;
+    }
+    .span-mypage {
+      display: block;
     }
   }
 `;
@@ -144,20 +143,13 @@ function Head() {
             <span onClick={toNavigate}>Search</span>
             {login ? (
               <>
-                <FaCookie className="faCookie" onClick={OpenMenu} />
+                <FaCookie className="fa-cookie" onClick={OpenMenu} />
                 {menuOpen ? (
                   <Menu setMenuOpen={setMenuOpen} />
                 ) : (
                   <>
-                    <span onClick={toNavigate}>My Page</span>
-                    <span
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <FaAngleDown className="faAngleDown" />
+                    <span className="span-mypage" onClick={toNavigate}>
+                      My Page
                     </span>
                   </>
                 )}
