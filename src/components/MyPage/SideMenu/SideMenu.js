@@ -9,34 +9,27 @@ const SideUl = styled.ul`
   height: 10em;
   border: 1px solid #fff;
   display: none;
-  .side-li--first {
-    display: none;
-  }
   @media screen and (max-width: 500px) {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    position: absolute;
-    right: ${(props) => props.right};
-    .side-li--first {
-      display: block;
-      position: absolute;
-      left: -20px;
-      top: 40%;
-    }
+    position: fixed;
+    left: -80px;
+    transform: ${(props) => props.transform};
+    transition: all 0.5s ease-out;
   }
 `;
 
 const SideLi = styled.li`
-  .fa-left {
-    display: none;
+  cursor: pointer;
+  opacity: 0.8;
+  &:nth-child(1) {
+    position: absolute;
+    right: -20px;
+    top: 40%;
   }
-  @media screen and (max-width: 500px) {
-    .fa-left,
-    .fa-right {
-      display: block;
-      position: absolute;
-    }
+  &:hover {
+    opacity: 1;
   }
 `;
 
@@ -51,12 +44,12 @@ function SideMenu() {
 
   return (
     <>
-      <SideUl right={openSide ? `0` : `-80px`}>
-        <SideLi className="side-li--first" onClick={onOpenSide}>
+      <SideUl transform={openSide && `translateX(80px)`}>
+        <SideLi onClick={onOpenSide}>
           {openSide ? (
-            <FaChevronRight className="fa-right" />
+            <FaChevronLeft />
           ) : (
-            <FaChevronLeft className="fa-left" />
+            <FaChevronRight className="fa-right" />
           )}
         </SideLi>
         <SideLi>My Ratings</SideLi>

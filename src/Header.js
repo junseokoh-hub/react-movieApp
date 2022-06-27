@@ -7,6 +7,7 @@ import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
 
 const Container = styled.div`
+  width: 100vw;
   .active {
     display: none;
   }
@@ -14,9 +15,12 @@ const Container = styled.div`
 
 const IconContainer = styled.div`
   display: none;
+  svg {
+    cursor: pointer;
+  }
   @media screen and (max-width: 500px) {
-    width: 100vw;
     height: 100%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 0 1em;
