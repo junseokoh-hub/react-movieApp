@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { fetchSearchMedia } from "../api";
 import SearchBox from "../components/Search/SearchBox";
 import SearchedContent from "../components/Search/SearchedContent";
 import { Helmet } from "react-helmet-async";
+
+const SearchContainer = styled.div`
+  padding-top: 3.2em;
+`;
 
 function Search() {
   const [search, setSearch] = useState("");
@@ -39,7 +44,7 @@ function Search() {
     }
   };
   return (
-    <>
+    <SearchContainer>
       <Helmet>
         <title>
           {searchData.length > 0 && keyword ? `Search - ${keyword}` : `Search`}
@@ -54,7 +59,7 @@ function Search() {
         activeGenre={activeGenre}
         setActiveGenre={setActiveGenre}
       />
-    </>
+    </SearchContainer>
   );
 }
 

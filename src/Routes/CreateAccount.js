@@ -4,6 +4,7 @@ import { FaArrowCircleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 const AccountContainer = styled.div`
+  padding-top: 3.2em;
   svg {
     cursor: pointer;
     margin-left: 0.2em;

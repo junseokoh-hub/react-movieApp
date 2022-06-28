@@ -10,7 +10,8 @@ import { Helmet } from "react-helmet-async";
 
 const ShowMainInfo = styled.div`
   display: flex;
-  background-color: #1e272e;
+  background-color: ${(props) => props.theme.bgColor};
+  padding-top: 3.2em;
   @media screen and (max-width: 500px) {
     flex-direction: column;
     background-color: inherit;

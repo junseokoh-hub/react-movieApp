@@ -20,7 +20,7 @@ function Home() {
 
   return (
     <MovieContainer>
-      <BigScreen movie />
+      <BigScreen />
       <MovieList movie apiList="popular" />
       <MovieList movie apiList="upcoming" />
       <MovieList movie apiList="top_rated" />

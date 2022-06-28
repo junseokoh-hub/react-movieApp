@@ -6,6 +6,7 @@ import SideMenu from "../SideMenu/SideMenu";
 
 const TestInfo = styled.div`
   display: flex;
+  padding-top: 3.2em;
   .username {
     margin-left: 1em;
     font-size: 2em;

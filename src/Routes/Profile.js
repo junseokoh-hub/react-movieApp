@@ -60,7 +60,7 @@ function Profile() {
       <Helmet>
         <title>{individualDetail.name}</title>
       </Helmet>
-      <ul>
+      <ul style={{ paddingTop: `3.2em` }}>
         <ProfileLi>
           {/* <ProfileImg
           src={`https://${IMAGE_BASE_URL}/w200/${individualDetail.profile_path}`}
