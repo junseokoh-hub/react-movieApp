@@ -5,7 +5,7 @@ import { LoginContext } from "../../Context/LoginContext";
 
 const MenuContainer = styled.div`
   width: 5em;
-  height: 15em;
+  height: 5em;
   background-color: ${(props) => props.theme.whiteColor};
   position: absolute;
   top: 25px;

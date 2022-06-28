@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import { FaArrowCircleUp } from "react-icons/fa";
 import MovieList from "../components/MovieList";
+import BigScreen from "../components/BigScreen";
 import { TopContext } from "../Context/TopContext";
 
 const MovieContainer = styled.div`
@@ -19,6 +20,7 @@ function Home() {
 
   return (
     <MovieContainer>
+      <BigScreen movie />
       <MovieList movie apiList="popular" />
       <MovieList movie apiList="upcoming" />
       <MovieList movie apiList="top_rated" />

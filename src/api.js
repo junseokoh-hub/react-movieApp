@@ -1,5 +1,15 @@
 import { API_KEY, API_URL } from "./Config";
 
+/* Home */
+
+export const fetchTrending = async () => {
+  const response = await fetch(
+    `https://${API_URL}trending/all/week?api_key=${API_KEY}&language=en-US`,
+  );
+  const json = response.json();
+  return json;
+};
+
 /* Detail */
 
 export const fetchMedia = async (movie, id) => {

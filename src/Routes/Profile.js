@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
 import styled from "styled-components";
-import CommonImg from "../components/CommonImg/CommonImg";
+import CommonImg from "../components/CommonImg";
 import { Helmet } from "react-helmet-async";
 
 const ProfileTitle = styled.h3`

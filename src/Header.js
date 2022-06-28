@@ -9,7 +9,7 @@ import Menu from "./components/Menu";
 const Container = styled.div`
   width: 100vw;
   .active {
-    display: none;
+    background-color: ${(props) => props.theme.bgColor};
   }
 `;
 
@@ -29,10 +29,10 @@ const IconContainer = styled.div`
 
 const Header = styled.header`
   width: 100%;
-  padding: 0.5em 0;
+  padding: 1em 0;
   display: flex;
   align-items: center;
-  background-color: ${(props) => props.theme.bgColor};
+  background-color: transparent;
   box-shadow: ${(props) => props.theme.boxShadow};
   position: fixed;
   top: 0;

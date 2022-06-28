@@ -1,8 +1,18 @@
 import React from "react";
-import { useNavigate, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { getItemfromLocalStorage } from "../../../LocalStorage";
 import SideMenu from "../SideMenu/SideMenu";
+
+const TestInfo = styled.div`
+  display: flex;
+  .username {
+    margin-left: 1em;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+  }
+`;
 
 const Test = styled.div`
   width: 10em;
@@ -12,37 +22,35 @@ const Test = styled.div`
   border: 1px solid #fff;
 `;
 
+const Tabs = styled.ul`
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+`;
+
+const Tab = styled.li`
+  margin: 0 auto;
+`;
+
 function MyInfo() {
   const id = getItemfromLocalStorage();
-  let navigate = useNavigate();
   return (
     <>
-      <div style={{ display: "flex" }}>
+      <TestInfo>
         <Test />
-        <span>{id.slice(0, id.indexOf("@"))}</span>
-      </div>
-      <ul
-        style={{ display: "flex", marginTop: "1em", justifyContent: "Center" }}
-      >
-        <li
-          style={{ marginRight: "1em" }}
-          onClick={() => navigate(`/myPage/myProfile`)}
-        >
-          My Profile
-        </li>
-        <li
-          style={{ marginRight: "1em" }}
-          onClick={() => navigate(`/myPage/myRating`)}
-        >
-          My Ratings
-        </li>
-        <li
-          style={{ marginRight: "1em" }}
-          onClick={() => navigate(`/myPage/myList`)}
-        >
-          My List
-        </li>
-      </ul>
+        <span className="username">{id.slice(0, id.indexOf("@"))}</span>
+      </TestInfo>
+      <Tabs>
+        <Tab>
+          <Link to={`/myPage/myProfile`}>My Profile</Link>
+        </Tab>
+        <Tab>
+          <Link to={`/myPage/myRating`}>My Ratings</Link>
+        </Tab>
+        <Tab>
+          <Link to={`/myPage/myList`}>My List</Link>
+        </Tab>
+      </Tabs>
       <SideMenu />
       <Outlet />
     </>

@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
 import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
-import MyProfile from "../components/MyPage/MyProfile";
 import MyInfo from "../components/MyPage/MyInfo/MyInfo";
+
 const LoginTitle = styled.h2`
   text-transform: uppercase;
   text-align: center;
