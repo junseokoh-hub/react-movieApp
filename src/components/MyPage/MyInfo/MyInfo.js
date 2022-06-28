@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import { getItemfromLocalStorage } from "../../../LocalStorage";
 import SideMenu from "../SideMenu/SideMenu";
@@ -31,6 +31,9 @@ const Tabs = styled.ul`
 
 const Tab = styled.li`
   margin: 0 auto;
+  .clicked {
+    color: teal;
+  }
 `;
 
 function MyInfo() {
@@ -43,13 +46,28 @@ function MyInfo() {
       </TestInfo>
       <Tabs>
         <Tab>
-          <Link to={`/myPage/myProfile`}>My Profile</Link>
+          <NavLink
+            to={`/myPage/myProfile`}
+            className={({ isActive }) => (isActive ? "clicked" : "")}
+          >
+            My Profile
+          </NavLink>
         </Tab>
         <Tab>
-          <Link to={`/myPage/myRating`}>My Ratings</Link>
+          <NavLink
+            to={`/myPage/myRating`}
+            className={({ isActive }) => (isActive ? "clicked" : "")}
+          >
+            My Ratings
+          </NavLink>
         </Tab>
         <Tab>
-          <Link to={`/myPage/myList`}>My List</Link>
+          <NavLink
+            to={`/myPage/myList`}
+            className={({ isActive }) => (isActive ? "clicked" : "")}
+          >
+            My List
+          </NavLink>
         </Tab>
       </Tabs>
       <SideMenu />
