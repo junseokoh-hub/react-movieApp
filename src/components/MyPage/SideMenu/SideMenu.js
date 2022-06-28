@@ -9,6 +9,7 @@ const SideUl = styled.ul`
   height: 10em;
   border: 1px solid #fff;
   display: none;
+  background-color: #000;
   @media screen and (max-width: 500px) {
     display: flex;
     flex-direction: column;
@@ -16,7 +17,7 @@ const SideUl = styled.ul`
     position: fixed;
     left: -80px;
     transform: ${(props) => props.transform};
-    transition: all 0.5s ease-out;
+    transition: all 0.3s ease-out;
   }
 `;
 
@@ -42,9 +43,20 @@ function SideMenu() {
     setOpenSide((prev) => !prev);
   };
 
+  const toNavigate = (e) => {
+    const {
+      target: { innerHTML },
+    } = e;
+    if (innerHTML === "My Ratings") {
+      navigate(`/myPage/myProfile/myRating`);
+    } else if (innerHTML === "My List") {
+      navigate(`/myPage/myProfile/myList`);
+    }
+  };
+
   return (
     <>
-      <SideUl transform={openSide && `translateX(80px)`}>
+      <SideUl transform={openSide ? `translateX(80px)` : `translate(-5px)`}>
         <SideLi onClick={onOpenSide}>
           {openSide ? (
             <FaChevronLeft />
@@ -52,8 +64,8 @@ function SideMenu() {
             <FaChevronRight className="fa-right" />
           )}
         </SideLi>
-        <SideLi>My Ratings</SideLi>
-        <SideLi>My List</SideLi>
+        <SideLi onClick={toNavigate}>My Ratings</SideLi>
+        <SideLi onClick={toNavigate}>My List</SideLi>
         <SideLi
           onClick={(e) => {
             getLogout(e);

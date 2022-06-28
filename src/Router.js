@@ -33,9 +33,11 @@ function Routing() {
         <Route path="/tv/:id/similarShows" element={<SimilarShows />} />
         {login ? (
           <>
-            <Route path="/myPage/myProfile" element={<MyProfile />} />
-            <Route path="/myPage/myRating" element={<MyRating />} />
-            <Route path="/myPage/myList" element={<MyList />} />
+            <Route path="/myPage" element={<MyPage />}>
+              <Route path="myProfile" element={<MyProfile />} />
+              <Route path="myRating" element={<MyRating />} />
+              <Route path="myList" element={<MyList />} />
+            </Route>
           </>
         ) : (
           <>

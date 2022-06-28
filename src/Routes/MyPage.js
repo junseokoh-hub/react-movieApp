@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
 import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
 import MyProfile from "../components/MyPage/MyProfile";
-
+import MyInfo from "../components/MyPage/MyInfo/MyInfo";
 const LoginTitle = styled.h2`
   text-transform: uppercase;
   text-align: center;
@@ -81,7 +81,7 @@ function MyPage() {
       </Helmet>
       {login ? (
         <>
-          <MyProfile />
+          <MyInfo />
         </>
       ) : (
         <LoginForm onSubmit={getLogin}>
