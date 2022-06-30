@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
+import { ToggleContext } from "./Context/ToggleContext";
 
 const Container = styled.div`
   width: 100vw;
@@ -32,7 +33,7 @@ const Header = styled.header`
   padding: 1em 0;
   display: flex;
   align-items: center;
-  background-color: transparent;
+  background-color: ${(props) => props.bgColor};
   box-shadow: ${(props) => props.theme.boxShadow};
   position: fixed;
   top: 0;
@@ -96,6 +97,7 @@ const Li = styled.li`
 function Head() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { login } = useContext(LoginContext);
+  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
   const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 
@@ -119,6 +121,7 @@ function Head() {
     } = e;
     if (innerHTML === "Movies") {
       navigate(`/`);
+      setToggleVideo(false);
     } else if (innerHTML === "TV") {
       navigate(`/tv`);
     } else if (innerHTML === "Search") {
@@ -138,7 +141,10 @@ function Head() {
 
   return (
     <Container>
-      <Header ref={navbar}>
+      <Header
+        ref={navbar}
+        bgColor={toggleVideo ? `rgb(20,20,20)` : "transparent"}
+      >
         <IconContainer>
           <FaHome onClick={() => navigate("/")} />
           <FaBars onClick={navToggle} />

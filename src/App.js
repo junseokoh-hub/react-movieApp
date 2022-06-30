@@ -5,18 +5,21 @@ import { NavProvider } from "./Context/NavContext";
 import React from "react";
 import { TopProvider } from "./Context/TopContext";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { ToggleProvider } from "./Context/ToggleContext";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <TopProvider>
-        <NavProvider>
-          <LogoutProvider>
-            <Routing />
-          </LogoutProvider>
-        </NavProvider>
-      </TopProvider>
+      <ToggleProvider>
+        <TopProvider>
+          <NavProvider>
+            <LogoutProvider>
+              <Routing />
+            </LogoutProvider>
+          </NavProvider>
+        </TopProvider>
+      </ToggleProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </>
   );
