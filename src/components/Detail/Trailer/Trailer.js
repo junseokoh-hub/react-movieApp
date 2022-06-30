@@ -46,9 +46,9 @@ function Trailers({ movie, id }) {
                   key={item.id}
                   title={item.name}
                   src={`https://www.youtube.com/embed/${item.key}`}
-                  frameborder="0"
+                  frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowfullscreen
+                  allowFullScreen
                 ></SeparateVideos>
               );
             })}

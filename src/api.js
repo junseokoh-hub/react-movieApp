@@ -1,13 +1,21 @@
 import { API_KEY, API_URL } from "./Config";
+import axios from "axios";
 
 /* Home */
 
+// export const fetchTrending = async () => {
+//   const response = await fetch(
+//     `https://${API_URL}trending/all/week?api_key=${API_KEY}&language=en-US`,
+//   );
+//   const json = response.json();
+//   return json;
+// };
+
 export const fetchTrending = async () => {
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}trending/all/week?api_key=${API_KEY}&language=en-US`,
   );
-  const json = response.json();
-  return json;
+  return data;
 };
 
 /* Detail */

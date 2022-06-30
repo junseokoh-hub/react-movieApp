@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { fetchTrending } from "../../api";
+import { fetchMediaVideos, fetchTrending } from "../../api";
 import { IMAGE_BASE_URL } from "../../Config";
 import { useQuery } from "react-query";
 
@@ -14,10 +14,18 @@ const Screen = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  position: relative;
   @media screen and (max-width: 500px) {
     background-size: 500px 100%;
     background-repeat: no-repeat;
   }
+`;
+const IFrame = styled.iframe`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 `;
 
 const ScreenTitle = styled.h2`
@@ -36,27 +44,71 @@ const ScreenOverview = styled.p`
   }
 `;
 
-function BigScreen() {
-  const { data, isLoading, isError } = useQuery("trending", fetchTrending);
-  console.log(data);
+const ToggleButton = styled.button`
+  margin-top: 0.3em;
+  width: 3em;
+  border: 1px solid #fff;
+  background-color: #3d3d3d;
+  font-size: 2em;
+  color: whitesmoke;
+  padding: 0.3em 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
+function BigScreen({ movie }) {
+  const [toggleVideo, setToggleVideo] = useState(false);
+  const {
+    data,
+    isLoading: trendingLoading,
+    isError,
+    error,
+  } = useQuery("trending", fetchTrending, {
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+  const { data: newData, isLoading: videoLoading } = useQuery("mainVideo", () =>
+    fetchMediaVideos(movie, data?.results[0]?.id),
+  );
+
+  const isLoading = trendingLoading || videoLoading;
+
+  const onToggle = () => {
+    setToggleVideo((prev) => !prev);
+  };
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
 
   if (isError) {
-    return <span>Error: {isError.message}</span>;
+    return <span>Error: {error.message}</span>;
   }
 
   return (
-    <>
-      {isLoading ? (
-        <div>Loading...</div>
+    <Screen
+      bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
+    >
+      {toggleVideo ? (
+        <IFrame
+          title={newData.id}
+          src={`https://www.youtube.com/embed/${
+            newData.results?.length > 0 && newData?.results[0]?.key
+          }?autoplay=1`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
       ) : (
-        <Screen
-          bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0].backdrop_path}`}
-        >
-          <ScreenTitle>{data?.results[0].title}</ScreenTitle>
-          <ScreenOverview>{data?.results[0].overview}</ScreenOverview>
-        </Screen>
+        <>
+          <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
+          <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
+          <ToggleButton onClick={onToggle}>Play</ToggleButton>
+        </>
       )}
-    </>
+    </Screen>
   );
 }
 
