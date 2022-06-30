@@ -7,6 +7,7 @@ import { TopContext } from "../Context/TopContext";
 
 const MovieContainer = styled.div`
   position: relative;
+  padding-bottom: 2em;
   .arrow-up {
     cursor: pointer;
     font-size: 1.2em;

@@ -40,7 +40,7 @@ const Header = styled.header`
   z-index: 100;
   @media screen and (max-width: 500px) {
     flex-direction: column;
-    align-items: flex-start;
+    padding: 1em 0 0 0;
   }
 `;
 
@@ -53,6 +53,7 @@ const Ul = styled.ul`
     display: ${(props) => props.open};
     flex-direction: column;
     padding: 0;
+    background-color: ${(props) => props.theme.bgColor};
   }
 `;
 
@@ -101,7 +102,7 @@ function Head() {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (navbar.current !== null) {
-        if (window.scrollY > navbar.current.offsetHeight + 100) {
+        if (window.scrollY > navbar.current.offsetHeight + 10) {
           navbar.current.classList.add("active");
         } else {
           navbar.current.classList.remove("active");

@@ -1,5 +1,5 @@
+import React from "react";
 import styled from "styled-components";
-import React /*,{ useState, useEffect, useCallback }*/ from "react";
 import { fetchMediaVideos } from "../../../api";
 import { useQuery } from "react-query";
 
@@ -31,16 +31,6 @@ function Trailers({ movie, id }) {
   const { data: videos } = useQuery(["videos", id], () =>
     fetchMediaVideos(movie, id),
   );
-  // const [showData, setShowData] = useState([]);
-
-  // const getMediaVideos = useCallback(async () => {
-  //   const json = await fetchMediaVideos(movie, id);
-  //   setShowData(json.results);
-  // }, [id, movie]);
-
-  // useEffect(() => {
-  //   getMediaVideos();
-  // }, [getMediaVideos]);
 
   return (
     <>
@@ -56,6 +46,9 @@ function Trailers({ movie, id }) {
                   key={item.id}
                   title={item.name}
                   src={`https://www.youtube.com/embed/${item.key}`}
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
                 ></SeparateVideos>
               );
             })}

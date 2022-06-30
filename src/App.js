@@ -4,6 +4,7 @@ import { LogoutProvider } from "./Context/LoginContext";
 import { NavProvider } from "./Context/NavContext";
 import React from "react";
 import { TopProvider } from "./Context/TopContext";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           </LogoutProvider>
         </NavProvider>
       </TopProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
     </>
   );
 }

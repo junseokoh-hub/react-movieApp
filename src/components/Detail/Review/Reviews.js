@@ -1,4 +1,4 @@
-import React, { /*useEffect,*/ useState /*useCallback*/ } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import ReviewTextarea from "./ReviewTextarea";
 import ReviewList from "./ReviewList";
@@ -48,16 +48,6 @@ const ReviewContent = styled.p`
 function Reviews({ movie, id }) {
   const [inputText, setInputText] = useState("");
   const [todos, setTodos] = useState([]);
-  // const [reviews, setReviews] = useState([]);
-
-  // const getMediaReviews = useCallback(async () => {
-  //   const json = await fetchMediaReviews(movie, id);
-  //   setReviews(json.results);
-  // }, [id, movie]);
-
-  // useEffect(() => {
-  //   getMediaReviews();
-  // }, [getMediaReviews]);
 
   const { data: reviews } = useQuery(["reviews", id], () =>
     fetchMediaReviews(movie, id),

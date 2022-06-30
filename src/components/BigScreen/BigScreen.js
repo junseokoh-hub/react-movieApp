@@ -37,8 +37,12 @@ const ScreenOverview = styled.p`
 `;
 
 function BigScreen() {
-  const { data, isLoading } = useQuery("trending", fetchTrending);
+  const { data, isLoading, isError } = useQuery("trending", fetchTrending);
   console.log(data);
+
+  if (isError) {
+    return <span>Error: {isError.message}</span>;
+  }
 
   return (
     <>

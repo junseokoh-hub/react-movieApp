@@ -38,6 +38,7 @@ const Tab = styled.li`
 
 function MyInfo() {
   const id = getItemfromLocalStorage();
+
   return (
     <>
       <TestInfo>
