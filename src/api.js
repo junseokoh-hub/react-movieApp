@@ -24,18 +24,20 @@ export const fetchMedia = async (movie, id) => {
   const response = await fetch(
     `https://${API_URL}${
       movie ? "movie" : "tv"
-    }/${id}?api_key=${API_KEY}&language=en-US`,
+    }/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos,images`,
   );
   const json = await response.json();
   return json;
 };
 
 export const fetchMediaVideos = async (movie, id) => {
-  // const { data } = await axios.get(
-  //   `https://${API_URL}${
-  //     movie ? "movie" : "tv"
-  //   }/${id}/videos?api_key=${API_KEY}&language=en-US`,
-  // );
+  // const { data } = await axios
+  //   .get(
+  //     `https://${API_URL}${
+  //       movie ? "movie" : "tv"
+  //     }/${id}/videos?api_key=${API_KEY}&language=en-US`,
+  //   )
+  //   .then((res) => console.log(res).catch((err) => console.log(err)));
   // return data;
 
   const response = await fetch(

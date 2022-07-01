@@ -27,7 +27,7 @@ const IFrame = styled.iframe`
   left: 0;
   width: 100%;
   height: 100%;
-  display: block;
+  display: ${(props) => props.display};
 `;
 
 const ScreenTitle = styled.h2`
@@ -66,17 +66,25 @@ function BigScreen({ movie }) {
   const {
     data,
     isLoading: trendingLoading,
-    isError,
+    isError: trendingError,
     error,
   } = useQuery("trending", fetchTrending, {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });
-  const { data: newData, isLoading: videoLoading } = useQuery("mainVideo", () =>
-    fetchMediaVideos(movie, data?.results[0]?.id),
+  const {
+    data: newData,
+    isLoading: videoLoading,
+    isError: videoError,
+  } = useQuery("mainVideo", () =>
+    fetchMediaVideos(
+      (movie = data?.results[0]?.media_type),
+      data?.results[0]?.id,
+    ),
   );
 
   const isLoading = trendingLoading || videoLoading;
+  const isError = trendingError || videoError;
 
   const onToggle = () => {
     setToggleVideo((prev) => !prev);
@@ -94,13 +102,14 @@ function BigScreen({ movie }) {
     <>
       {toggleVideo ? (
         <IFrame
-          title={newData.id}
+          title={newData?.id}
           src={`https://www.youtube.com/embed/${
-            newData.results?.length > 0 && newData?.results[0]?.key
+            newData?.results?.length > 0 && newData?.results[0]?.key
           }?autoplay=1&autohide=1&controls=0 `}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          display={toggleVideo ? "block" : "none"}
         />
       ) : (
         <Screen
