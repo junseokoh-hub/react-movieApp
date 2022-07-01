@@ -15,7 +15,7 @@ const Screen = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: relative;
+  /* position: relative; */
   @media screen and (max-width: 500px) {
     background-size: 500px 100%;
     background-repeat: no-repeat;
@@ -27,6 +27,7 @@ const IFrame = styled.iframe`
   left: 0;
   width: 100%;
   height: 100%;
+  display: block;
 `;
 
 const ScreenTitle = styled.h2`
@@ -90,27 +91,48 @@ function BigScreen({ movie }) {
   }
 
   return (
-    <Screen
-      bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
-    >
+    <>
       {toggleVideo ? (
         <IFrame
           title={newData.id}
           src={`https://www.youtube.com/embed/${
             newData.results?.length > 0 && newData?.results[0]?.key
-          }?autoplay=1`}
+          }?autoplay=1&autohide=1&controls=0 `}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       ) : (
-        <>
+        <Screen
+          bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
+        >
           <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
           <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
           <ToggleButton onClick={onToggle}>Play</ToggleButton>
-        </>
+        </Screen>
       )}
-    </Screen>
+    </>
+    // <Screen
+    //   bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
+    // >
+    //   {toggleVideo ? (
+    //     <IFrame
+    //       title={newData.id}
+    //       src={`https://www.youtube.com/embed/${
+    //         newData.results?.length > 0 && newData?.results[0]?.key
+    //       }?autoplay=1&autohide=1&controls=0 `}
+    //       frameBorder="0"
+    //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    //       allowFullScreen
+    //     />
+    //   ) : (
+    //     <>
+    //       <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
+    //       <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
+    //       <ToggleButton onClick={onToggle}>Play</ToggleButton>
+    //     </>
+    //   )}
+    // </Screen>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { FaHome, FaBars, FaCookie } from "react-icons/fa";
+import { FaHome, FaBars, FaCookie, FaArrowCircleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
@@ -11,6 +11,14 @@ const Container = styled.div`
   width: 100vw;
   .active {
     background-color: ${(props) => props.theme.bgColor};
+  }
+  .fa-leftarrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.3em;
+    cursor: pointer;
+    z-index: 10000;
   }
 `;
 
@@ -33,7 +41,7 @@ const Header = styled.header`
   padding: 1em 0;
   display: flex;
   align-items: center;
-  background-color: ${(props) => props.bgColor};
+  background-color: transparent;
   box-shadow: ${(props) => props.theme.boxShadow};
   position: fixed;
   top: 0;
@@ -141,40 +149,44 @@ function Head() {
 
   return (
     <Container>
-      <Header
-        ref={navbar}
-        bgColor={toggleVideo ? `rgb(20,20,20)` : "transparent"}
-      >
-        <IconContainer>
-          <FaHome onClick={() => navigate("/")} />
-          <FaBars onClick={navToggle} />
-        </IconContainer>
-        <Ul open={navOpen ? "flex" : "none"}>
-          <Li>
-            <span onClick={toNavigate}>Movies</span>
-            <span onClick={toNavigate}>TV</span>
-          </Li>
-          <Li>
-            <span onClick={toNavigate}>Search</span>
-            {login ? (
-              <>
-                <FaCookie className="fa-cookie" onClick={OpenMenu} />
-                {menuOpen ? (
-                  <Menu setMenuOpen={setMenuOpen} />
-                ) : (
-                  <>
-                    <span className="span-mypage" onClick={toNavigate}>
-                      My Page
-                    </span>
-                  </>
-                )}
-              </>
-            ) : (
-              <span onClick={toNavigate}>LogIn</span>
-            )}
-          </Li>
-        </Ul>
-      </Header>
+      {toggleVideo ? (
+        <FaArrowCircleLeft
+          className="fa-leftarrow"
+          onClick={() => setToggleVideo(false)}
+        />
+      ) : (
+        <Header ref={navbar}>
+          <IconContainer>
+            <FaHome onClick={() => navigate("/")} />
+            <FaBars onClick={navToggle} />
+          </IconContainer>
+          <Ul open={navOpen ? "flex" : "none"}>
+            <Li>
+              <span onClick={toNavigate}>Movies</span>
+              <span onClick={toNavigate}>TV</span>
+            </Li>
+            <Li>
+              <span onClick={toNavigate}>Search</span>
+              {login ? (
+                <>
+                  <FaCookie className="fa-cookie" onClick={OpenMenu} />
+                  {menuOpen ? (
+                    <Menu setMenuOpen={setMenuOpen} />
+                  ) : (
+                    <>
+                      <span className="span-mypage" onClick={toNavigate}>
+                        My Page
+                      </span>
+                    </>
+                  )}
+                </>
+              ) : (
+                <span onClick={toNavigate}>LogIn</span>
+              )}
+            </Li>
+          </Ul>
+        </Header>
+      )}
     </Container>
   );
 }
