@@ -99,16 +99,27 @@ function BigScreen() {
   return (
     <>
       {toggleVideo ? (
-        <IFrame
-          title={newData?.id}
-          src={`https://www.youtube.com/embed/${
-            newData?.results?.length > 0 && newData?.results[35]?.key
-          }?autoplay=1&autohide=1&controls=0&rel=0`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          display={toggleVideo ? "block" : "none"}
-        />
+        <>
+          <IFrame
+            title={newData?.id}
+            src={`https://www.youtube.com/embed/${
+              newData?.results?.length > 0 && newData?.results[35]?.key
+            }?autoplay=1&autohide=1&controls=0`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            display={toggleVideo ? "block" : "none"}
+          />
+          <div
+            style={{
+              position: `absolute`,
+              backgroundColor: `#000`,
+              width: `100%`,
+              height: `140px`,
+              zIndex: 1,
+            }}
+          ></div>
+        </>
       ) : (
         <Screen
           display={toggleVideo ? "none" : "flex"}
