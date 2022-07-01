@@ -12,7 +12,7 @@ const Screen = styled.div`
   background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
     url(${(props) => props.bgImage});
   background-size: cover;
-  display: flex;
+  display: ${(props) => props.display};
   flex-direction: column;
   justify-content: flex-end;
   /* position: relative; */
@@ -26,7 +26,7 @@ const IFrame = styled.iframe`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 110vh;
   display: ${(props) => props.display};
 `;
 
@@ -60,7 +60,7 @@ const ToggleButton = styled.button`
   cursor: pointer;
 `;
 
-function BigScreen({ movie }) {
+function BigScreen() {
   const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
 
   const {
@@ -77,10 +77,7 @@ function BigScreen({ movie }) {
     isLoading: videoLoading,
     isError: videoError,
   } = useQuery("mainVideo", () =>
-    fetchMediaVideos(
-      (movie = data?.results[0]?.media_type),
-      data?.results[0]?.id,
-    ),
+    fetchMediaVideos(data?.results[0]?.media_type, data?.results[0]?.id),
   );
 
   const isLoading = trendingLoading || videoLoading;
@@ -113,6 +110,7 @@ function BigScreen({ movie }) {
         />
       ) : (
         <Screen
+          display={toggleVideo ? "none" : "flex"}
           bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
         >
           <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>

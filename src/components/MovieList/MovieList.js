@@ -1,11 +1,12 @@
 import { API_KEY, API_URL, IMAGE_BASE_URL } from "../../Config";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { ToggleContext } from "../../Context/ToggleContext";
 
 const UnorderedList = styled.ul`
-  display: flex;
+  display: ${(props) => props.display};
   flex-wrap: wrap;
 `;
 
@@ -28,6 +29,7 @@ const ClassficiationTitle = styled.h2`
   padding: ${(props) => props.theme.smallGap};
   text-transform: uppercase;
   color: ${(props) => props.theme.darkBlueColor};
+  display: ${(props) => props.display};
   @media screen and (max-width: 500px) {
     padding-left: 0.6em;
   }
@@ -59,6 +61,7 @@ const ListHeader = styled.span`
 
 function MovieList({ movie, apiList }) {
   const [data, setData] = useState([]);
+  const { toggleVideo } = useContext(ToggleContext);
 
   useEffect(() => {
     async function apiCall() {
@@ -82,8 +85,10 @@ function MovieList({ movie, apiList }) {
       <Helmet>
         <title>{movie ? "Movie" : "TV"}</title>
       </Helmet>
-      <ClassficiationTitle>{apiList}</ClassficiationTitle>
-      <UnorderedList>
+      <ClassficiationTitle display={toggleVideo ? "none" : "block"}>
+        {apiList}
+      </ClassficiationTitle>
+      <UnorderedList display={toggleVideo ? "none" : "flex"}>
         {data.map((item) => {
           return (
             <List key={item.id}>
