@@ -4,6 +4,7 @@ import { FaArrowCircleUp } from "react-icons/fa";
 import MovieList from "../components/MovieList";
 import BigScreen from "../components/BigScreen";
 import { TopContext } from "../Context/TopContext";
+import { ToggleContext } from "../Context/ToggleContext";
 
 const MovieContainer = styled.div`
   position: relative;
@@ -18,14 +19,16 @@ const MovieContainer = styled.div`
 
 function Home() {
   const { backToTop } = useContext(TopContext);
-
+  const { toggleVideo } = useContext(ToggleContext);
   return (
     <MovieContainer>
       <BigScreen />
       <MovieList movie apiList="popular" />
       <MovieList movie apiList="upcoming" />
       <MovieList movie apiList="top_rated" />
-      <FaArrowCircleUp className="arrow-up" onClick={backToTop} />
+      {toggleVideo || (
+        <FaArrowCircleUp className="arrow-up" onClick={backToTop} />
+      )}
     </MovieContainer>
   );
 }

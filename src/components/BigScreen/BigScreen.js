@@ -63,36 +63,37 @@ const ToggleButton = styled.button`
 function BigScreen() {
   const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
 
-  const {
-    data,
-    isLoading: trendingLoading,
-    isError: trendingError,
-    error,
-  } = useQuery("trending", fetchTrending, {
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-  });
-  const {
-    data: newData,
-    isLoading: videoLoading,
-    isError: videoError,
-  } = useQuery("mainVideo", () =>
-    fetchMediaVideos(data?.results[0]?.media_type, data?.results[0]?.id),
+  const { data, isLoading: trendingLoading } = useQuery(
+    "trending",
+    fetchTrending,
+    {
+      onError: () => {
+        console.log(`data Error occurs`);
+      },
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    },
   );
-
-  const isLoading = trendingLoading || videoLoading;
-  const isError = trendingError || videoError;
+  const { data: newData, isLoading: videoLoading } = useQuery(
+    "mainVideo",
+    () => fetchMediaVideos(data?.results[0]?.media_type, data?.results[0]?.id),
+    {
+      onError: () => {
+        console.log(`newData Error occurs`);
+      },
+      enabled: !!data?.results[0]?.id,
+      refetchOnWindowFocus: false,
+    },
+  );
 
   const onToggle = () => {
     setToggleVideo((prev) => !prev);
   };
 
+  const isLoading = trendingLoading || videoLoading;
+
   if (isLoading) {
     return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
   }
 
   return (
@@ -101,8 +102,8 @@ function BigScreen() {
         <IFrame
           title={newData?.id}
           src={`https://www.youtube.com/embed/${
-            newData?.results?.length > 0 && newData?.results[0]?.key
-          }?autoplay=1&autohide=1&controls=0 `}
+            newData?.results?.length > 0 && newData?.results[35]?.key
+          }?autoplay=1&autohide=1&controls=0&rel=0`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

@@ -31,22 +31,20 @@ export const fetchMedia = async (movie, id) => {
 };
 
 export const fetchMediaVideos = async (movie, id) => {
-  // const { data } = await axios
-  //   .get(
-  //     `https://${API_URL}${
-  //       movie ? "movie" : "tv"
-  //     }/${id}/videos?api_key=${API_KEY}&language=en-US`,
-  //   )
-  //   .then((res) => console.log(res).catch((err) => console.log(err)));
-  // return data;
-
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}${
       movie ? "movie" : "tv"
     }/${id}/videos?api_key=${API_KEY}&language=en-US`,
   );
-  const json = await response.json();
-  return json;
+  return data;
+
+  // const response = await fetch(
+  //   `https://${API_URL}${
+  //     movie ? "movie" : "tv"
+  //   }/${id}/videos?api_key=${API_KEY}&language=en-US`,
+  // );
+  // const json = await response.json();
+  // return json;
 };
 
 export const fetchMediaReviews = async (movie, id) => {
