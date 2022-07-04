@@ -20,14 +20,23 @@ export const fetchTrending = async () => {
 
 /* Detail */
 
+// export const fetchMedia = async (movie, id) => {
+//   const response = await fetch(
+//     `https://${API_URL}${
+//       movie ? "movie" : "tv"
+//     }/${id}?api_key=${API_KEY}&language=en-US`,
+//   );
+//   const json = await response.json();
+//   return json;
+// };
+
 export const fetchMedia = async (movie, id) => {
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}${
       movie ? "movie" : "tv"
-    }/${id}?api_key=${API_KEY}&language=en-US&append_to_response=videos,images`,
+    }/${id}?api_key=${API_KEY}&language=en-US`,
   );
-  const json = await response.json();
-  return json;
+  return data;
 };
 
 export const fetchMediaVideos = async (movie, id) => {
@@ -47,34 +56,60 @@ export const fetchMediaVideos = async (movie, id) => {
   // return json;
 };
 
+// export const fetchMediaReviews = async (movie, id) => {
+//   const response = await fetch(
+//     `https://${API_URL}${
+//       movie ? "movie" : "tv"
+//     }/${id}/reviews?api_key=${API_KEY}&language=en-US`,
+//   );
+//   const json = await response.json();
+//   return json;
+// };
 export const fetchMediaReviews = async (movie, id) => {
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}${
       movie ? "movie" : "tv"
     }/${id}/reviews?api_key=${API_KEY}&language=en-US`,
   );
-  const json = await response.json();
-  return json;
+  return data;
 };
 
+// export const fetchMediaSimilarShows = async (movie, id) => {
+//   const response = await fetch(
+//     `https://${API_URL}${
+//       movie ? "movie" : "tv"
+//     }/${id}/similar?api_key=${API_KEY}&language=en-US`,
+//   );
+//   const json = await response.json();
+//   return json;
+// };
+
 export const fetchMediaSimilarShows = async (movie, id) => {
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}${
       movie ? "movie" : "tv"
     }/${id}/similar?api_key=${API_KEY}&language=en-US`,
   );
-  const json = await response.json();
-  return json;
+  return data;
 };
 
+// export const fetchMediaCredits = async (movie, id) => {
+//   const response = await fetch(
+//     `https://${API_URL}${
+//       movie ? "movie" : "tv"
+//     }/${id}/credits?api_key=${API_KEY}&language=en-US`,
+//   );
+//   const json = await response.json();
+//   return json;
+// };
+
 export const fetchMediaCredits = async (movie, id) => {
-  const response = await fetch(
+  const { data } = await axios.get(
     `https://${API_URL}${
       movie ? "movie" : "tv"
     }/${id}/credits?api_key=${API_KEY}&language=en-US`,
   );
-  const json = await response.json();
-  return json;
+  return data;
 };
 
 /* Search */

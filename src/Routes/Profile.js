@@ -4,6 +4,7 @@ import { fetchIndividualDetail, fetchIndividualFilm } from "../api";
 import styled from "styled-components";
 import CommonImg from "../components/CommonImg";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "react-query";
 
 const ProfileTitle = styled.h3`
   color: ${(props) => props.theme.darkBlueColor};
@@ -35,31 +36,36 @@ const ProfileFilmography = styled.div`
 `;
 
 function Profile() {
-  const [individualFilm, setIndividualFilm] = useState({});
-  const [individualDetail, setIndividualDetail] = useState({});
-
   const { id } = useParams();
+  const { data: individualDetail } = useQuery(["profileIndividual", id], () =>
+    fetchIndividualDetail(id),
+  );
+  const { data: individualFilm } = useQuery(["profileFilm", id], () =>
+    fetchIndividualFilm(id),
+  );
+  // const [individualFilm, setIndividualFilm] = useState({});
+  // const [individualDetail, setIndividualDetail] = useState({});
 
-  const getIndividualFilm = useCallback(async () => {
-    const json = await fetchIndividualFilm(id);
-    setIndividualFilm(json);
-  }, [id]);
+  // const getIndividualFilm = useCallback(async () => {
+  //   const json = await fetchIndividualFilm(id);
+  //   setIndividualFilm(json);
+  // }, [id]);
 
-  const getIndividual = useCallback(async () => {
-    const json = await fetchIndividualDetail(id);
-    setIndividualDetail(json);
-  }, [id]);
+  // const getIndividual = useCallback(async () => {
+  //   const json = await fetchIndividualDetail(id);
+  //   setIndividualDetail(json);
+  // }, [id]);
 
-  useEffect(() => {
-    getIndividualFilm();
-    getIndividual();
-  }, [getIndividualFilm, getIndividual]);
+  // useEffect(() => {
+  //   getIndividualFilm();
+  //   getIndividual();
+  // }, [getIndividualFilm, getIndividual]);
 
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <>
       <Helmet>
-        <title>{individualDetail.name}</title>
+        <title>{individualDetail?.name}</title>
       </Helmet>
       <ul style={{ paddingTop: `3.2em` }}>
         <ProfileLi>
@@ -68,24 +74,24 @@ function Profile() {
           alt={individualDetail.name}
         /> */}
           <CommonImg
-            path={individualDetail.profile_path}
+            path={individualDetail?.profile_path}
             size={200}
-            alt={individualDetail.name}
+            alt={individualDetail?.name}
           />
-          <span>{individualDetail.name}</span>
+          <span>{individualDetail?.name}</span>
         </ProfileLi>
         <ProfileLi>
           <ProfileTitle>Biography</ProfileTitle>
           <p style={{ fontStyle: "oblique" }}>
-            {individualDetail.biography?.slice(0, 500)}
+            {individualDetail?.biography?.slice(0, 500)}
             ...
           </p>
         </ProfileLi>
         <ProfileLi>
           <ProfileTitle>Filmography</ProfileTitle>
           <ProfileFilmography>
-            {individualFilm.cast &&
-              individualFilm.cast
+            {individualFilm?.cast &&
+              individualFilm?.cast
                 .filter((item) => item.popularity > 100)
                 .map((item) => {
                   const mediaType = item.media_type === "movie";
