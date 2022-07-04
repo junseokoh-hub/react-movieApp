@@ -55,6 +55,7 @@ function Profile() {
     getIndividual();
   }, [getIndividualFilm, getIndividual]);
 
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <>
       <Helmet>

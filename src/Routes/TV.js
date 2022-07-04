@@ -20,6 +20,7 @@ const MovieContainer = styled.div`
 function Tv() {
   const { backToTop } = useContext(TopContext);
   const { toggleVideo } = useContext(ToggleContext);
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <MovieContainer>
       <BigScreen />

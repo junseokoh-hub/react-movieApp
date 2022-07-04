@@ -52,6 +52,7 @@ const AccountBtn = styled.button`
 
 function CreateAccount() {
   let navigate = useNavigate();
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <AccountContainer>
       <FaArrowCircleLeft onClick={() => navigate(-1)} />

@@ -48,6 +48,8 @@ function Detail({ movie }) {
     getMediaCredits();
   }, [getMedia, getMediaCredits]);
 
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
+
   return (
     <>
       <Helmet>

@@ -42,7 +42,7 @@ const LoginButton = styled(LoginInput)`
 `;
 
 function MyPage() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const { login, setLogin } = useContext(LoginContext);
@@ -53,8 +53,8 @@ function MyPage() {
     const {
       target: { value, name },
     } = e;
-    if (name === "email") {
-      setEmail(value);
+    if (name === "username") {
+      setUsername(value);
     } else {
       setPassword(value);
     }
@@ -62,11 +62,11 @@ function MyPage() {
 
   const getLogin = (e) => {
     e.preventDefault();
-    if (email && password) {
-      onLogin(email, password);
+    if (username && password) {
+      onLogin(username, password);
       setLogin(getItemfromLocalStorage() !== null);
       navigate("/");
-      setEmail("");
+      setUsername("");
       setPassword("");
     } else {
       alert(`입력해주세요`);
@@ -74,6 +74,7 @@ function MyPage() {
     console.log(`get login`);
   };
 
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <>
       <Helmet>
@@ -87,10 +88,10 @@ function MyPage() {
         <LoginForm onSubmit={getLogin}>
           <LoginTitle>login</LoginTitle>
           <LoginInput
-            value={email}
+            value={username}
             onChange={onChange}
-            type="email"
-            name="email"
+            type="text"
+            name="username"
             placeholder="Username"
           />
           <LoginInput

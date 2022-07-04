@@ -16,6 +16,7 @@ function Search() {
   const [searchData, setSearchData] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [activeGenre, setActiveGenre] = useState(0);
+  document.body.scrollTop = document.documentElement.scrollTop = 0;
 
   const onChange = (event) => {
     const {

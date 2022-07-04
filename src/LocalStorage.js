@@ -1,5 +1,5 @@
-export const onLogin = (email, password) => {
-  localStorage.setItem("username", email);
+export const onLogin = (username, password) => {
+  localStorage.setItem("username", username);
   localStorage.setItem("password", password);
 };
 

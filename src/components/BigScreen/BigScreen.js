@@ -123,7 +123,7 @@ function BigScreen() {
       ) : (
         <Screen
           display={toggleVideo ? "none" : "flex"}
-          bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
+          bgImage={`https://${IMAGE_BASE_URL}/w500${data?.results[0]?.backdrop_path}`}
         >
           <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
           <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
@@ -131,27 +131,6 @@ function BigScreen() {
         </Screen>
       )}
     </>
-    // <Screen
-    //   bgImage={`https://${IMAGE_BASE_URL}/w200${data?.results[0]?.backdrop_path}`}
-    // >
-    //   {toggleVideo ? (
-    //     <IFrame
-    //       title={newData.id}
-    //       src={`https://www.youtube.com/embed/${
-    //         newData.results?.length > 0 && newData?.results[0]?.key
-    //       }?autoplay=1&autohide=1&controls=0 `}
-    //       frameBorder="0"
-    //       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    //       allowFullScreen
-    //     />
-    //   ) : (
-    //     <>
-    //       <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
-    //       <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
-    //       <ToggleButton onClick={onToggle}>Play</ToggleButton>
-    //     </>
-    //   )}
-    // </Screen>
   );
 }
 
