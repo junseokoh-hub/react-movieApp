@@ -39,6 +39,7 @@ const SearchedImg = styled.img`
   }
   @media screen and (max-width: 500px) {
     height: 6em;
+    width: 4em;
   }
 `;
 
@@ -75,17 +76,19 @@ const SearchedException = styled.span`
 
 function SearchedSection({ filtered = [], movie }) {
   const mediaType = movie ? "movie" : "tv";
-  const filteredData = filtered.filter((item) => item.media_type === mediaType);
-
+  const filteredData = filtered?.filter(
+    (item) => item.media_type === mediaType,
+  );
+  console.log("i'm rendered");
   return (
     <>
       <SearchedType>{movie ? "Movie" : "TV Show"}</SearchedType>
 
-      {filteredData.length === 0 ? (
+      {filteredData?.length === 0 ? (
         <SearchedException>No results...</SearchedException>
       ) : (
         <SearchedUl>
-          {filteredData.map((item) => {
+          {filteredData?.map((item) => {
             const date = movie ? item.release_date : item.first_air_date;
             const name = movie ? item.original_title : item.original_name;
             return (

@@ -23,7 +23,7 @@ function SearchedContent({
         activeGenre={activeGenre}
         setActiveGenre={setActiveGenre}
       />
-      {searchData.length > 0 ? (
+      {searchData?.length > 0 ? (
         <>
           <SearchedSection filtered={filtered} movie />
           <SearchedSection filtered={filtered} />

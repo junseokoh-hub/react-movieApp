@@ -48,7 +48,7 @@ function Search() {
     <SearchContainer>
       <Helmet>
         <title>
-          {searchData.length > 0 && keyword ? `Search - ${keyword}` : `Search`}
+          {searchData?.length > 0 && keyword ? `Search - ${keyword}` : `Search`}
         </title>
       </Helmet>
       <SearchBox search={search} onChange={onChange} />

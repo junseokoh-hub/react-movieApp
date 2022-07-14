@@ -101,7 +101,8 @@ function BigScreen() {
           <IFrame
             title={newData?.id}
             src={`https://www.youtube.com/embed/${
-              newData?.results?.length > 0 && newData?.results[35]?.key
+              newData?.results?.length > 0 &&
+              newData?.results[newData?.results.length - 1]?.key
             }?autoplay=1&autohide=1&controls=0`}
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
