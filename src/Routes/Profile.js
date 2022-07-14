@@ -43,23 +43,6 @@ function Profile() {
   const { data: individualFilm } = useQuery(["profileFilm", id], () =>
     fetchIndividualFilm(id),
   );
-  // const [individualFilm, setIndividualFilm] = useState({});
-  // const [individualDetail, setIndividualDetail] = useState({});
-
-  // const getIndividualFilm = useCallback(async () => {
-  //   const json = await fetchIndividualFilm(id);
-  //   setIndividualFilm(json);
-  // }, [id]);
-
-  // const getIndividual = useCallback(async () => {
-  //   const json = await fetchIndividualDetail(id);
-  //   setIndividualDetail(json);
-  // }, [id]);
-
-  // useEffect(() => {
-  //   getIndividualFilm();
-  //   getIndividual();
-  // }, [getIndividualFilm, getIndividual]);
 
   document.body.scrollTop = document.documentElement.scrollTop = 0;
 
@@ -70,10 +53,6 @@ function Profile() {
       </Helmet>
       <ul style={{ paddingTop: `3.2em` }}>
         <ProfileLi>
-          {/* <ProfileImg
-          src={`https://${IMAGE_BASE_URL}/w200/${individualDetail.profile_path}`}
-          alt={individualDetail.name}
-        /> */}
           <CommonImg
             path={individualDetail?.profile_path}
             size={200}

@@ -129,7 +129,7 @@ function Head() {
     } = e;
     if (innerHTML === "Movies") {
       navigate(`/`);
-      setToggleVideo(false);
+      // setToggleVideo(false);
     } else if (innerHTML === "TV") {
       navigate(`/tv`);
     } else if (innerHTML === "Search") {
@@ -147,6 +147,7 @@ function Head() {
     setMenuOpen((prev) => !prev);
   };
 
+  console.log("i'm rendered");
   return (
     <Container>
       {toggleVideo ? (
@@ -191,4 +192,4 @@ function Head() {
   );
 }
 
-export default Head;
+export default React.memo(Head);
