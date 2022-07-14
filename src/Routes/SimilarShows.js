@@ -11,7 +11,7 @@ const SimilarUl = styled.ul`
   padding-top: 3.2em;
   @media screen and (max-width: 500px) {
     width: 100%;
-    padding: 0 1em 0 0;
+    padding: 3.2em 1em 0 0;
   }
 `;
 

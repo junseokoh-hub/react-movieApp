@@ -20,7 +20,9 @@ const IndividualCredit = styled.li`
 
 const CreditsImg = styled.img`
   width: 7.5em;
+  height: 180px;
   border-radius: ${(props) => props.theme.smallGap};
+  border: ${(props) => props.border};
 `;
 
 const IndividualInfo = styled.div`
@@ -48,6 +50,7 @@ function SecondMenuContent({ credits }) {
                 src={`https://${IMAGE_BASE_URL}/w200${item.profile_path}`}
                 alt={item.original_name}
                 onError={handleImgError}
+                border={item.profile_path === null ? "1px solid #fff" : ""}
               />
               <IndividualInfo>
                 <span>{item.name}</span>

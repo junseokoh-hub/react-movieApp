@@ -9,6 +9,7 @@ const AccountContainer = styled.div`
   svg {
     cursor: pointer;
     margin-left: 0.2em;
+    margin-top: 0.2em;
   }
 `;
 

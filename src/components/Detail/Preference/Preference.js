@@ -1,5 +1,16 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { FaHeart } from "react-icons/fa";
+
+const PrefContainer = styled.div`
+  display: flex;
+  align-items: center;
+  .heart {
+    display: block;
+    font-size: 2em;
+    margin-left: 0.3em;
+  }
+`;
 
 const VoteRateCircle = styled.div`
   display: flex;
@@ -24,27 +35,17 @@ const VoteRateCircle = styled.div`
   }
 `;
 
-const HeartLike = styled.div`
-  width: 2em;
-  height: 2em;
-  border: ${(props) => (props.colorState ? "none" : `1px solid black`)};
-  border-radius: 50%;
-  margin-left: ${(props) => props.theme.smallGap};
-  background-color: ${(props) =>
-    props.colorState ? `rgba(255, 0, 0, 0.8)` : "transparent"};
-  cursor: pointer;
-`;
-
 function Preference({ data }) {
   const [colorState, setColorState] = useState(false);
   return (
-    <div style={{ display: "flex", alignItems: "center" }}>
+    <PrefContainer>
       <VoteRateCircle value={data.vote_average?.toFixed(1)}></VoteRateCircle>
-      <HeartLike
-        colorState={colorState}
+      <FaHeart
+        className="heart"
+        color={colorState ? `rgba(255,0,0,0.8)` : "#fff"}
         onClick={() => setColorState((prev) => !prev)}
       />
-    </div>
+    </PrefContainer>
   );
 }
 

@@ -32,6 +32,7 @@ const IconContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 0 1em;
   }
 `;
@@ -49,7 +50,8 @@ const Header = styled.header`
   z-index: 100;
   @media screen and (max-width: 500px) {
     flex-direction: column;
-    padding: 1em 0 0 0;
+    padding: ${(props) => props.pad};
+    background-color: ${(props) => props.backColor};
   }
 `;
 
@@ -155,7 +157,11 @@ function Head() {
           onClick={() => setToggleVideo(false)}
         />
       ) : (
-        <Header ref={navbar}>
+        <Header
+          ref={navbar}
+          backColor={navOpen ? `rgb(20,20,20)` : "transparent"}
+          pad={navOpen ? "1em 0 0 0" : "1em 0"}
+        >
           <IconContainer>
             <FaHome onClick={() => navigate("/")} />
             <FaBars onClick={navToggle} />
