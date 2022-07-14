@@ -4,6 +4,7 @@ import ReviewTextarea from "./ReviewTextarea";
 import ReviewList from "./ReviewList";
 import { fetchMediaReviews } from "../../../api";
 import { useQuery } from "react-query";
+import { handleImgError } from "../../../ErrorImg";
 
 const ReviewIndicator = styled.h4`
   color: ${(props) => props.theme.whiteColor};
@@ -60,7 +61,12 @@ function Reviews({ movie, id }) {
         {reviews?.results.map((item) => {
           return (
             <li key={item.id}>
-              <img src={item.author_details?.avatar_pathd} alt={item.author} />
+              <img
+                src={item.author_details?.avatar_path}
+                alt={item.author}
+                onError={handleImgError}
+                style={{ width: "2em" }}
+              />
               <ReviewUsername>*{item.author_details.username}</ReviewUsername>
               <ReviewContent>
                 {item.content.slice(0, 200)}...{" "}

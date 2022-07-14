@@ -70,8 +70,6 @@ function BigScreen() {
       onError: () => {
         console.log(`data Error occurs`);
       },
-      refetchOnWindowFocus: false,
-      refetchOnMount: false,
     },
   );
   const { data: newData, isLoading: videoLoading } = useQuery(

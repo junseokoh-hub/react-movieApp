@@ -64,8 +64,8 @@ function Detail({ movie }) {
         <TabBundle data={data} movie={movie} credits={credits} />
       </ShowMainInfo>
       <ShowOthers>
-        <Reviews movie={movie} id={id} />
         <Trailers movie={movie} id={id} />
+        <Reviews movie={movie} id={id} />
       </ShowOthers>
     </>
   );

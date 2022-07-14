@@ -20,4 +20,4 @@ function ReviewList({ todos, setTodos }) {
   );
 }
 
-export default ReviewList;
+export default React.memo(ReviewList);

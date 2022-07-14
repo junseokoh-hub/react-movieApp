@@ -17,7 +17,7 @@ function ReviewContent({ writer, text, todo, todos, setTodos }) {
   const handleDelete = () => {
     setTodos(todos.filter((element) => element.id !== todo.id));
   };
-
+  console.log("why i'm rendered?");
   return (
     <div style={{ marginBottom: "1em" }}>
       <div>

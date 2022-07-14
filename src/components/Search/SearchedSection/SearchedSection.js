@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../../../Config";
+import { handleImgError } from "../../../ErrorImg";
 
 const SearchedUl = styled.ul`
   display: flex;
@@ -13,7 +14,7 @@ const SearchedLi = styled.li`
   margin: 0 1em 0.5em 1em;
   padding: 0.5em 0 0 0.5em;
   width: 11em;
-  display: ${(props) => props.display};
+  display: flex;
   flex-direction: column;
   cursor: pointer;
   box-shadow: ${(props) => props.theme.boxShadow};
@@ -25,6 +26,7 @@ const SearchedLi = styled.li`
 `;
 
 const SearchedImg = styled.img`
+  width: ${(props) => props.width};
   height: 15em;
   display: block;
   border-radius: ${(props) => props.theme.smallGap};
@@ -87,18 +89,13 @@ function SearchedSection({ filtered = [], movie }) {
             const date = movie ? item.release_date : item.first_air_date;
             const name = movie ? item.original_title : item.original_name;
             return (
-              <SearchedLi
-                key={item.id}
-                display={
-                  item.backdrop_path === null && item.poster_path === null
-                    ? "none"
-                    : "flex"
-                }
-              >
+              <SearchedLi key={item.id}>
                 <Link to={`/${mediaType}/${item.id}`}>
                   <SearchedImg
                     src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                     alt={item.title}
+                    onError={handleImgError}
+                    width={item.poster_path === null ? "10em" : ""}
                   />
                   <SearchedTitle>{name}</SearchedTitle>
                   <SearchedDate>
@@ -114,4 +111,4 @@ function SearchedSection({ filtered = [], movie }) {
   );
 }
 
-export default SearchedSection;
+export default React.memo(SearchedSection);

@@ -2,6 +2,7 @@ import React from "react";
 import { IMAGE_BASE_URL } from "../../../Config";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { handleImgError } from "../../../ErrorImg";
 
 const CreditsContainer = styled.ul`
   display: flex;
@@ -36,12 +37,6 @@ const IndividualInfo = styled.div`
 `;
 
 function SecondMenuContent({ credits }) {
-  const noImageUrl = "/logo192.png";
-
-  const handleImgError = (e) => {
-    e.target.src = noImageUrl;
-  };
-
   return (
     <CreditsContainer>
       {credits.slice(0, 8).map((item) => {

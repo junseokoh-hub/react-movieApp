@@ -79,4 +79,4 @@ function FilterButtons({
   );
 }
 
-export default FilterButtons;
+export default React.memo(FilterButtons);

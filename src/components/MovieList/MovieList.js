@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ToggleContext } from "../../Context/ToggleContext";
+import { handleImgError } from "../../ErrorImg";
 
 const UnorderedList = styled.ul`
   display: ${(props) => props.display};
@@ -37,6 +38,7 @@ const ClassficiationTitle = styled.h2`
 
 const Poster = styled.img`
   width: 5em;
+  height: 120px;
   margin-bottom: ${(props) => props.theme.smallGap};
   border-radius: ${(props) => props.theme.smallGap};
   transition: transform 0.1s linear;
@@ -96,6 +98,7 @@ function MovieList({ movie, apiList }) {
                 <Poster
                   src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                   alt={item.original_title}
+                  onError={handleImgError}
                 />
                 {movie ? (
                   <ListHeader>{item.title}</ListHeader>

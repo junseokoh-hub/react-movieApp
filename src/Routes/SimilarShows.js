@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import { IMAGE_BASE_URL } from "../Config";
 import styled from "styled-components";
 import SimilarShowContent from "../components/SimilarShows/SimilarShowContent";
+import { handleImgError } from "../ErrorImg";
 
 const SimilarUl = styled.ul`
   background-color: #2f3640;
@@ -61,6 +62,7 @@ function SimilarShows({ movie }) {
               <img
                 src={`https://${IMAGE_BASE_URL}/w200${item.poster_path}`}
                 alt={movie ? item.original_title : item.original_name}
+                onError={handleImgError}
               />
               <SimilarShowContent movie={movie} item={item} />
             </Link>
