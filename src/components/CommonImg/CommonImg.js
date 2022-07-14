@@ -3,13 +3,6 @@ import styled from "styled-components";
 import { IMAGE_BASE_URL } from "../../Config";
 import { handleImgError } from "../../ErrorImg";
 
-// const ImageContainer = styled.img`
-//   display: block;
-//   cursor: pointer;
-//   border-radius: ${(props) => props.theme.smallGap};
-//   margin-right: ${(props) => props.theme.smallGap};
-// `;
-
 const ImageContainer = styled.img(({ theme, customStyle }) => ({
   marginRight: theme.smallGap,
   borderRadius: theme.smallGap,

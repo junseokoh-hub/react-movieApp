@@ -1,10 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
 import { LoginContext } from "../Context/LoginContext";
 import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
 import MyInfo from "../components/MyPage/MyInfo/MyInfo";
+import { useForm } from "react-hook-form";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -42,38 +43,23 @@ const LoginButton = styled(LoginInput)`
 `;
 
 function MyPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
+  const { register, handleSubmit, setValue } = useForm();
+  let navigate = useNavigate();
   const { login, setLogin } = useContext(LoginContext);
 
-  let navigate = useNavigate();
-
-  const onChange = (e) => {
-    const {
-      target: { value, name },
-    } = e;
-    if (name === "username") {
-      setUsername(value);
-    } else {
-      setPassword(value);
-    }
-  };
-
-  const getLogin = (e) => {
-    e.preventDefault();
-    if (username && password) {
+  const handleValid = (data) => {
+    const { username, password } = data;
+    if (data) {
       onLogin(username, password);
       setLogin(getItemfromLocalStorage() !== null);
       navigate("/");
-      setUsername("");
-      setPassword("");
+      setValue("username", "");
+      setValue("password", "");
     } else {
-      alert(`입력해주세요`);
+      alert("입력해주세요!");
     }
-    console.log(`get login`);
+    console.log("get logged in !");
   };
-
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <>
@@ -85,20 +71,16 @@ function MyPage() {
           <MyInfo />
         </>
       ) : (
-        <LoginForm onSubmit={getLogin}>
+        <LoginForm onSubmit={handleSubmit(handleValid)}>
           <LoginTitle>login</LoginTitle>
           <LoginInput
-            value={username}
-            onChange={onChange}
+            {...register("username", { required: "Username is required!" })}
             type="text"
-            name="username"
             placeholder="Username"
           />
           <LoginInput
-            value={password}
-            onChange={onChange}
+            {...register("password", { required: "Password is" })}
             type="password"
-            name="password"
             placeholder="Password"
           />
           <LoginButton type="submit" value="LogIn" />

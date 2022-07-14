@@ -147,7 +147,6 @@ function Head() {
     setMenuOpen((prev) => !prev);
   };
 
-  console.log("i'm rendered");
   return (
     <Container>
       {toggleVideo ? (
@@ -192,4 +191,4 @@ function Head() {
   );
 }
 
-export default React.memo(Head);
+export default Head;
