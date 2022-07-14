@@ -11,7 +11,7 @@ export const TopProvider = ({ children }) => {
     });
   };
 
-  const value = { backToTop };
-
-  return <TopContext.Provider value={value}>{children}</TopContext.Provider>;
+  return (
+    <TopContext.Provider value={{ backToTop }}>{children}</TopContext.Provider>
+  );
 };

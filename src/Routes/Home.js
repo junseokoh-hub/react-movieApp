@@ -5,6 +5,8 @@ import MovieList from "../components/MovieList";
 import BigScreen from "../components/BigScreen";
 import { TopContext } from "../Context/TopContext";
 import { ToggleContext } from "../Context/ToggleContext";
+import { ToggleVideoAtom } from "../Recoil/ToggleAtom";
+import { useRecoilValue } from "recoil";
 
 const MovieContainer = styled.div`
   position: relative;
@@ -19,7 +21,8 @@ const MovieContainer = styled.div`
 
 function Home() {
   const { backToTop } = useContext(TopContext);
-  const { toggleVideo } = useContext(ToggleContext);
+  // const { toggleVideo } = useContext(ToggleContext);
+  const toggleVideo = useRecoilValue(ToggleVideoAtom);
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <MovieContainer>

@@ -43,7 +43,7 @@ function MyInfo() {
     <>
       <TestInfo>
         <Test />
-        <span className="username">{id.slice(0, id.indexOf("@"))}</span>
+        <span className="username">{id?.slice(0, id?.indexOf("@"))}</span>
       </TestInfo>
       <Tabs>
         <Tab>

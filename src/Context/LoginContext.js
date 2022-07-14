@@ -1,20 +1,21 @@
-import React, { createContext, useState } from "react";
+import React, { createContext } from "react";
 import { getItemfromLocalStorage, onLogout } from "../LocalStorage";
+import { useSetRecoilState } from "recoil";
+import { LoginAtom } from "../Recoil/LoginAtom";
 
 export const LoginContext = createContext({});
 
 export const LogoutProvider = ({ children }) => {
-  const [login, setLogin] = useState(getItemfromLocalStorage() !== null);
-
+  const setLogin = useSetRecoilState(LoginAtom);
   const getLogout = (e) => {
     e.preventDefault();
     onLogout();
     setLogin(getItemfromLocalStorage() !== null);
   };
 
-  const value = { login, setLogin, getLogout };
-
   return (
-    <LoginContext.Provider value={value}>{children}</LoginContext.Provider>
+    <LoginContext.Provider value={{ getLogout }}>
+      {children}
+    </LoginContext.Provider>
   );
 };

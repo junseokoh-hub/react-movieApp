@@ -3,7 +3,9 @@ import styled from "styled-components";
 import { fetchMediaVideos, fetchTrending } from "../../api";
 import { IMAGE_BASE_URL } from "../../Config";
 import { useQuery } from "react-query";
-import { ToggleContext } from "../../Context/ToggleContext";
+// import { ToggleContext } from "../../Context/ToggleContext";
+import { ToggleVideoAtom } from "../../Recoil/ToggleAtom";
+import { useRecoilState } from "recoil";
 
 const Screen = styled.div`
   width: 100%;
@@ -26,7 +28,7 @@ const IFrame = styled.iframe`
   top: 0;
   left: 0;
   width: 100%;
-  height: 110vh;
+  height: 100%;
   display: ${(props) => props.display};
 `;
 
@@ -61,8 +63,8 @@ const ToggleButton = styled.button`
 `;
 
 function BigScreen() {
-  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
-
+  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
   const { data, isLoading: trendingLoading } = useQuery(
     "trending",
     fetchTrending,

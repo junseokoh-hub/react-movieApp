@@ -4,6 +4,7 @@ import App from "./App";
 import { ThemeProvider } from "styled-components";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 
 const theme = {
   bgColor: `rgb(20,20,20)`,
@@ -23,11 +24,13 @@ const queryClient = new QueryClient({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider theme={theme}>
-      <HelmetProvider>
-        <App />
-      </HelmetProvider>
-    </ThemeProvider>
-  </QueryClientProvider>,
+  <RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <HelmetProvider>
+          <App />
+        </HelmetProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </RecoilRoot>,
 );

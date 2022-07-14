@@ -79,7 +79,6 @@ function SearchedSection({ filtered = [], movie }) {
   const filteredData = filtered?.filter(
     (item) => item.media_type === mediaType,
   );
-  console.log("i'm rendered");
   return (
     <>
       <SearchedType>{movie ? "Movie" : "TV Show"}</SearchedType>

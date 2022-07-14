@@ -1,11 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
-import { LoginContext } from "../Context/LoginContext";
 import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
 import MyInfo from "../components/MyPage/MyInfo/MyInfo";
 import { useForm } from "react-hook-form";
+import { useRecoilState } from "recoil";
+import { LoginAtom } from "../Recoil/LoginAtom";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -45,7 +46,7 @@ const LoginButton = styled(LoginInput)`
 function MyPage() {
   const { register, handleSubmit, setValue } = useForm();
   let navigate = useNavigate();
-  const { login, setLogin } = useContext(LoginContext);
+  const [login, setLogin] = useRecoilState(LoginAtom);
 
   const handleValid = (data) => {
     const { username, password } = data;

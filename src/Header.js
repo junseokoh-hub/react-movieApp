@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaHome, FaBars, FaCookie, FaArrowCircleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./Context/LoginContext";
 import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
 import { ToggleContext } from "./Context/ToggleContext";
+import { LoginAtom } from "./Recoil/LoginAtom";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { ToggleVideoAtom } from "./Recoil/ToggleAtom";
 
 const Container = styled.div`
   width: 100vw;
@@ -106,8 +108,9 @@ const Li = styled.li`
 
 function Head() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const { login } = useContext(LoginContext);
-  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  const login = useRecoilValue(LoginAtom);
+  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
   const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 
@@ -131,7 +134,7 @@ function Head() {
     } = e;
     if (innerHTML === "Movies") {
       navigate(`/`);
-      // setToggleVideo(false);
+      setToggleVideo(false);
     } else if (innerHTML === "TV") {
       navigate(`/tv`);
     } else if (innerHTML === "Search") {
