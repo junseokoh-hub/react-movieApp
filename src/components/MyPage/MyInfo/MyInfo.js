@@ -25,7 +25,9 @@ const Test = styled.div`
 const Tabs = styled.ul`
   display: flex;
   justify-content: center;
-  margin-top: 1em;
+  margin: 1em 0;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
 `;
 
 const Tab = styled.li`
