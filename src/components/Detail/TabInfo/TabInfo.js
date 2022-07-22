@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import TotalOverview from "../Overview/Overview";
 import Preference from "../Preference/Preference";
-import { NavContext } from "../../../Context/NavContext";
+import { useSetRecoilState } from "recoil";
+import { NavAtom } from "../../../Recoil/NavAtom";
 
 const ShowGenre = styled.span`
   margin-right: 0.2em;
@@ -29,7 +30,7 @@ const PathToSimilar = styled.span`
 `;
 
 function FirstMenuContent({ data, movie }) {
-  const { setNavOpen } = useContext(NavContext);
+  const setNavOpen = useSetRecoilState(NavAtom);
   return (
     <>
       {movie ? (

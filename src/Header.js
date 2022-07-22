@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FaHome, FaBars, FaCookie, FaArrowCircleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
 import { LoginAtom } from "./Recoil/LoginAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ToggleVideoAtom } from "./Recoil/ToggleAtom";
+import { NavAtom } from "./Recoil/NavAtom";
 
 const Container = styled.div`
   width: 100vw;
@@ -108,10 +108,13 @@ const Li = styled.li`
 function Head() {
   const [menuOpen, setMenuOpen] = useState(false);
   const login = useRecoilValue(LoginAtom);
-  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
   const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
-  const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
+  const [navOpen, setNavOpen] = useRecoilState(NavAtom);
   const navbar = useRef(null);
+
+  const navToggle = () => {
+    setNavOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
