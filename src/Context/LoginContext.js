@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
-import { getItemfromLocalStorage, onLogout } from "../LocalStorage";
 import { useSetRecoilState } from "recoil";
 import { LoginAtom } from "../Recoil/LoginAtom";
+import { getCookie, removeCookie } from "../Cookie";
 
 export const LoginContext = createContext({});
 
@@ -9,8 +9,8 @@ export const LogoutProvider = ({ children }) => {
   const setLogin = useSetRecoilState(LoginAtom);
   const getLogout = (e) => {
     e.preventDefault();
-    onLogout();
-    setLogin(getItemfromLocalStorage() !== null);
+    removeCookie("tmdbsession");
+    setLogin(getCookie("tmdbsession") !== undefined);
   };
 
   return (

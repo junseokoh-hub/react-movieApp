@@ -56,7 +56,7 @@ function FirstMenuContent({ data, movie }) {
             </ShowGenre>
           );
         })}
-      <Preference data={data} />
+      <Preference data={data} movie={movie} />
       <TotalOverview data={data} movie={movie} />
       {data && (
         <Link to={`/${movie ? "movie" : "tv"}/${data.id}/similarShows`}>

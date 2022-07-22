@@ -6,8 +6,7 @@ import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
 import { ToggleContext } from "./Context/ToggleContext";
 import { LoginAtom } from "./Recoil/LoginAtom";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { ToggleVideoAtom } from "./Recoil/ToggleAtom";
+import { useRecoilValue } from "recoil";
 
 const Container = styled.div`
   width: 100vw;
@@ -109,8 +108,7 @@ const Li = styled.li`
 function Head() {
   const [menuOpen, setMenuOpen] = useState(false);
   const login = useRecoilValue(LoginAtom);
-  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
-  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
+  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
   const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 
@@ -182,11 +180,9 @@ function Head() {
                   {menuOpen ? (
                     <Menu setMenuOpen={setMenuOpen} />
                   ) : (
-                    <>
-                      <span className="span-mypage" onClick={toNavigate}>
-                        My Page
-                      </span>
-                    </>
+                    <span className="span-mypage" onClick={toNavigate}>
+                      My Page
+                    </span>
                   )}
                 </>
               ) : (

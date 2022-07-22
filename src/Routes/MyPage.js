@@ -1,12 +1,18 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import styled from "styled-components";
-import { onLogin, getItemfromLocalStorage } from "../LocalStorage";
 import MyInfo from "../components/MyPage/MyInfo/MyInfo";
 import { useForm } from "react-hook-form";
 import { useRecoilState } from "recoil";
 import { LoginAtom } from "../Recoil/LoginAtom";
+import { getCookie } from "../Cookie";
+import {
+  createAccount,
+  createSession,
+  createSessoinWithLogin,
+  getReqToken,
+} from "../loginCall";
 
 const LoginTitle = styled.h2`
   text-transform: uppercase;
@@ -47,19 +53,30 @@ function MyPage() {
   const { register, handleSubmit, setValue } = useForm();
   let navigate = useNavigate();
   const [login, setLogin] = useRecoilState(LoginAtom);
+  const [accoutId, setAccountId] = useState("");
 
   const handleValid = (data) => {
-    const { username, password } = data;
     if (data) {
-      onLogin(username, password);
-      setLogin(getItemfromLocalStorage() !== null);
-      navigate("/");
-      setValue("username", "");
-      setValue("password", "");
+      getLogin(data);
+      if (getCookie("tmdbsession") !== undefined) {
+        setLogin(getCookie("tmdbsession") !== undefined);
+        setValue("username", "");
+        setValue("password", "");
+      }
     } else {
       alert("입력해주세요!");
     }
     console.log("get logged in !");
+  };
+
+  console.log(getCookie("tmdbsession") !== undefined);
+
+  const getLogin = async (data) => {
+    const reqToken = await getReqToken();
+    const newReqToken = await createSessoinWithLogin(data, reqToken);
+    const session_id = await createSession(newReqToken);
+    const account_id = await createAccount(session_id);
+    setAccountId(account_id);
   };
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
@@ -84,7 +101,13 @@ function MyPage() {
             type="password"
             placeholder="Password"
           />
-          <LoginButton type="submit" value="LogIn" />
+          {getCookie("tmdbsession") !== undefined ? (
+            <Link to="/">
+              <LoginButton type="submit" value="LogIn" />
+            </Link>
+          ) : (
+            <LoginButton type="submit" value="LogIn" />
+          )}
           <LoginButton
             type="button"
             value="Create Account"

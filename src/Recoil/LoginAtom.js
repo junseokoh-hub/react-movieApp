@@ -1,7 +1,7 @@
 import { atom } from "recoil";
-import { getItemfromLocalStorage } from "../LocalStorage";
+import { getCookie } from "../Cookie";
 
 export const LoginAtom = atom({
   key: "login",
-  default: getItemfromLocalStorage() !== null,
+  default: getCookie("tmdbsession") !== undefined,
 });

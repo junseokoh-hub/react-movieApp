@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { LoginContext } from "../../../../Context/LoginContext";
-import { getItemfromLocalStorage } from "../../../../LocalStorage";
+import { LoginAtom } from "../../../../Recoil/LoginAtom";
 
 const InputContainer = styled.div`
   display: flex;
@@ -32,7 +32,7 @@ const SubmitButton = styled.button`
 `;
 
 function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
-  const { login } = useContext(LoginContext);
+  const login = useRecoilValue(LoginAtom);
 
   const inputTextHandler = (event) => {
     const {
@@ -47,7 +47,7 @@ function ReviewTextarea({ todos, setTodos, inputText, setInputText }) {
       ? setTodos([
           ...todos,
           {
-            writer: getItemfromLocalStorage(),
+            writer: "hello",
             text: inputText,
             completed: false,
             id: Math.random() * 1000,

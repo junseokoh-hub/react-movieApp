@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa";
+import { useRecoilValue } from "recoil";
+import { ListSelector } from "../../../Recoil/ListAtom";
+import { API_KEY, API_URL } from "../../../Config";
+import { getCookie } from "../../../Cookie";
 
 const PrefContainer = styled.div`
   display: flex;
@@ -35,15 +39,42 @@ const VoteRateCircle = styled.div`
   }
 `;
 
-function Preference({ data }) {
+function Preference({ data, movie }) {
   const [colorState, setColorState] = useState(false);
+  const accountId = useRecoilValue(ListSelector);
+  const onClick = () => {
+    setColorState((prev) => !prev);
+  };
+
+  const markFav = async () => {
+    const response = await fetch(
+      `https://${API_URL}account/${accountId}/favorite?api_key=${API_KEY}&session_id=${getCookie(
+        "tmdbsession",
+      )}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json; charset=utf-8" },
+        body: JSON.stringify({
+          media_type: movie ? "movie" : "tv",
+          media_id: data?.id,
+          favorite: colorState,
+        }),
+      },
+    );
+    const json = await response.json().catch((err) => console.log(err));
+    console.log(json);
+  };
+
+  useEffect(() => {
+    markFav();
+  }, [colorState]);
   return (
     <PrefContainer>
       <VoteRateCircle value={data.vote_average?.toFixed(1)}></VoteRateCircle>
       <FaHeart
         className="heart"
         color={colorState ? `rgba(255,0,0,0.8)` : "#fff"}
-        onClick={() => setColorState((prev) => !prev)}
+        onClick={onClick}
       />
     </PrefContainer>
   );

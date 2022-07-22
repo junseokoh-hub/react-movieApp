@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { getItemfromLocalStorage } from "../../../LocalStorage";
 import SideMenu from "../SideMenu/SideMenu";
 
 const TestInfo = styled.div`
@@ -37,13 +36,10 @@ const Tab = styled.li`
 `;
 
 function MyInfo() {
-  const id = getItemfromLocalStorage();
-
   return (
     <>
       <TestInfo>
         <Test />
-        <span className="username">{id?.slice(0, id?.indexOf("@"))}</span>
       </TestInfo>
       <Tabs>
         <Tab>

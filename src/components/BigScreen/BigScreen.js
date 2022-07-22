@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { fetchMediaVideos, fetchTrending } from "../../api";
 import { IMAGE_BASE_URL } from "../../Config";
 import { useQuery } from "react-query";
-// import { ToggleContext } from "../../Context/ToggleContext";
-import { ToggleVideoAtom } from "../../Recoil/ToggleAtom";
-import { useRecoilState } from "recoil";
+import { ToggleContext } from "../../Context/ToggleContext";
 
 const Screen = styled.div`
   width: 100%;
@@ -28,7 +26,7 @@ const IFrame = styled.iframe`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 110vh;
   display: ${(props) => props.display};
 `;
 
@@ -63,8 +61,7 @@ const ToggleButton = styled.button`
 `;
 
 function BigScreen() {
-  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
-  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
+  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
   const { data, isLoading: trendingLoading } = useQuery(
     "trending",
     fetchTrending,
@@ -124,7 +121,7 @@ function BigScreen() {
       ) : (
         <Screen
           display={toggleVideo ? "none" : "flex"}
-          bgImage={`https://${IMAGE_BASE_URL}/w500${data?.results[0]?.backdrop_path}`}
+          bgImage={`https://${IMAGE_BASE_URL}/original${data?.results[0]?.backdrop_path}`}
         >
           <ScreenTitle>{data?.results[0]?.title}</ScreenTitle>
           <ScreenOverview>{data?.results[0]?.overview}</ScreenOverview>
