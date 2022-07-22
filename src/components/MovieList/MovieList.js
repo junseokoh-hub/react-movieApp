@@ -3,8 +3,9 @@ import React, { useState, useEffect, useContext } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ToggleContext } from "../../Context/ToggleContext";
 import { handleImgError } from "../../ErrorImg";
+import { useRecoilValue } from "recoil";
+import { ToggleVideoAtom } from "../../Recoil/ToggleAtom";
 
 const UnorderedList = styled.ul`
   display: ${(props) => props.display};
@@ -63,7 +64,7 @@ const ListHeader = styled.span`
 
 function MovieList({ movie, apiList }) {
   const [data, setData] = useState([]);
-  const { toggleVideo } = useContext(ToggleContext);
+  const toggleVideo = useRecoilValue(ToggleVideoAtom);
 
   useEffect(() => {
     async function apiCall() {

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { fetchMediaVideos, fetchTrending } from "../../api";
 import { IMAGE_BASE_URL } from "../../Config";
 import { useQuery } from "react-query";
-import { ToggleContext } from "../../Context/ToggleContext";
+import { useRecoilState } from "recoil";
+import { ToggleVideoAtom } from "../../Recoil/ToggleAtom";
 
 const Screen = styled.div`
   width: 100%;
@@ -61,7 +62,7 @@ const ToggleButton = styled.button`
 `;
 
 function BigScreen() {
-  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
   const { data, isLoading: trendingLoading } = useQuery(
     "trending",
     fetchTrending,

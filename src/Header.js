@@ -4,9 +4,9 @@ import { FaHome, FaBars, FaCookie, FaArrowCircleLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { NavContext } from "./Context/NavContext";
 import Menu from "./components/Menu";
-import { ToggleContext } from "./Context/ToggleContext";
 import { LoginAtom } from "./Recoil/LoginAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { ToggleVideoAtom } from "./Recoil/ToggleAtom";
 
 const Container = styled.div`
   width: 100vw;
@@ -108,7 +108,8 @@ const Li = styled.li`
 function Head() {
   const [menuOpen, setMenuOpen] = useState(false);
   const login = useRecoilValue(LoginAtom);
-  const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  // const { toggleVideo, setToggleVideo } = useContext(ToggleContext);
+  const [toggleVideo, setToggleVideo] = useRecoilState(ToggleVideoAtom);
   const { navOpen, setNavOpen, navToggle } = useContext(NavContext);
   const navbar = useRef(null);
 

@@ -4,7 +4,8 @@ import { FaArrowCircleUp } from "react-icons/fa";
 import MovieList from "../components/MovieList/";
 import BigScreen from "../components/BigScreen";
 import { TopContext } from "../Context/TopContext";
-import { ToggleContext } from "../Context/ToggleContext";
+import { useRecoilValue } from "recoil";
+import { ToggleVideoAtom } from "../Recoil/ToggleAtom";
 
 const MovieContainer = styled.div`
   position: relative;
@@ -19,14 +20,18 @@ const MovieContainer = styled.div`
 
 function Tv() {
   const { backToTop } = useContext(TopContext);
-  const { toggleVideo } = useContext(ToggleContext);
+  const toggleVideo = useRecoilValue(ToggleVideoAtom);
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
     <MovieContainer>
       <BigScreen />
-      <MovieList apiList="popular" />
-      <MovieList apiList="on_the_air" />
-      <MovieList apiList="top_rated" />
+      {!toggleVideo ? (
+        <>
+          <MovieList apiList="popular" />
+          <MovieList apiList="on_the_air" />
+          <MovieList apiList="top_rated" />
+        </>
+      ) : null}
       {toggleVideo || (
         <FaArrowCircleUp className="arrow-up" onClick={backToTop} />
       )}

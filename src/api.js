@@ -83,3 +83,5 @@ export const fetchIndividualDetail = async (id) => {
   const json = response.json();
   return json;
 };
+
+/* My Page */

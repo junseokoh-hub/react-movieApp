@@ -4,8 +4,8 @@ import styled from "styled-components";
 import { LoginContext } from "../../Context/LoginContext";
 
 const MenuContainer = styled.div`
-  width: 5em;
-  height: 5em;
+  width: 7em;
+  height: 4.5em;
   background-color: ${(props) => props.theme.whiteColor};
   position: absolute;
   top: 25px;
@@ -39,8 +39,8 @@ function Menu({ setMenuOpen }) {
       navigate(`/myPage/myProfile`);
     } else if (innerHTML === "My Ratings") {
       navigate("/myPage/myRating");
-    } else if (innerHTML === "My List") {
-      navigate("/myPage/myList");
+    } else if (innerHTML === "My Favorites") {
+      navigate("/myPage/myFavorites");
     } else if (innerHTML === "Log Out") {
       getLogout(e);
       navigate("/myPage");
@@ -52,7 +52,7 @@ function Menu({ setMenuOpen }) {
       <ul>
         <li onClick={toNavigate}>My Profile</li>
         <li onClick={toNavigate}>My Ratings</li>
-        <li onClick={toNavigate}>My List</li>
+        <li onClick={toNavigate}>My Favorites</li>
         <li onClick={toNavigate}>Log Out</li>
       </ul>
     </MenuContainer>

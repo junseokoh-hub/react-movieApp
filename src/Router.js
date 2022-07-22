@@ -11,7 +11,7 @@ import Profile from "./Routes/Profile";
 import MyProfile from "./components/MyPage/MyProfile";
 import CreateAccount from "./Routes/CreateAccount";
 import MyRating from "./components/MyPage/MyRating";
-import MyList from "./components/MyPage/MyList";
+import MyFavorites from "./Routes/MyFavorites";
 import { useRecoilValue } from "recoil";
 import { LoginAtom } from "./Recoil/LoginAtom";
 
@@ -37,7 +37,7 @@ function Routing() {
             <Route path="/myPage/*" element={<MyPage />}>
               <Route path="myProfile" element={<MyProfile />} />
               <Route path="myRating" element={<MyRating />} />
-              <Route path="myList" element={<MyList />} />
+              <Route path="myFavorites" element={<MyFavorites />} />
             </Route>
           </>
         ) : (

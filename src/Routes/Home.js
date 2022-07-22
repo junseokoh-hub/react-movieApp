@@ -4,7 +4,6 @@ import { FaArrowCircleUp } from "react-icons/fa";
 import MovieList from "../components/MovieList";
 import BigScreen from "../components/BigScreen";
 import { TopContext } from "../Context/TopContext";
-import { ToggleContext } from "../Context/ToggleContext";
 import { ToggleVideoAtom } from "../Recoil/ToggleAtom";
 import { useRecoilValue } from "recoil";
 
@@ -27,9 +26,14 @@ function Home() {
   return (
     <MovieContainer>
       <BigScreen />
-      <MovieList movie apiList="popular" />
-      <MovieList movie apiList="upcoming" />
-      <MovieList movie apiList="top_rated" />
+      {!toggleVideo ? (
+        <>
+          <MovieList movie apiList="popular" />
+          <MovieList movie apiList="upcoming" />
+          <MovieList movie apiList="top_rated" />
+        </>
+      ) : null}
+
       {toggleVideo || (
         <FaArrowCircleUp className="arrow-up" onClick={backToTop} />
       )}

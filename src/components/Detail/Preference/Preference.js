@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
-import { accountSelector } from "../../../Recoil/ListAtom";
+import { accountSelector } from "../../../Recoil/AccountAtom";
 import { API_KEY, API_URL } from "../../../Config";
 import { getCookie } from "../../../Cookie";
 

@@ -60,10 +60,10 @@ function MyInfo() {
         </Tab>
         <Tab>
           <NavLink
-            to={`/myPage/myList`}
+            to={`/myPage/myFavorites`}
             className={({ isActive }) => (isActive ? "clicked" : "")}
           >
-            My List
+            My Favorites
           </NavLink>
         </Tab>
       </Tabs>
