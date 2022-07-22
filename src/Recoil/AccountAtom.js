@@ -18,3 +18,17 @@ export const accountSelector = selector({
     return json.id;
   },
 });
+
+export const favMovieSelector = selector({
+  key: "favMovieSelectorFamily",
+  get: async ({ get }) => {
+    const accountId = get(accountSelector);
+    const response = await fetch(
+      `https://${API_URL}account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${getCookie(
+        "tmdbsession",
+      )}`,
+    );
+    const json = await response.json();
+    return json;
+  },
+});

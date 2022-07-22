@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useQuery } from "react-query";
 import { useRecoilValue } from "recoil";
-import { API_KEY, API_URL, IMAGE_BASE_URL } from "../Config";
-import { getCookie } from "../Cookie";
-import { accountSelector } from "../Recoil/AccountAtom";
+import { IMAGE_BASE_URL } from "../Config";
+import { favMovieSelector } from "../Recoil/AccountAtom";
 import { handleImgError } from "../ErrorImg";
 
 const Wrapper = styled.div`
@@ -32,23 +30,11 @@ const FavMovie = styled.div`
 
 function MyFavorites() {
   console.log("rendered");
-  const accountId = useRecoilValue(accountSelector);
-  const { data, isLoading } = useQuery(["movie", "favorites"], async () => {
-    const response = await fetch(
-      `https://${API_URL}account/${accountId}/favorite/movies?api_key=${API_KEY}&session_id=${getCookie(
-        "tmdbsession",
-      )}`,
-    );
-    const json = await response.json();
-    return json;
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-
+  const favMovie = useRecoilValue(favMovieSelector);
   return (
     <Wrapper>
       <Grid>
-        {data?.results?.map((item) => (
+        {favMovie?.results?.map((item) => (
           <FavMovie
             key={item.id}
             bgphoto={`https://${IMAGE_BASE_URL}/original/${item.poster_path}`}
