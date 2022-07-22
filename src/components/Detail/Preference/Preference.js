@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { FaHeart } from "react-icons/fa";
 import { useRecoilValue } from "recoil";
-import { ListSelector } from "../../../Recoil/ListAtom";
+import { accountSelector } from "../../../Recoil/ListAtom";
 import { API_KEY, API_URL } from "../../../Config";
 import { getCookie } from "../../../Cookie";
 
@@ -41,7 +41,7 @@ const VoteRateCircle = styled.div`
 
 function Preference({ data, movie }) {
   const [colorState, setColorState] = useState(false);
-  const accountId = useRecoilValue(ListSelector);
+  const accountId = useRecoilValue(accountSelector);
   const onClick = () => {
     setColorState((prev) => !prev);
   };
@@ -62,7 +62,6 @@ function Preference({ data, movie }) {
       },
     );
     const json = await response.json().catch((err) => console.log(err));
-    console.log(json);
   };
 
   useEffect(() => {

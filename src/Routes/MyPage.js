@@ -53,7 +53,6 @@ function MyPage() {
   const { register, handleSubmit, setValue } = useForm();
   let navigate = useNavigate();
   const [login, setLogin] = useRecoilState(LoginAtom);
-  const [accoutId, setAccountId] = useState("");
 
   const handleValid = (data) => {
     if (data) {
@@ -69,14 +68,10 @@ function MyPage() {
     console.log("get logged in !");
   };
 
-  console.log(getCookie("tmdbsession") !== undefined);
-
   const getLogin = async (data) => {
     const reqToken = await getReqToken();
     const newReqToken = await createSessoinWithLogin(data, reqToken);
     const session_id = await createSession(newReqToken);
-    const account_id = await createAccount(session_id);
-    setAccountId(account_id);
   };
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useContext } from "react";
+import React from "react";
 import Head from "./Header";
 import Home from "./Routes/Home";
 import Tv from "./Routes/TV";
@@ -10,12 +10,13 @@ import SimilarShows from "./Routes/SimilarShows";
 import Profile from "./Routes/Profile";
 import MyProfile from "./components/MyPage/MyProfile";
 import CreateAccount from "./Routes/CreateAccount";
-import { LoginContext } from "./Context/LoginContext";
 import MyRating from "./components/MyPage/MyRating";
 import MyList from "./components/MyPage/MyList";
+import { useRecoilValue } from "recoil";
+import { LoginAtom } from "./Recoil/LoginAtom";
 
 function Routing() {
-  const { login } = useContext(LoginContext);
+  const login = useRecoilValue(LoginAtom);
   return (
     <Router>
       <Head />

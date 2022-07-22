@@ -41,11 +41,3 @@ export const createSession = async (newReqToken) => {
   setCookie("tmdbsession", json.session_id);
   return json.session_id;
 };
-
-export const createAccount = async (session_id) => {
-  const response = await fetch(
-    `https://${API_URL}account?api_key=${API_KEY}&&session_id=${session_id}`,
-  );
-  const json = await response.json();
-  return json.id;
-};
