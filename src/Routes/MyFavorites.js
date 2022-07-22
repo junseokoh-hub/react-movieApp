@@ -31,6 +31,7 @@ const FavMovie = styled.div`
 `;
 
 function MyFavorites() {
+  console.log("rendered");
   const accountId = useRecoilValue(accountSelector);
   const { data, isLoading } = useQuery(["movie", "favorites"], async () => {
     const response = await fetch(

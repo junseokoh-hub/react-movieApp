@@ -75,4 +75,4 @@ function MyInfo() {
   );
 }
 
-export default MyInfo;
+export default React.memo(MyInfo);

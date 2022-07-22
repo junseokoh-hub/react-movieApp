@@ -20,7 +20,6 @@ const MovieContainer = styled.div`
 
 function Home() {
   const { backToTop } = useContext(TopContext);
-  // const { toggleVideo } = useContext(ToggleContext);
   const toggleVideo = useRecoilValue(ToggleVideoAtom);
   document.body.scrollTop = document.documentElement.scrollTop = 0;
   return (
